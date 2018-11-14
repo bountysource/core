@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/10983
+    uri: https://api.bitbucket.org/2.0/repositories/site/master/issues/15896
     body:
       encoding: US-ASCII
       string: ''
@@ -10,2175 +10,6 @@ http_interactions:
       User-Agent:
       - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
         like Gecko) Chrome/35.0.1916.153 Safari/537.36
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.6.2
-      Date:
-      - Thu, 19 Nov 2015 19:33:54 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '812'
-      Connection:
-      - keep-alive
-      X-Accepted-Oauth-Scopes:
-      - issue
-      X-Render-Time:
-      - '0.088693857193'
-      Etag:
-      - '"487ee9c6534454dc1098d3bc0e32cf5e"'
-      X-Request-Count:
-      - '295'
-      X-Served-By:
-      - app19
-      Vary:
-      - Authorization, Cookie
-      X-Static-Version:
-      - c1f64094ec67
-      X-Version:
-      - c1f64094ec67
-      X-Frame-Options:
-      - SAMEORIGIN
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Cache-Status:
-      - MISS
-    body:
-      encoding: UTF-8
-      string: '{"status": "open", "priority": "major", "title": "ED25519 SSH keys
-        (BB-13645)", "reported_by": {"username": "misuzu", "first_name": "", "last_name":
-        "", "display_name": "misuzu", "is_staff": false, "avatar": "https://bitbucket.org/account/misuzu/avatar/32/?ts=0",
-        "resource_uri": "/1.0/users/misuzu", "is_team": false}, "utc_last_updated":
-        "2015-11-18 21:53:36+00:00", "created_on": "2015-02-11T18:43:58.394", "metadata":
-        {"kind": "enhancement", "version": null, "component": "SSH", "milestone":
-        null}, "content": "There is no way to add ssh keys generated using \"ssh-keygen
-        -t ed25519\" command in \"SSH keys\" section.", "comment_count": 18, "local_id":
-        10983, "follower_count": 50, "utc_created_on": "2015-02-11 17:43:58+00:00",
-        "resource_uri": "/1.0/repositories/site/master/issues/10983", "is_spam": false}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:54 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961634&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=aa704fa901dc35b0c7f6b383f5a979ff26e27b0c&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '190'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:33:54 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 5afd0a2cf73ccbff
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:55 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961635&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=959c17acbc6780dea4f616c56f6a1025534df283&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '190'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:33:55 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 4ef7cb477c0b4666
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:55 GMT
-- request:
-    method: get
-    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/10983/comments
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers: {}
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx/1.6.2
-      Date:
-      - Thu, 19 Nov 2015 19:33:56 GMT
-      Content-Type:
-      - application/json; charset=utf-8
-      Content-Length:
-      - '9194'
-      Connection:
-      - keep-alive
-      X-Accepted-Oauth-Scopes:
-      - issue
-      X-Render-Time:
-      - '0.10337305069'
-      Etag:
-      - '"f3b14a1e2cf8b6c8d30a33c6ff0b8888"'
-      X-Request-Count:
-      - '225'
-      X-Served-By:
-      - app22
-      Vary:
-      - Authorization, Cookie
-      X-Static-Version:
-      - c1f64094ec67
-      X-Version:
-      - c1f64094ec67
-      X-Frame-Options:
-      - SAMEORIGIN
-      Strict-Transport-Security:
-      - max-age=31536000
-      X-Content-Type-Options:
-      - nosniff
-      X-Cache-Status:
-      - MISS
-    body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        W3siY29udGVudCI6ICJJIGZ1bGx5IGludGVuZGVkIG5vdCB0byB1c2UgUlNB
-        IGtleXMgYXQgYWxsIGFueW1vcmUsIGFuZCB3YXMgc3RhcnRsZWQgYnkgdGhp
-        cyBsaW1pdGF0aW9uLiIsICJhdXRob3JfaW5mbyI6IHsidXNlcm5hbWUiOiAi
-        a29mYWx0LWludmVuc2h1cmUiLCAiZmlyc3RfbmFtZSI6ICIiLCAibGFzdF9u
-        YW1lIjogIiIsICJkaXNwbGF5X25hbWUiOiAia29mYWx0LWludmVuc2h1cmUi
-        LCAiaXNfc3RhZmYiOiBmYWxzZSwgImF2YXRhciI6ICJodHRwczovL2JpdGJ1
-        Y2tldC5vcmcvYWNjb3VudC9rb2ZhbHQtaW52ZW5zaHVyZS9hdmF0YXIvMzIv
-        P3RzPTAiLCAicmVzb3VyY2VfdXJpIjogIi8xLjAvdXNlcnMva29mYWx0LWlu
-        dmVuc2h1cmUiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAy
-        MzQxOTI3OSwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMTEtMTggMjE6NTM6
-        MzYrMDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVh
-        dGVkX29uIjogIjIwMTUtMTEtMTggMjE6NTM6MzYrMDA6MDAiLCAiaXNfc3Bh
-        bSI6IGZhbHNlfSwgeyJjb250ZW50IjogIklzIHRoYXQgc28gbXVjaCBjb21w
-        bGljYXRlZCB0byBhZGQgc3VwcG9ydCBvZiBlZDI1NTE5ID8iLCAiYXV0aG9y
-        X2luZm8iOiB7InVzZXJuYW1lIjogIkVyd2FuZSIsICJmaXJzdF9uYW1lIjog
-        IkVyd2FuZSIsICJsYXN0X25hbWUiOiAiQnJldG9uIiwgImRpc3BsYXlfbmFt
-        ZSI6ICJFcndhbmUgQnJldG9uIiwgImlzX3N0YWZmIjogZmFsc2UsICJhdmF0
-        YXIiOiAiaHR0cHM6Ly9iaXRidWNrZXQub3JnL2FjY291bnQvRXJ3YW5lL2F2
-        YXRhci8zMi8/dHM9MTQ0NjA0MjM1OCIsICJyZXNvdXJjZV91cmkiOiAiLzEu
-        MC91c2Vycy9FcndhbmUiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRf
-        aWQiOiAyMzM2MjkwNCwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMTEtMTcg
-        MDc6NDU6MTQrMDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0
-        Y19jcmVhdGVkX29uIjogIjIwMTUtMTEtMTcgMDc6NDU6MTQrMDA6MDAiLCAi
-        aXNfc3BhbSI6IGZhbHNlfSwgeyJjb250ZW50IjogIkdyZWV0aW5ncyBmcm9t
-        IGphbnVhcnkgMjAxNCB3aGVuIFtlZDI1NTE5XShodHRwczovL2VuLndpa2lw
-        ZWRpYS5vcmcvd2lraS9FZERTQSNFZDI1NTE5KSB3YXMgYWRkZWQgdG8gW29w
-        ZW5zc2ggNi41XShodHRwOi8vd3d3Lm9wZW5zc2guY29tL3R4dC9yZWxlYXNl
-        LTYuNSksIG1heSAyMDE1IHdoZW4gaXQgd2FzIGFkZGVkIHRvIFtwdXR0eV0o
-        aHR0cDovL3RhcnRhcnVzLm9yZy9+c2ltb24tZ2l0L2dpdHdlYi8/cD1wdXR0
-        eS13aXNobGlzdC5naXQ7YT1ibG9iX3BsYWluO2Y9ZGF0YS9lZDI1NTE5O2hi
-        PXJlZnMvaGVhZHMvbWFzdGVyKSBhbmQgc2VwdGVtYmVyIDIwMTUgd2hlbiBp
-        dCB3YXMgYWRkZWQgdG8gW29zeF0oaHR0cHM6Ly9lbi53aWtpcGVkaWEub3Jn
-        L3dpa2kvT1NfWF9FbF9DYXBpdGFuI1JlbGVhc2VzKS4iLCAiYXV0aG9yX2lu
-        Zm8iOiB7InVzZXJuYW1lIjogIlVyMHMiLCAiZmlyc3RfbmFtZSI6ICJVcm/F
-        oSIsICJsYXN0X25hbWUiOiAiIiwgImRpc3BsYXlfbmFtZSI6ICJVcjBzIiwg
-        ImlzX3N0YWZmIjogZmFsc2UsICJhdmF0YXIiOiAiaHR0cHM6Ly9iaXRidWNr
-        ZXQub3JnL2FjY291bnQvVXIwcy9hdmF0YXIvMzIvP3RzPTE0NDc3MzMyODki
-        LCAicmVzb3VyY2VfdXJpIjogIi8xLjAvdXNlcnMvVXIwcyIsICJpc190ZWFt
-        IjogZmFsc2V9LCAiY29tbWVudF9pZCI6IDIzMzU5OTYwLCAidXRjX3VwZGF0
-        ZWRfb24iOiAiMjAxNS0xMS0xNyAwNDoyNjo1NiswMDowMCIsICJjb252ZXJ0
-        X21hcmt1cCI6IGZhbHNlLCAidXRjX2NyZWF0ZWRfb24iOiAiMjAxNS0xMS0x
-        NyAwNDowMTozNyswMDowMCIsICJpc19zcGFtIjogZmFsc2V9LCB7ImNvbnRl
-        bnQiOiAiRFNBIGlzIGRlcHJlY2F0ZWQsIGFzIGFyZSBzb21lIHNob3J0ZXIg
-        UlNBIGtleXMuIFdvdWxkIGxvdmUgc3VwcG9ydCBmb3IgZWQyNTUxOSAob3Ig
-        ZWNkc2EpIiwgImF1dGhvcl9pbmZvIjogeyJ1c2VybmFtZSI6ICJuaWNrZnJv
-        c3RhdHgiLCAiZmlyc3RfbmFtZSI6ICIiLCAibGFzdF9uYW1lIjogIiIsICJk
-        aXNwbGF5X25hbWUiOiAibmlja2Zyb3N0YXR4IiwgImlzX3N0YWZmIjogZmFs
-        c2UsICJhdmF0YXIiOiAiaHR0cHM6Ly9iaXRidWNrZXQub3JnL2FjY291bnQv
-        bmlja2Zyb3N0YXR4L2F2YXRhci8zMi8/dHM9MTQ0NjE0NDUzNiIsICJyZXNv
-        dXJjZV91cmkiOiAiLzEuMC91c2Vycy9uaWNrZnJvc3RhdHgiLCAiaXNfdGVh
-        bSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAyMzI3MDEwMywgInV0Y191cGRh
-        dGVkX29uIjogIjIwMTUtMTEtMTIgMjE6NTU6NDcrMDA6MDAiLCAiY29udmVy
-        dF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVhdGVkX29uIjogIjIwMTUtMTEt
-        MTIgMjE6NTU6NDcrMDA6MDAiLCAiaXNfc3BhbSI6IGZhbHNlfSwgeyJjb250
-        ZW50IjogIkknbSBhbHNvIHdhaXRpbmcgZm9yIHRoaXPigKYiLCAiYXV0aG9y
-        X2luZm8iOiB7InVzZXJuYW1lIjogInJtb3JpeiIsICJmaXJzdF9uYW1lIjog
-        IlJvbGFuZCIsICJsYXN0X25hbWUiOiAiTW9yaXoiLCAiZGlzcGxheV9uYW1l
-        IjogIlJvbGFuZCBNb3JpeiIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFy
-        IjogImh0dHBzOi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L3Jtb3Jpei9hdmF0
-        YXIvMzIvP3RzPTE0NDU4NzI5ODIiLCAicmVzb3VyY2VfdXJpIjogIi8xLjAv
-        dXNlcnMvcm1vcml6IiwgImlzX3RlYW0iOiBmYWxzZX0sICJjb21tZW50X2lk
-        IjogMjMxMjAyOTEsICJ1dGNfdXBkYXRlZF9vbiI6ICIyMDE1LTExLTA2IDEy
-        OjA1OjQwKzAwOjAwIiwgImNvbnZlcnRfbWFya3VwIjogZmFsc2UsICJ1dGNf
-        Y3JlYXRlZF9vbiI6ICIyMDE1LTExLTA2IDEyOjA1OjQwKzAwOjAwIiwgImlz
-        X3NwYW0iOiBmYWxzZX0sIHsiY29udGVudCI6ICJIaSBhbnkgdXBkYXRlIG9u
-        IHRoaXM/IEkgd2lzaCB0byB1c2UgZWQyNTUxOSB0b28iLCAiYXV0aG9yX2lu
-        Zm8iOiB7InVzZXJuYW1lIjogInNpYW5sZXJrIiwgImZpcnN0X25hbWUiOiAi
-        U2lhbiBMZXJrIiwgImxhc3RfbmFtZSI6ICJMYXUiLCAiZGlzcGxheV9uYW1l
-        IjogIlNpYW4gTGVyayBMYXUiLCAiaXNfc3RhZmYiOiBmYWxzZSwgImF2YXRh
-        ciI6ICJodHRwczovL2JpdGJ1Y2tldC5vcmcvYWNjb3VudC9zaWFubGVyay9h
-        dmF0YXIvMzIvP3RzPTAiLCAicmVzb3VyY2VfdXJpIjogIi8xLjAvdXNlcnMv
-        c2lhbmxlcmsiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAy
-        Mjk5MTE0NCwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMTEtMDIgMDU6MTg6
-        MjErMDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVh
-        dGVkX29uIjogIjIwMTUtMTEtMDIgMDU6MTg6MjErMDA6MDAiLCAiaXNfc3Bh
-        bSI6IGZhbHNlfSwgeyJjb250ZW50IjogIkknZCBsb3ZlIHRvIHNlZSBzdXBw
-        b3J0IGZvciB0aGlzLCB0aGVuIEkgY2FuIHBoYXNlIG91dCBteSBSU0Ega2V5
-        cyA6KSIsICJhdXRob3JfaW5mbyI6IHsidXNlcm5hbWUiOiAibGluazAiLCAi
-        Zmlyc3RfbmFtZSI6ICJEZW5uaXMiLCAibGFzdF9uYW1lIjogImRlIEdyZWVm
-        IiwgImRpc3BsYXlfbmFtZSI6ICJEZW5uaXMgZGUgR3JlZWYiLCAiaXNfc3Rh
-        ZmYiOiBmYWxzZSwgImF2YXRhciI6ICJodHRwczovL2JpdGJ1Y2tldC5vcmcv
-        YWNjb3VudC9saW5rMC9hdmF0YXIvMzIvP3RzPTE0NDc2NjUyNjUiLCAicmVz
-        b3VyY2VfdXJpIjogIi8xLjAvdXNlcnMvbGluazAiLCAiaXNfdGVhbSI6IGZh
-        bHNlfSwgImNvbW1lbnRfaWQiOiAyMjk4NDUwOSwgInV0Y191cGRhdGVkX29u
-        IjogIjIwMTUtMTEtMDEgMTc6Mzk6MzQrMDA6MDAiLCAiY29udmVydF9tYXJr
-        dXAiOiBmYWxzZSwgInV0Y19jcmVhdGVkX29uIjogIjIwMTUtMTEtMDEgMTc6
-        Mzk6MzQrMDA6MDAiLCAiaXNfc3BhbSI6IGZhbHNlfSwgeyJjb250ZW50Ijog
-        IlBsZWFzZSBhZGQgc3VwcG9ydCBmb3IgdGhpcy4iLCAiYXV0aG9yX2luZm8i
-        OiB7InVzZXJuYW1lIjogIlBhaW50ZWQtRm94IiwgImZpcnN0X25hbWUiOiAi
-        UGFpbnRlZCIsICJsYXN0X25hbWUiOiAiRm94IiwgImRpc3BsYXlfbmFtZSI6
-        ICJQYWludGVkIEZveCIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFyIjog
-        Imh0dHBzOi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L1BhaW50ZWQtRm94L2F2
-        YXRhci8zMi8/dHM9MTQ0MTk5OTczMCIsICJyZXNvdXJjZV91cmkiOiAiLzEu
-        MC91c2Vycy9QYWludGVkLUZveCIsICJpc190ZWFtIjogZmFsc2V9LCAiY29t
-        bWVudF9pZCI6IDIyNzM0ODcyLCAidXRjX3VwZGF0ZWRfb24iOiAiMjAxNS0x
-        MC0yMyAxNDoyNDo0MCswMDowMCIsICJjb252ZXJ0X21hcmt1cCI6IGZhbHNl
-        LCAidXRjX2NyZWF0ZWRfb24iOiAiMjAxNS0xMC0yMyAxNDoyNDo0MCswMDow
-        MCIsICJpc19zcGFtIjogZmFsc2V9LCB7ImNvbnRlbnQiOiAiVG9kYXksIE9T
-        IFggRWwgQ2FwaXRhbiBoYXMgYmVlbiByZWxlYXNlZC4gVGhlIHZlcnNpb24g
-        b2Ygb3BlbnNzaCBpcyA2LjlwMS4gV2UgY2FuIHVzZSBlZDI1NTE5IGtleSBv
-        biBtYWMuXG5Ib3cgaXMgdGhlIHByb2dyZXNzPyIsICJhdXRob3JfaW5mbyI6
-        IHsidXNlcm5hbWUiOiAia2F3YXp6eiIsICJmaXJzdF9uYW1lIjogIllvc2hp
-        YWtpIiwgImxhc3RfbmFtZSI6ICJLYXdhenUiLCAiZGlzcGxheV9uYW1lIjog
-        Illvc2hpYWtpIEthd2F6dSIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFy
-        IjogImh0dHBzOi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L2thd2F6enovYXZh
-        dGFyLzMyLz90cz0xNDQ3NTcxMjExIiwgInJlc291cmNlX3VyaSI6ICIvMS4w
-        L3VzZXJzL2thd2F6enoiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRf
-        aWQiOiAyMjE2MzA4OSwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMTAtMDIg
-        MDg6MzQ6MzMrMDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0
-        Y19jcmVhdGVkX29uIjogIjIwMTUtMTAtMDEgMDQ6MzY6MjcrMDA6MDAiLCAi
-        aXNfc3BhbSI6IGZhbHNlfSwgeyJjb250ZW50IjogIkJ1bXAuIEFueSBwcm9n
-        cmVzcyBvbiB0aGlzIGlzc3VlPyIsICJhdXRob3JfaW5mbyI6IHsidXNlcm5h
-        bWUiOiAieWFuMTIxMjUiLCAiZmlyc3RfbmFtZSI6ICJDaGkgSHN1YW4iLCAi
-        bGFzdF9uYW1lIjogIlllbiIsICJkaXNwbGF5X25hbWUiOiAiQ2hpIEhzdWFu
-        IFllbiIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFyIjogImh0dHBzOi8v
-        Yml0YnVja2V0Lm9yZy9hY2NvdW50L3lhbjEyMTI1L2F2YXRhci8zMi8/dHM9
-        MCIsICJyZXNvdXJjZV91cmkiOiAiLzEuMC91c2Vycy95YW4xMjEyNSIsICJp
-        c190ZWFtIjogZmFsc2V9LCAiY29tbWVudF9pZCI6IDIxNTYzMTE3LCAidXRj
-        X3VwZGF0ZWRfb24iOiAiMjAxNS0wOS0wNiAwODo1NjozNSswMDowMCIsICJj
-        b252ZXJ0X21hcmt1cCI6IGZhbHNlLCAidXRjX2NyZWF0ZWRfb24iOiAiMjAx
-        NS0wOS0wNiAwODo1NjozNSswMDowMCIsICJpc19zcGFtIjogZmFsc2V9LCB7
-        ImNvbnRlbnQiOiAiRllJOiBlZDI1NTE5IHNzaCBrZXlzIGFscmVhZHkgc3Vw
-        cG9ydGVkIGJ5IGdpdGh1Yi5jb20iLCAiYXV0aG9yX2luZm8iOiB7InVzZXJu
-        YW1lIjogImNpdHJpbiIsICJmaXJzdF9uYW1lIjogIkFudG9uIiwgImxhc3Rf
-        bmFtZSI6ICJZdXpoYW5pbm92IiwgImRpc3BsYXlfbmFtZSI6ICJBbnRvbiBZ
-        dXpoYW5pbm92IiwgImlzX3N0YWZmIjogZmFsc2UsICJhdmF0YXIiOiAiaHR0
-        cHM6Ly9iaXRidWNrZXQub3JnL2FjY291bnQvY2l0cmluL2F2YXRhci8zMi8/
-        dHM9MTQ0NzkzNDk5MyIsICJyZXNvdXJjZV91cmkiOiAiLzEuMC91c2Vycy9j
-        aXRyaW4iLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAxOTgz
-        OTY1MCwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMDctMDYgMTE6MTI6MDgr
-        MDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVhdGVk
-        X29uIjogIjIwMTUtMDctMDYgMTE6MTI6MDgrMDA6MDAiLCAiaXNfc3BhbSI6
-        IGZhbHNlfSwgeyJjb250ZW50IjogIkFjaGlldmVtZW50IEdldDogaXNzdWUg
-        bmVjcm9tYW5jZXIuIEl0IHdpbGwgYmUgbmljZSB0byB1c2UgdGhlIGxhdGVz
-        dC9ncmVhdGVzdC9jdXR0aW5nLWVkZ2UgY3J5cHRvIGZvciBzc2gnaW5nIDsp
-        IiwgImF1dGhvcl9pbmZvIjogeyJ1c2VybmFtZSI6ICJrOThrdXJ6IiwgImZp
-        cnN0X25hbWUiOiAiSm9uYXRoYW4iLCAibGFzdF9uYW1lIjogIlZvc3MiLCAi
-        ZGlzcGxheV9uYW1lIjogIkpvbmF0aGFuIFZvc3MiLCAiaXNfc3RhZmYiOiBm
-        YWxzZSwgImF2YXRhciI6ICJodHRwczovL2JpdGJ1Y2tldC5vcmcvYWNjb3Vu
-        dC9rOThrdXJ6L2F2YXRhci8zMi8/dHM9MTQ0NzU4MDk0NSIsICJyZXNvdXJj
-        ZV91cmkiOiAiLzEuMC91c2Vycy9rOThrdXJ6IiwgImlzX3RlYW0iOiBmYWxz
-        ZX0sICJjb21tZW50X2lkIjogMTk0MTMyOTksICJ1dGNfdXBkYXRlZF9vbiI6
-        ICIyMDE1LTA3LTAxIDAzOjI0OjM3KzAwOjAwIiwgImNvbnZlcnRfbWFya3Vw
-        IjogZmFsc2UsICJ1dGNfY3JlYXRlZF9vbiI6ICIyMDE1LTA3LTAxIDAzOjI0
-        OjM3KzAwOjAwIiwgImlzX3NwYW0iOiBmYWxzZX0sIHsiY29udGVudCI6ICJJ
-        c3N1ZSAjMTE0MjQgd2FzIG1hcmtlZCBhcyBhIGR1cGxpY2F0ZSBvZiB0aGlz
-        IGlzc3VlLiIsICJhdXRob3JfaW5mbyI6IHsidXNlcm5hbWUiOiAianlvd2Vs
-        bCIsICJmaXJzdF9uYW1lIjogIkplc3NlIiwgImxhc3RfbmFtZSI6ICJZb3dl
-        bGwgW0F0bGFzc2lhbl0iLCAiZGlzcGxheV9uYW1lIjogIkplc3NlIFlvd2Vs
-        bCBbQXRsYXNzaWFuXSIsICJpc19zdGFmZiI6IHRydWUsICJhdmF0YXIiOiAi
-        aHR0cHM6Ly9iaXRidWNrZXQub3JnL2FjY291bnQvanlvd2VsbC9hdmF0YXIv
-        MzIvP3RzPTE0NDc4ODA1MzYiLCAicmVzb3VyY2VfdXJpIjogIi8xLjAvdXNl
-        cnMvanlvd2VsbCIsICJpc190ZWFtIjogZmFsc2V9LCAiY29tbWVudF9pZCI6
-        IDE5Mzc4MzA2LCAidXRjX3VwZGF0ZWRfb24iOiAiMjAxNS0wNi0yOSAyMzo0
-        MjoxOSswMDowMCIsICJjb252ZXJ0X21hcmt1cCI6IGZhbHNlLCAidXRjX2Ny
-        ZWF0ZWRfb24iOiAiMjAxNS0wNi0yOSAyMzo0MjoxOSswMDowMCIsICJpc19z
-        cGFtIjogZmFsc2V9LCB7ImNvbnRlbnQiOiAiWW91J3JlIHJpZ2h0OyBFQ0RT
-        QSBhbmQgRWQyNTUxOSB1c2UgZGlmZmVyZW50IGN1cnZlcy4gSSd2ZSB1cGRh
-        dGVkIHRoZSB0aWNrZXQgc28gdGhhdCBpdCdzIG5vIGxvbmdlciBtYXJrZWQg
-        YXMgYSBkdXBsaWNhdGUuIiwgImF1dGhvcl9pbmZvIjogeyJ1c2VybmFtZSI6
-        ICJqcmVkbW9uZCIsICJmaXJzdF9uYW1lIjogIkppbSIsICJsYXN0X25hbWUi
-        OiAiUmVkbW9uZCIsICJkaXNwbGF5X25hbWUiOiAiSmltIFJlZG1vbmQiLCAi
-        aXNfc3RhZmYiOiB0cnVlLCAiYXZhdGFyIjogImh0dHBzOi8vYml0YnVja2V0
-        Lm9yZy9hY2NvdW50L2pyZWRtb25kL2F2YXRhci8zMi8/dHM9MTQ0Nzg4MDY3
-        OSIsICJyZXNvdXJjZV91cmkiOiAiLzEuMC91c2Vycy9qcmVkbW9uZCIsICJp
-        c190ZWFtIjogZmFsc2V9LCAiY29tbWVudF9pZCI6IDE5MzI0NDI5LCAidXRj
-        X3VwZGF0ZWRfb24iOiAiMjAxNS0wNi0yNyAwMToxNzo1NiswMDowMCIsICJj
-        b252ZXJ0X21hcmt1cCI6IGZhbHNlLCAidXRjX2NyZWF0ZWRfb24iOiAiMjAx
-        NS0wNi0yNyAwMToxNzo1NiswMDowMCIsICJpc19zcGFtIjogZmFsc2V9LCB7
-        ImNvbnRlbnQiOiAiRUNEU0EgaXMgbm90IHRoZSBzYW1lIGFzIEVkMjU1MTku
-        IFRoZXkgYXJlIGNvbXBsZXRlbHkgZGlmZmVyZW50LiBJIGRvbid0IHNlZSBo
-        b3cgdGhpcyBpcyBhIGR1cGxpY2F0ZS4iLCAiYXV0aG9yX2luZm8iOiB7InVz
-        ZXJuYW1lIjogIms5OGt1cnoiLCAiZmlyc3RfbmFtZSI6ICJKb25hdGhhbiIs
-        ICJsYXN0X25hbWUiOiAiVm9zcyIsICJkaXNwbGF5X25hbWUiOiAiSm9uYXRo
-        YW4gVm9zcyIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFyIjogImh0dHBz
-        Oi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L2s5OGt1cnovYXZhdGFyLzMyLz90
-        cz0xNDQ3NTgwOTQ1IiwgInJlc291cmNlX3VyaSI6ICIvMS4wL3VzZXJzL2s5
-        OGt1cnoiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQiOiAxOTI5
-        OTYwMSwgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMDYtMjUgMjI6MTI6MDAr
-        MDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19jcmVhdGVk
-        X29uIjogIjIwMTUtMDYtMjUgMjI6MTI6MDArMDA6MDAiLCAiaXNfc3BhbSI6
-        IGZhbHNlfSwgeyJjb250ZW50IjogIkR1cGxpY2F0ZSBvZiAjNDIyMi4iLCAi
-        YXV0aG9yX2luZm8iOiB7InVzZXJuYW1lIjogImpnYXJjaWE0IiwgImZpcnN0
-        X25hbWUiOiAiSm9obiIsICJsYXN0X25hbWUiOiAiR2FyY2lhIiwgImRpc3Bs
-        YXlfbmFtZSI6ICJKb2huIEdhcmNpYSIsICJpc19zdGFmZiI6IGZhbHNlLCAi
-        YXZhdGFyIjogImh0dHBzOi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L2pnYXJj
-        aWE0L2F2YXRhci8zMi8/dHM9MTQzNjU0Mzc1MiIsICJyZXNvdXJjZV91cmki
-        OiAiLzEuMC91c2Vycy9qZ2FyY2lhNCIsICJpc190ZWFtIjogZmFsc2V9LCAi
-        Y29tbWVudF9pZCI6IDE1Njc5OTE2LCAidXRjX3VwZGF0ZWRfb24iOiAiMjAx
-        NS0wMi0xMyAxOTozNzo0OCswMDowMCIsICJjb252ZXJ0X21hcmt1cCI6IGZh
-        bHNlLCAidXRjX2NyZWF0ZWRfb24iOiAiMjAxNS0wMi0xMyAxOTozNzo0OCsw
-        MDowMCIsICJpc19zcGFtIjogZmFsc2V9LCB7ImNvbnRlbnQiOiAiWWVzLCBw
-        bGVhc2Ugc3VwcG9ydCB0aGVzZS5cblxuLSBuZXdlciwgZGViYXRhYmx5IG1v
-        cmUgc2VjdXJlXG4tIG5vdGljZWFibHkgZmFzdGVyICYgdGhlcmVmb3JlIHVz
-        ZXMgbGVzcyBlbmVyZ3kiLCAiYXV0aG9yX2luZm8iOiB7InVzZXJuYW1lIjog
-        InNrdW5rd2Vya3MiLCAiZmlyc3RfbmFtZSI6ICJEYXZlIiwgImxhc3RfbmFt
-        ZSI6ICJDb3R0bGVodWJlciIsICJkaXNwbGF5X25hbWUiOiAiRGF2ZSBDb3R0
-        bGVodWJlciIsICJpc19zdGFmZiI6IGZhbHNlLCAiYXZhdGFyIjogImh0dHBz
-        Oi8vYml0YnVja2V0Lm9yZy9hY2NvdW50L3NrdW5rd2Vya3MvYXZhdGFyLzMy
-        Lz90cz0xNDM0NzE5NDYzIiwgInJlc291cmNlX3VyaSI6ICIvMS4wL3VzZXJz
-        L3NrdW5rd2Vya3MiLCAiaXNfdGVhbSI6IGZhbHNlfSwgImNvbW1lbnRfaWQi
-        OiAxNTY0MTQxMywgInV0Y191cGRhdGVkX29uIjogIjIwMTUtMDItMTIgMDg6
-        NTA6NDErMDA6MDAiLCAiY29udmVydF9tYXJrdXAiOiBmYWxzZSwgInV0Y19j
-        cmVhdGVkX29uIjogIjIwMTUtMDItMTIgMDg6NTA6NDErMDA6MDAiLCAiaXNf
-        c3BhbSI6IGZhbHNlfV0=
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:57 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961637&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=db35d978af1d59bdf4381e7e73a8390a3a01b56b&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:33:58 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 92f0aaad72d13907
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:58 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961638&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=7989d18c9615f319b918b3b611b0c939d03e8e2b&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:33:59 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - cfad34d87c7d5a7c
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:59 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961639&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=b1401fac7e8687631f8202de70498d0336420268&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '197'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:33:59 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 2dbdd3f18efa5d83
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:33:59 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961639&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=b1401fac7e8687631f8202de70498d0336420268&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '205'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:00 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - f50226f747fba8ac
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:00 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961640&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=ef19f98e1e88184cfea43f7336361b69c9117494&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:01 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - e295e3687c31c41b
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:01 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961641&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=6232b0ed71abad328d56ccc5df03500a4983a0d5&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '192'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:02 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 19d73c98aed33457
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:02 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961642&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=3303ee53f4599ee8c829d55f5a7771495e2fc727&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '198'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:03 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - a91211ec27606370
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:03 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961643&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=67a5cce7419f961c45ee495d287f6d12e5d03a82&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '204'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:04 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - ee4f7b1fb1c756ad
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:04 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961644&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=6ffeb4f79957c898001ad00d0f643c8d1b98bb6f&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:05 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - e620ab6ecd0673bb
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:05 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961645&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=153e05f2a9f9ce2732e589ab95df6e10221c0357&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '192'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:06 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - b1ee926fd6f2cb12
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:06 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961646&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1447934993&signature=548f832039cf8578ac9bca56408cf5d50f4012cc&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:07 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 7eb182f8cfa0f0ff
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:07 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961647&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=b5630fd6e3fd6475c06cf4f875513e529e9c993e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:07 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 8f6610d18dc5cfc5
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:07 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961647&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=b5630fd6e3fd6475c06cf4f875513e529e9c993e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:08 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 28668a3707a6c560
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:08 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961648&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=41c056227f0b435a7dd6ff64c5585aa9dac48863&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:09 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 882c06528c4bf05f
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:09 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961649&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=383ef78252d1a918675f18255e0d955fa661334b&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:10 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 8c92ca7ab8ae2b9e
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:10 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961650&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=e95ca6f6f1e8e2b0d237a86e2fb554f70c78973e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:10 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - f5039357f3ca2d0f
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:10 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961650&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=e95ca6f6f1e8e2b0d237a86e2fb554f70c78973e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '203'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:11 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - edd3a8abd2b6ed5e
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:11 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961651&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkofalt-invenshure%2Favatar%2F32%2F%3Fts%3D0&signature=6a9bba7f1c5efee984c36819609e5c46e1fc5dd7&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:12 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - ff8c48fad865cd8a
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:12 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961652&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FErwane%2Favatar%2F32%2F%3Fts%3D1446042358&signature=3b99d7fc1cd9b5836df066349087608bf6c5c763&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:13 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - d304c6dedc2c7fbb
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:13 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961653&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FUr0s%2Favatar%2F32%2F%3Fts%3D1447733289&signature=0dd4223439fd9117a3edf1ebf51ea53588e6ef2d&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '197'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:13 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - c8ad98d515f28550
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:13 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961653&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fnickfrostatx%2Favatar%2F32%2F%3Fts%3D1446144536&signature=0dd4223439fd9117a3edf1ebf51ea53588e6ef2d&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '205'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:15 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 5c456a7b20a1e03a
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:15 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961655&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Frmoriz%2Favatar%2F32%2F%3Fts%3D1445872982&signature=1e48dff7219495b15a7dce2b7d693da2abd11ecc&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:15 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - a09292facd601622
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:15 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961655&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fsianlerk%2Favatar%2F32%2F%3Fts%3D0&signature=1e48dff7219495b15a7dce2b7d693da2abd11ecc&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '192'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:16 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 4639a6a967d9366f
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:16 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961656&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Flink0%2Favatar%2F32%2F%3Fts%3D1447665265&signature=308222b38d539a9311da3b1cca7a19cc8e1f8c1c&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '198'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:17 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 08dc9bedf42a9846
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:17 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961657&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2FPainted-Fox%2Favatar%2F32%2F%3Fts%3D1441999730&signature=ae85e49c7c52cc744be64076ed57affe11dbb1ae&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '204'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:18 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - dc10b5184c1e108b
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:18 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961658&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fkawazzz%2Favatar%2F32%2F%3Fts%3D1447571211&signature=fbb59c463a9b0bba781fa373d917d9e2a4f12aef&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:18 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - ce61a686043d6f07
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:18 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961658&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fyan12125%2Favatar%2F32%2F%3Fts%3D0&signature=fbb59c463a9b0bba781fa373d917d9e2a4f12aef&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '192'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:19 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 7be8362b628e30d9
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:19 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961659&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fcitrin%2Favatar%2F32%2F%3Fts%3D1447934993&signature=d2b7b88912cb41c0841d560e5e3db7ac11dff77b&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '199'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:20 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - cc987a1953be43fe
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:20 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961660&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=20b6faa84d455bc037719aa39a4f810203e2c604&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:21 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 60f843aad88b5898
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:21 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961661&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjyowell%2Favatar%2F32%2F%3Fts%3D1447880536&signature=309b1482fd27c57ac379c417e2e66a3ff144ce1e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:21 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - ef3842936acd3c27
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:21 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961661&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjredmond%2Favatar%2F32%2F%3Fts%3D1447880679&signature=309b1482fd27c57ac379c417e2e66a3ff144ce1e&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:22 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 1dac9bbd6ce531ea
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:22 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961662&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fk98kurz%2Favatar%2F32%2F%3Fts%3D1447580945&signature=47fbb770d07f7b969910b664d9f782d98d68fa49&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '200'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:23 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 011809ac5694d96b
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:23 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961663&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fjgarcia4%2Favatar%2F32%2F%3Fts%3D1436543752&signature=59a9f484740769ea53d58810ff41f31a7743c727&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '201'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:24 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - bcf3fd05b143ed45
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:24 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961664&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fskunkwerks%2Favatar%2F32%2F%3Fts%3D1434719463&signature=b3f8fbff6e59dd88a9650f03711c121d5e626c33&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '203'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:25 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 3a6d43bf5b5cfe6e
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:25 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961665&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=ad90db01ceeba64f53334c8a6ce4386bd1d0b9f6&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '190'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:26 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - ec2ec22df5cee1ba
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Transfer-Encoding:
-      - chunked
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:26 GMT
-- request:
-    method: post
-    uri: https://api.cloudinary.com/v1_1/test/image/upload
-    body:
-      encoding: US-ASCII
-      string: timestamp=1447961666&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fmisuzu%2Favatar%2F32%2F%3Fts%3D0&signature=32d0e480ba3c89652c10f213f62ec6e57b04cb6b&api_key=test
-    headers:
-      Accept:
-      - "*/*; q=0.5, application/xml"
-      Accept-Encoding:
-      - gzip, deflate
-      User-Agent:
-      - cld-ruby-1.0.72
-      Content-Length:
-      - '190'
-      Content-Type:
-      - application/x-www-form-urlencoded
-  response:
-    status:
-      code: 401
-      message: Unauthorized
-    headers:
-      Cache-Control:
-      - no-cache
-      Content-Type:
-      - application/json; charset=utf-8
-      Date:
-      - Thu, 19 Nov 2015 19:34:27 GMT
-      Server:
-      - cloudinary
-      Status:
-      - 401 Unauthorized
-      X-Cld-Error:
-      - cloud_name is disabled
-      X-Request-Id:
-      - 216e150f25b33bab
-      X-Ua-Compatible:
-      - IE=Edge,chrome=1
-      Content-Length:
-      - '46'
-      Connection:
-      - keep-alive
-    body:
-      encoding: UTF-8
-      string: '{"error":{"message":"cloud_name is disabled"}}'
-    http_version: 
-  recorded_at: Thu, 19 Nov 2015 19:34:27 GMT
-- request:
-    method: get
-    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/15896
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
-        like Gecko) Chrome/35.0.1916.153 Safari/537.36
-  response:
-    status:
-      code: 200
-      message: OK
-    headers:
-      Server:
-      - nginx
-      Vary:
-      - Authorization
-      Cache-Control:
-      - max-age=900
-      Content-Type:
-      - application/json; charset=utf-8
-      Strict-Transport-Security:
-      - max-age=31536000; includeSubDomains; preload
-      Date:
-      - Thu, 22 Mar 2018 12:41:51 GMT
-      X-Served-By:
-      - app-140
-      Accept-Ranges:
-      - bytes
-      Etag:
-      - '"14614c712f3210f918f6ab5e091c0516"'
-      X-Static-Version:
-      - 0614fb63a033
-      X-Content-Type-Options:
-      - nosniff
-      X-Accepted-Oauth-Scopes:
-      - issue
-      X-Render-Time:
-      - '0.0535831451416'
-      Connection:
-      - Keep-Alive
-      X-Request-Count:
-      - '486'
-      X-Version:
-      - 0614fb63a033
-      X-Frame-Options:
-      - SAMEORIGIN
-      X-Cache-Info:
-      - cached
-      Content-Length:
-      - '820'
-    body:
-      encoding: UTF-8
-      string: '{"status": "closed", "priority": "blocker", "title": "STDERR: ssh:
-        connect to host bitbucket.org port 22: Network is unreachable", "reported_by":
-        {"username": "ablaga", "first_name": "Adrian", "last_name": "Blaga", "display_name":
-        "Adrian Blaga", "is_staff": false, "avatar": "https://bitbucket.org/account/ablaga/avatar/32/?ts=1521719307",
-        "resource_uri": "/1.0/users/ablaga", "is_team": false}, "utc_last_updated":
-        "2018-03-22 12:11:18+00:00", "created_on": "2018-03-22T11:37:23.703", "metadata":
-        {"kind": "bug", "version": null, "component": "SSH", "milestone": null}, "content":
-        "AWS deployments are failing (Frankfurt region).", "comment_count": 3, "local_id":
-        15896, "follower_count": 4, "utc_created_on": "2018-03-22 10:37:23+00:00",
-        "resource_uri": "/1.0/repositories/site/master/issues/15896", "is_spam": false}'
-    http_version: 
-  recorded_at: Thu, 22 Mar 2018 12:41:54 GMT
-- request:
-    method: get
-    uri: https://api.bitbucket.org/1.0/repositories/site/master/issues/15896/comments
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers: {}
   response:
     status:
       code: 200
@@ -2195,36 +26,187 @@ http_interactions:
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Date:
-      - Thu, 22 Mar 2018 12:41:52 GMT
+      - Sun, 15 Apr 2018 00:37:27 GMT
       X-Served-By:
-      - app-139
+      - app-143
       Accept-Ranges:
       - bytes
       Etag:
-      - '"ec2859ce06b455161ea775a84d4fc7e6"'
+      - '"8e1079121923abf0d84210c9fae6a1aa"'
       X-Static-Version:
-      - 0614fb63a033
+      - 027117463a4f
       X-Content-Type-Options:
       - nosniff
       X-Accepted-Oauth-Scopes:
       - issue
       X-Render-Time:
-      - '0.0398139953613'
+      - '0.0874469280243'
       Connection:
-      - Keep-Alive
+      - keep-alive
       X-Request-Count:
-      - '91'
+      - '378'
       X-Version:
-      - 0614fb63a033
+      - 027117463a4f
       X-Frame-Options:
       - SAMEORIGIN
       X-Cache-Info:
-      - cached
+      - caching
       Content-Length:
-      - '1359'
+      - '1965'
     body:
       encoding: UTF-8
-      string: '[{"content": "Apparently the problem comes from Amazon:\n\n\n```\nHello,\n\nThank
+      string: '{"priority": "blocker", "kind": "bug", "repository": {"links": {"self":
+        {"href": "https://api.bitbucket.org/2.0/repositories/site/master"}, "html":
+        {"href": "https://bitbucket.org/site/master"}, "avatar": {"href": "https://bitbucket.org/site/master/avatar/32/"}},
+        "type": "repository", "name": "master", "full_name": "site/master", "uuid":
+        "{3159450f-8238-486f-bbf4-7e30b121b37f}"}, "links": {"attachments": {"href":
+        "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/attachments"},
+        "self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896"},
+        "watch": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/watch"},
+        "comments": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/comments"},
+        "html": {"href": "https://bitbucket.org/site/master/issues/15896/stderr-ssh-connect-to-host-bitbucketorg"},
+        "vote": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/vote"}},
+        "reporter": {"username": "ablaga", "display_name": "Adrian Blaga", "type":
+        "user", "uuid": "{63408f38-b1bb-4cf6-905a-080d20d93cbd}", "links": {"self":
+        {"href": "https://api.bitbucket.org/2.0/users/ablaga"}, "html": {"href": "https://bitbucket.org/ablaga/"},
+        "avatar": {"href": "https://bitbucket.org/account/ablaga/avatar/32/"}}}, "title":
+        "STDERR: ssh: connect to host bitbucket.org port 22: Network is unreachable",
+        "component": {"name": "SSH", "links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/components/5"}}},
+        "votes": 3, "watches": 4, "content": {"raw": "AWS deployments are failing
+        (Frankfurt region).", "markup": "markdown", "html": "<p>AWS deployments are
+        failing (Frankfurt region).</p>", "type": "rendered"}, "assignee": null, "state":
+        "closed", "version": null, "edited_on": null, "created_on": "2018-03-22T10:37:23.703238+00:00",
+        "milestone": null, "updated_on": "2018-03-22T12:11:18.585841+00:00", "type":
+        "issue", "id": 15896}'
+    http_version: 
+  recorded_at: Sun, 15 Apr 2018 00:37:27 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: UTF-8
+      string: timestamp=1523752647&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fablaga%2Favatar%2F32%2F&signature=3437ec49a8507805039d8c3a307a4e4b6f736813&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '181'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 15 Apr 2018 00:37:28 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - 3c5096b99d4fc0c0
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Sun, 15 Apr 2018 00:37:28 GMT
+- request:
+    method: get
+    uri: https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/comments
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML,
+        like Gecko) Chrome/35.0.1916.153 Safari/537.36
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Vary:
+      - Authorization, Accept-Encoding
+      Cache-Control:
+      - max-age=900
+      Content-Type:
+      - application/json; charset=utf-8
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Date:
+      - Sun, 15 Apr 2018 00:37:29 GMT
+      X-Served-By:
+      - app-139
+      Accept-Ranges:
+      - bytes
+      Etag:
+      - '"71b760b3cdcbb17ecc65a2c7b86e48c5"'
+      X-Static-Version:
+      - 027117463a4f
+      X-Content-Type-Options:
+      - nosniff
+      X-Accepted-Oauth-Scopes:
+      - issue
+      X-Render-Time:
+      - '0.117431879044'
+      Connection:
+      - keep-alive
+      X-Request-Count:
+      - '412'
+      X-Version:
+      - 027117463a4f
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Cache-Info:
+      - caching
+      Content-Length:
+      - '5769'
+    body:
+      encoding: UTF-8
+      string: '{"pagelen": 20, "values": [{"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/comments/44100277"},
+        "html": {"href": "https://bitbucket.org/site/master/issues/15896#comment-44100277"}},
+        "issue": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896"}},
+        "type": "issue", "id": 15896, "repository": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master"},
+        "html": {"href": "https://bitbucket.org/site/master"}, "avatar": {"href":
+        "https://bitbucket.org/site/master/avatar/32/"}}, "type": "repository", "name":
+        "master", "full_name": "site/master", "uuid": "{3159450f-8238-486f-bbf4-7e30b121b37f}"},
+        "title": "STDERR: ssh: connect to host bitbucket.org port 22: Network is unreachable"},
+        "content": {"raw": null, "markup": "markdown", "html": "", "type": "rendered"},
+        "created_on": "2018-03-22T10:39:19.814356+00:00", "user": {"username": "ablaga",
+        "display_name": "Adrian Blaga", "type": "user", "uuid": "{63408f38-b1bb-4cf6-905a-080d20d93cbd}",
+        "links": {"self": {"href": "https://api.bitbucket.org/2.0/users/ablaga"},
+        "html": {"href": "https://bitbucket.org/ablaga/"}, "avatar": {"href": "https://bitbucket.org/account/ablaga/avatar/32/"}}},
+        "updated_on": null, "type": "issue_comment", "id": 44100277}, {"links": {"self":
+        {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/comments/44102804"},
+        "html": {"href": "https://bitbucket.org/site/master/issues/15896#comment-44102804"}},
+        "issue": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896"}},
+        "type": "issue", "id": 15896, "repository": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master"},
+        "html": {"href": "https://bitbucket.org/site/master"}, "avatar": {"href":
+        "https://bitbucket.org/site/master/avatar/32/"}}, "type": "repository", "name":
+        "master", "full_name": "site/master", "uuid": "{3159450f-8238-486f-bbf4-7e30b121b37f}"},
+        "title": "STDERR: ssh: connect to host bitbucket.org port 22: Network is unreachable"},
+        "content": {"raw": "Apparently the problem comes from Amazon:\n\n\n```\nHello,\n\nThank
         you for contacting AWS Premium Support. My name is Akash and I will be assisting
         you with this case today.\n\nI understand that you are facing connectivity
         issues with your bitbucket.org. I can confirm that at the moment, there seems
@@ -2235,12 +217,186 @@ http_interactions:
         downtime and thank you for your patience while we go about restoring the service.\n\nI
         will post a response on the case, as soon as I receive more information on
         this issue. Your patience on this matter would be highly appreciated.\n\nBest
-        regards,\n\nAkash S.\nAmazon Web Services\n\n```", "author_info": {"username":
-        "ablaga", "first_name": "Adrian", "last_name": "Blaga", "display_name": "Adrian
-        Blaga", "is_staff": false, "avatar": "https://bitbucket.org/account/ablaga/avatar/32/?ts=1521719307",
-        "resource_uri": "/1.0/users/ablaga", "is_team": false}, "comment_id": 44102804,
-        "utc_updated_on": "2018-03-22 12:11:07+00:00", "convert_markup": false, "utc_created_on":
-        "2018-03-22 12:11:07+00:00", "is_private": false, "is_spam": false}]'
+        regards,\n\nAkash S.\nAmazon Web Services\n\n```", "markup": "markdown", "html":
+        "<p>Apparently the problem comes from Amazon:</p>\n<div class=\"codehilite\"><pre><span></span>Hello,\n\nThank
+        you for contacting AWS Premium Support. My name is Akash and I will be assisting
+        you with this case today.\n\nI understand that you are facing connectivity
+        issues with your bitbucket.org. I can confirm that at the moment, there seems
+        to be an underlying problem with our networking infrastructure, which manages
+        the connection to Bitbucket.org from Frankfurt and Mumbai regions, and this
+        is being treated with the utmost urgency by our internal teams. As soon as
+        we have more information it will be relayed to you.\n\nI apologize for the
+        downtime and thank you for your patience while we go about restoring the service.\n\nI
+        will post a response on the case, as soon as I receive more information on
+        this issue. Your patience on this matter would be highly appreciated.\n\nBest
+        regards,\n\nAkash S.\nAmazon Web Services\n</pre></div>", "type": "rendered"},
+        "created_on": "2018-03-22T12:11:07.339031+00:00", "user": {"username": "ablaga",
+        "display_name": "Adrian Blaga", "type": "user", "uuid": "{63408f38-b1bb-4cf6-905a-080d20d93cbd}",
+        "links": {"self": {"href": "https://api.bitbucket.org/2.0/users/ablaga"},
+        "html": {"href": "https://bitbucket.org/ablaga/"}, "avatar": {"href": "https://bitbucket.org/account/ablaga/avatar/32/"}}},
+        "updated_on": null, "type": "issue_comment", "id": 44102804}, {"links": {"self":
+        {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896/comments/44102812"},
+        "html": {"href": "https://bitbucket.org/site/master/issues/15896#comment-44102812"}},
+        "issue": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master/issues/15896"}},
+        "type": "issue", "id": 15896, "repository": {"links": {"self": {"href": "https://api.bitbucket.org/2.0/repositories/site/master"},
+        "html": {"href": "https://bitbucket.org/site/master"}, "avatar": {"href":
+        "https://bitbucket.org/site/master/avatar/32/"}}, "type": "repository", "name":
+        "master", "full_name": "site/master", "uuid": "{3159450f-8238-486f-bbf4-7e30b121b37f}"},
+        "title": "STDERR: ssh: connect to host bitbucket.org port 22: Network is unreachable"},
+        "content": {"raw": null, "markup": "markdown", "html": "", "type": "rendered"},
+        "created_on": "2018-03-22T12:11:18.629234+00:00", "user": {"username": "ablaga",
+        "display_name": "Adrian Blaga", "type": "user", "uuid": "{63408f38-b1bb-4cf6-905a-080d20d93cbd}",
+        "links": {"self": {"href": "https://api.bitbucket.org/2.0/users/ablaga"},
+        "html": {"href": "https://bitbucket.org/ablaga/"}, "avatar": {"href": "https://bitbucket.org/account/ablaga/avatar/32/"}}},
+        "updated_on": null, "type": "issue_comment", "id": 44102812}], "page": 1,
+        "size": 3}'
     http_version: 
-  recorded_at: Thu, 22 Mar 2018 12:41:55 GMT
+  recorded_at: Sun, 15 Apr 2018 00:37:29 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: UTF-8
+      string: timestamp=1523752649&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fablaga%2Favatar%2F32%2F&signature=e48b4cb9692081038572e1e764df6851711d1fe8&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '181'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 15 Apr 2018 00:37:29 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - 2b1ea02f7b940400
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Sun, 15 Apr 2018 00:37:30 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: UTF-8
+      string: timestamp=1523752650&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fablaga%2Favatar%2F32%2F&signature=903c4b152213ac486fc92050461b8aac0cdafcc4&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '181'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 15 Apr 2018 00:37:30 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - 239f53d428a43b24
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '46'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Sun, 15 Apr 2018 00:37:30 GMT
+- request:
+    method: post
+    uri: https://api.cloudinary.com/v1_1/test/image/upload
+    body:
+      encoding: UTF-8
+      string: timestamp=1523752650&discard_original_filename=1&file=https%3A%2F%2Fbitbucket.org%2Faccount%2Fablaga%2Favatar%2F32%2F&signature=903c4b152213ac486fc92050461b8aac0cdafcc4&api_key=test
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - cld-ruby-1.0.72
+      Content-Length:
+      - '181'
+      Content-Type:
+      - application/x-www-form-urlencoded
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Sun, 15 Apr 2018 00:37:31 GMT
+      Server:
+      - cloudinary
+      Status:
+      - 401 Unauthorized
+      X-Cld-Error:
+      - cloud_name is disabled
+      X-Request-Id:
+      - 2269f4984987a2f5
+      X-Ua-Compatible:
+      - IE=Edge,chrome=1
+      X-Xss-Protection:
+      - 1; mode=block
+      Content-Length:
+      - '46'
+      Connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":{"message":"cloud_name is disabled"}}'
+    http_version: 
+  recorded_at: Sun, 15 Apr 2018 00:37:31 GMT
 recorded_with: VCR 2.9.3

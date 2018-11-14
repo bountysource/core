@@ -59,7 +59,6 @@
 class Bitbucket::Tracker < ::Tracker
 
   has_many :issues, class_name: "Bitbucket::Issue", foreign_key: :tracker_id
-  MAX_RESULT_PER_PAGE = 50
 
   # REMOTE SYNC INSTANCE METHODS
   def remote_sync_if_necessary(options={})
@@ -70,24 +69,19 @@ class Bitbucket::Tracker < ::Tracker
     end
   end
 
-  def remote_sync(options={})
+  def remote_sync(options = {})
     update_attributes!(synced_at: Time.now)
     # update from API response, if data changed since last sync
-    start = options[:start] || 0
-    params = {
-      limit: MAX_RESULT_PER_PAGE,
-      start: start
-    }
     api_options = {
-      url: Bitbucket::API.generate_base_url(self),
-      path: Bitbucket::API.generate_issue_list_path(params)
+      url: options[:url] || Bitbucket::API.generate_base_url(url),
+      path: options[:url] ? nil : Bitbucket::API.issue_list_path
     }
     api_response = Bitbucket::API.fetch_issue_list(api_options)
 
     # create or update issues
     sync_issues_from_array(api_response)
 
-    # fetch next page if current page has full results
-    (options[:force] ? self : delay).remote_sync(start: start+MAX_RESULT_PER_PAGE) if api_response.length == MAX_RESULT_PER_PAGE
+    # fetch next page if current page has next
+    (options[:force] ? self : delay).remote_sync(url: api_options[:next_url]) if api_options[:next_url]
   end
 end

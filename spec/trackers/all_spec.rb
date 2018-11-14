@@ -298,7 +298,8 @@ describe "live_sync" do
       end
 
       it "should create Tracker Issues" do
-        expect(action).to change(tracker.issues, :count).by_at_least(tracker_class::MAX_RESULT_PER_PAGE)
+        # Bitbucket API 2.0 returns at least 10 values in a continuing page
+        expect(action).to change(tracker.issues, :count).by_at_least(10)
       end
     end
 

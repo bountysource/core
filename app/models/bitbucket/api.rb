@@ -24,12 +24,12 @@ class Bitbucket::API < Tracker::RemoteAPI
     end
   end
 
-  def self.generate_base_url(tracker)
-    "https://api.bitbucket.org/1.0/repositories/#{tracker.url.gsub('https://bitbucket.org/','')}/"
+  def self.generate_base_url(tracker_url)
+    tracker_url.gsub('https://bitbucket.org/', 'https://api.bitbucket.org/2.0/repositories/')
   end
 
-  def self.generate_issue_list_path(params = {})
-    "/issues?" + params.to_param
+  def self.issue_list_path
+    '/issues'
   end
 
   def self.generate_issue_detail_path(issue)
@@ -40,10 +40,23 @@ class Bitbucket::API < Tracker::RemoteAPI
     "/issues/#{issue.number}/comments"
   end
 
-  def self.fetch_issue_comments(options={})
+  def self.fetch_issue_list(options = {})
+    options[:base_url] ||= options[:url]
+    options[:url] = File.join(options[:url].to_s, options[:path].to_s) if options[:path]
+    options[:html] ||= HTTParty.get(options[:url], timeout: 15,
+      headers: {
+        'User-Agent' => Api::Application.config.chrome_user_agent
+      }).body
+    parse_issue_list(options[:base_url], options[:html], options)
+  end
+
+  def self.fetch_issue_comments(options = {})
     new_relic_data_point "Custom/external_api/#{self.to_s}/fetch_comment"
     options[:url] = File.join(options[:url].to_s, options[:path].to_s) if options[:path]
-    options[:html] ||= HTTParty.get(options[:url], timeout: 5).body
+    options[:html] ||= HTTParty.get(options[:url], timeout: 15,
+      headers: {
+        'User-Agent' => Api::Application.config.chrome_user_agent
+      }).body
     parse_issue_comments(options[:html])
   end
 
@@ -51,18 +64,29 @@ protected
 
   def self.parse_issue_comments(response = "")
     data = JSON.parse(response)
+    comments = data['values']
+    while data['next']
+      response = HTTParty.get(data['next'], timeout: 15,
+        headers: {
+          'User-Agent' => Api::Application.config.chrome_user_agent
+        }).body
+      data = JSON.parse(response)
+      comments.concat(data['values'])
+    end
 
-    data.map do |comment|
+    comments.map do |comment|
       linked_account = LinkedAccount::Bitbucket.find_or_create_from_api_response(
-        author_name: comment['author_info'] && comment['author_info']['username'],
-        author_image_url: comment['author_info'] && comment['author_info']['avatar']
+        author_name: comment['user'] && comment['user']['username'],
+        author_image_url: comment['user'] && comment['user']['links'] &&
+                          comment['user']['links']['avatar'] &&
+                          comment['user']['links']['avatar']['href']
       )
 
       {
-        remote_id: comment['comment_id'],
-        body_html: comment['content'],
-        created_at: DateTime.parse(comment['utc_created_on']),
-        author: linked_account
+        remote_id: comment['id'],
+        body_html: comment['content'] && comment['content']['html'],
+        author: linked_account,
+        created_at: DateTime.parse(comment['created_on'])
       }
     end
   end
@@ -71,39 +95,46 @@ protected
     issue = JSON.parse(response)
 
     linked_account = LinkedAccount::Bitbucket.find_or_create_from_api_response(
-      author_name: issue['reported_by'] && issue['reported_by']['username'],
-      author_image_url: issue['reported_by'] && issue['reported_by']['avatar']
+      author_name: issue['reporter'] && issue['reporter']['username'],
+      author_image_url: issue['reporter'] && issue['reporter']['links'] &&
+                        issue['reporter']['links']['avatar'] &&
+                        issue['reporter']['links']['avatar']['href']
     )
 
     {
-      number: issue['local_id'],
+      number: issue['id'],
       title: issue['title'],
-      state: issue['status'],
+      state: issue['state'],
       priority: issue['priority'],
-      body: issue['content'],
-      can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
-      url: issue['resource_uri'].gsub('/1.0/repositories', 'https://bitbucket.org').gsub('/issue/', '/issues/'),
-      owner: issue['reported_by'] ? issue['reported_by']['username'] : '',
+      body: issue['content'] && issue['content']['html'],
+      can_add_bounty: issue['state'] == 'new' || issue['state'] == 'open',
+      url: issue['links'] && issue['links']['html'] &&
+           issue['links']['html']['href'],
       author: linked_account,
-      remote_created_at: DateTime.parse(issue['utc_created_on']),
-      remote_updated_at: DateTime.parse(issue['utc_last_updated'])
+      owner: issue['assignee'] ? issue['assignee']['username'] : nil,
+      remote_created_at: DateTime.parse(issue['created_on']),
+      remote_updated_at: issue['updated_on'] &&
+                         DateTime.parse(issue['updated_on'])
     }
   end
 
-  def self.parse_issue_list(base_url, response = "")
+  def self.parse_issue_list(base_url, response = "", state = {})
     data = JSON.parse(response)
-    data['issues'].map do |issue|
+    state[:next_url] = data['next']
+    data['values'].map do |issue|
       {
-        number: issue['local_id'],
+        number: issue['id'],
         title: issue['title'],
-        state: issue['status'],
+        state: issue['state'],
         priority: issue['priority'],
-        body: issue['content'],
-        can_add_bounty: issue['status'] == 'new' || issue['status'] == 'open',
-        url: issue['resource_uri'].gsub('/1.0/repositories', 'https://bitbucket.org').gsub('/issue/', '/issues/'), 
-        owner: issue['reported_by'] ? issue["reported_by"]["username"] : '', 
-        remote_created_at: DateTime.parse(issue['utc_created_on']), 
-        remote_updated_at: DateTime.parse(issue['utc_last_updated']) 
+        body: issue['content'] && issue['content']['html'],
+        can_add_bounty: issue['state'] == 'new' || issue['state'] == 'open',
+        url: issue['links'] && issue['links']['html'] &&
+             issue['links']['html']['href'],
+        owner: issue['assignee'] ? issue['assignee']['username'] : nil,
+        remote_created_at: DateTime.parse(issue['created_on']),
+        remote_updated_at: issue['updated_on'] &&
+                           DateTime.parse(issue['updated_on'])
       }
     end
   end
