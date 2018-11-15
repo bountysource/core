@@ -29,7 +29,7 @@ angular.module('app').config(function($stateProvider) {
           team_payin_params.owner_id = null;
         } else {
           team_payin_params.owner_type = "Team";
-          team_payin_params.owner_id = $stateParams.display_as.split("Team")[1];
+          team_payin_params.owner_id = $stateParams.display_as.split("team")[1];
         }
 
         $api.one_time_checkout.create({}, {
