@@ -10,7 +10,6 @@ angular.module('app')
   $scope.form_data = {};
 
   $api.get_ad_space($routeParams.id).then(function(response) {
-    console.log(response);
     if (response.meta.success)   {
       var adSpace = response.data;
       $scope.adSpace = response.data;

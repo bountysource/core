@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: ad_spaces
+#
+#  id            :bigint(8)        not null, primary key
+#  cloudinary_id :string
+#  title         :string
+#  text          :text
+#  button_text   :string
+#  button_url    :string
+#  position      :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'spec_helper'
 
 describe AdSpace do

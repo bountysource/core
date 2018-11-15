@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813231110) do
+ActiveRecord::Schema.define(version: 20180827073853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20180813231110) do
     t.integer "owner_id"
     t.string "owner_type", limit: 255
     t.boolean "standalone", default: false
+    t.integer "override_fee_percentage"
     t.index ["owner_id"], name: "index_accounts_on_item_id"
     t.index ["owner_type"], name: "index_accounts_on_item_type"
     t.index ["type"], name: "index_accounts_on_type"

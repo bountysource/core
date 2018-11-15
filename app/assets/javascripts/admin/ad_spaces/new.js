@@ -9,7 +9,6 @@ angular.module('app')
 .controller("NewAdSpaces", function ($scope, $api, $location) {
   $scope.form_data = {};
 
-  
   $scope.createAdSpace = function(form_data) {
     var data = angular.copy(form_data);
     if(data.position === ""){ data.position = null; }

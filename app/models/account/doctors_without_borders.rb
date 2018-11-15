@@ -2,15 +2,16 @@
 #
 # Table name: accounts
 #
-#  id          :integer          not null, primary key
-#  type        :string(255)      default("Account"), not null
-#  description :string(255)      default(""), not null
-#  currency    :string(255)      default("USD"), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  owner_id    :integer
-#  owner_type  :string(255)
-#  standalone  :boolean          default(FALSE)
+#  id                      :integer          not null, primary key
+#  type                    :string(255)      default("Account"), not null
+#  description             :string(255)      default(""), not null
+#  currency                :string(255)      default("USD"), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  owner_id                :integer
+#  owner_type              :string(255)
+#  standalone              :boolean          default(FALSE)
+#  override_fee_percentage :integer
 #
 # Indexes
 #

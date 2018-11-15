@@ -32,6 +32,13 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
     currency: 'USD'
   };
 
+  $api.ad_spaces()
+    .then(function(response) {
+      $scope.ads = {
+        issue_ad: response.find(function(ad) { return ad.position === 'issue'; })
+      };
+    });
+
   $scope.checkout = {};
 
   // METAMASK WALLET UPDATE BEGIN

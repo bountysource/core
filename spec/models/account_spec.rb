@@ -2,15 +2,16 @@
 #
 # Table name: accounts
 #
-#  id          :integer          not null, primary key
-#  type        :string(255)      default("Account"), not null
-#  description :string(255)      default(""), not null
-#  currency    :string(255)      default("USD"), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  owner_id    :integer
-#  owner_type  :string(255)
-#  standalone  :boolean          default(FALSE)
+#  id                      :integer          not null, primary key
+#  type                    :string(255)      default("Account"), not null
+#  description             :string(255)      default(""), not null
+#  currency                :string(255)      default("USD"), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  owner_id                :integer
+#  owner_type              :string(255)
+#  standalone              :boolean          default(FALSE)
+#  override_fee_percentage :integer
 #
 # Indexes
 #
@@ -22,6 +23,11 @@
   require 'spec_helper'
 
 describe Account do
+
+  it "should have a valid instance" do
+    account = build(:team_account)
+    expect(account).to be_valid
+  end
 
   describe 'transfers' do
     let!(:person)   { create(:person_with_money_in_account, money_amount: 10.00) }
@@ -135,6 +141,20 @@ describe Account do
       end
     end
 
+  end
+
+  describe '.calculate_cash_out_fee' do
+    context 'for team account' do
+      it "return a default 10 percent fee when not set" do
+        account = build(:team_account)
+        expect(account.calculate_cash_out_fee(50)).to eq 5
+      end
+
+      it "return a the correct fee when an override fee is set" do
+        account = build(:team_account, override_fee_percentage: 5)
+        expect(account.calculate_cash_out_fee(50)).to eq 2.5
+      end
+    end
   end
 
 end

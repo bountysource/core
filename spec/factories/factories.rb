@@ -1,18 +1,4 @@
 FactoryBot.define do
-  factory :account do
-    factory :fundraiser_account, class: Account::Fundraiser do
-      association :item, factory: :fundraiser
-    end
-
-    factory :issue_account, class: Account::IssueAccount do
-      association :item, factory: :issue
-    end
-
-    factory :repo_account, class: Account::Repository do
-      association :item, factory: :tracker
-    end
-  end
-
   factory :paypal_ipn do
     txn_id { "0FR017006U837124K" }
   end

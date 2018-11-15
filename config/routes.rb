@@ -120,6 +120,7 @@ Api::Application.routes.draw do
           end
 
           resources :accounts do
+            resources :set_override_fees, only: :create, module: :accounts
             collection do
               get :overview
             end
@@ -164,7 +165,7 @@ Api::Application.routes.draw do
 
           resources :pledges
 
-          resources :adverts
+          resources :info_spaces
 
           resources :transactions do
             resources :splits
@@ -447,7 +448,7 @@ Api::Application.routes.draw do
 
 
         resources :transactions, only: [:index, :show]
-        resources :ad_spaces, only: :index
+        resources :info_spaces, only: :index
 
         resources :bounties, only: [] do
           collection do

@@ -2,15 +2,16 @@
 #
 # Table name: accounts
 #
-#  id          :integer          not null, primary key
-#  type        :string(255)      default("Account"), not null
-#  description :string(255)      default(""), not null
-#  currency    :string(255)      default("USD"), not null
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  owner_id    :integer
-#  owner_type  :string(255)
-#  standalone  :boolean          default(FALSE)
+#  id                      :integer          not null, primary key
+#  type                    :string(255)      default("Account"), not null
+#  description             :string(255)      default(""), not null
+#  currency                :string(255)      default("USD"), not null
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  owner_id                :integer
+#  owner_type              :string(255)
+#  standalone              :boolean          default(FALSE)
+#  override_fee_percentage :integer
 #
 # Indexes
 #
@@ -33,6 +34,8 @@ class Account < ApplicationRecord
   scope :standalone, lambda { where(standalone: true) }
   scope :escrow, lambda { where(type: %w(Account::Paypal Account::GoogleWallet Account::BofA)) }
   scope :fee, lambda { where(type: %w(Account::BountySourceFeesBounty Account::BountySourceFeesPledge Account::BountySourceFeesTeam)) }
+
+  validates :override_fee_percentage, numericality: { less_than_or_equal_to: 100, greater_than_or_equal_to: 0}, allow_nil: true
 
   class Error < StandardError ; end
   class NotImplemented < Error ; end
@@ -215,9 +218,12 @@ class Account < ApplicationRecord
   # Calculate the cash out fee.
   #
   # Formula:
-  # (account balance) * 0.10
+  # fee percentage = override value or 10 if no override
+  # (account balance) * fee perecentage
+  DEFAULT_FEE = 10
   def calculate_cash_out_fee amount
-    (Money.new(amount.to_f*100) / 10).to_f
+    fee_percentage = override_fee_percentage || DEFAULT_FEE
+    (Money.new(amount.to_f*100) * fee_percentage / 100).to_f
   end
 
 end

@@ -20,18 +20,22 @@
 #  index_accounts_on_type       (type)
 #
 
-class Account::Coinbase < Account
+FactoryBot.define do
+  factory :account do
+    factory :fundraiser_account, class: Account::Fundraiser do
+      association :owner, factory: :fundraiser
+    end
 
-  before_create do
-    self.standalone = true
+    factory :issue_account, class: Account::IssueAccount do
+      association :owner, factory: :issue
+    end
+
+    factory :repo_account, class: Account::Repository do
+      association :owner, factory: :tracker
+    end
+
+    factory :team_account, class: Account::Team do
+      owner { |a| a.association(:team) }
+    end
   end
-
-  def self.liability?
-    false
-  end
-
-  def display_name
-    'Bitcoin'
-  end
-
 end

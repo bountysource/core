@@ -1,0 +1,28 @@
+<div class="info-space" ng-show="infoSpace">
+  <div class="info-space-image">
+    <img class="center-block" ng-src="{{ infoSpace.medium_image_url }}">
+  </div>
+  <div class="info-space-details">
+    <div>
+      <h4 class="mt-0">
+      {{ infoSpace.title }}
+      </h4>
+    </div>
+    <div>
+      {{ infoSpace.text }}
+    </div>
+  </div>
+  <div class="info-space-actions">
+    <div>
+      
+    </div>
+    <div>
+      <a ng-href="{{ infoSpace.button_url }}">
+        <button class="btn btn-light-blue">{{ infoSpace.button_text }}</button>
+      </a>
+    </div>
+    <div class="buy-space">
+      <a href="https://canyacoin.typeform.com/to/fsZa7Q" target="_blank">Buy this ad space</a>
+    </div>
+  </div>
+</div>
