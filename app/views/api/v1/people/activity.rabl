@@ -44,6 +44,14 @@ child(@crypto_bounties => :crypto_bounties) do
   end
 end
 
+child(@inactivity_splits => :inactivity_splits) do
+  node(:type) { |inactivity_split| 'InactivityFee' }
+
+  attribute :amount
+  attribute :created_at
+
+end
+
 child(@pledges => :pledges) do
   node(:type) { |pledge| pledge.class.name }
   extends "api/v1/pledges/partials/base"

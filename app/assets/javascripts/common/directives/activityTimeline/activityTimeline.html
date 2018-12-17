@@ -29,6 +29,10 @@
         ng-href="{{action.bounty_claim.issue.frontend_path}}">{{action.bounty_claim.issue.title}}</a>
       </td>
 
+      <td ng-if="action.type == 'InactivityFee'">
+        Deducted an inactivity fee of {{action.amount | dollars}}</a>
+      </td>
+
       <td ng-if="action.type == 'NilClass'"></td>
 
       <td class="text-muted pt-3 pb-3">{{ action.sort_date | date:'medium' }}</td>

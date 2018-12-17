@@ -7,14 +7,16 @@ class Gitlab::API < Tracker::RemoteAPI
   def self.extract_info_from_url(url)
     path = url.gsub('https://gitlab.com/','')
     project_id = CGI.escape(url.gsub('https://gitlab.com/','').chomp('/'))
-    if matches = url.match(/^https:\/\/gitlab\.com\/([^\/]+)\/([^\/]+)\/issues?\/(\d+)(\/.+)?$/)
+    if matches = url.match(/^https:\/\/gitlab\.com\/(.+)\/issues?\/(\d+)(\/.+)?$/)
+      tracker_name = matches[1]
+      issue_id = matches[2]
       {
-        issue_url: "https://gitlab.com/#{matches[1]}/#{matches[2]}/issues/#{matches[3]}",
-        issue_number: matches[3].to_i,
+        issue_url: "https://gitlab.com/#{tracker_name}/issues/#{issue_id}",
+        issue_number: matches[2].to_i,
         issue_title: nil,
         issue_class: Gitlab::Issue,
-        tracker_url: "https://gitlab.com/#{matches[1]}/#{matches[2]}",
-        tracker_name: "#{matches[1]}/#{matches[2]}",
+        tracker_url: "https://gitlab.com/#{tracker_name}",
+        tracker_name: tracker_name,
         tracker_class: Gitlab::Tracker
       }
     elsif self.fetch_tracker(url: "https://gitlab.com/api/v4/projects/#{project_id}")

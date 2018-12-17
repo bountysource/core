@@ -321,6 +321,7 @@ class Api::V1::PeopleController < ApplicationController
     @team_relations = @profile_person.team_member_relations.where(public: true).order("created_at desc").limit(50)
     bounty_claim_ids = @profile_person.bounty_claims.order("created_at desc").limit(50).pluck(:id)
     @bounty_claim_events_collected = BountyClaimEvent::Collected.where(bounty_claim_id: bounty_claim_ids).includes(:bounty_claim => :issue)
+    @inactivity_splits = Split.joins(:txn).where(transactions: {type: 'Transaction::InternalTransfer::InactivityFee'}).where(item: @profile_person)
   end
 
   # Projects that belong to you <3
