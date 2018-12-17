@@ -23,6 +23,8 @@ Crontab.run do
 
     every 5.minutes, 'Currency.sync_all'
 
+    every 1.day, 'ChargeUserInactivityFee.new.perform'
+
     # TODO: old. syncs trackers from plugins, but that ain't right, dawg.
     # every 1.hour, 'Tracker.joins(:plugin).where("tracker_plugins.locked = false").each { |tracker| tracker.delay.remote_sync }'
   end

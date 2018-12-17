@@ -693,6 +693,16 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def inactivity_fee_charged(options)
+    @person = options[:person]
+    subject = 'Bountysource Inactivity Fee'
+
+    mail(to: @person.email, subject: subject) do |format|
+      format.text
+      format.html
+    end
+  end
+
   def issue_suggestion_created(options)
     @person = options[:person]
     @issue_suggestion = options[:issue_suggestion]
