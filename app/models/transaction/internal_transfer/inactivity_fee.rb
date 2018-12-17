@@ -6,7 +6,7 @@ class Transaction::InternalTransfer::InactivityFee < Transaction::InternalTransf
     from_account = person.account
 
     balance = from_account.balance
-
+    return if balance <= 0
     if balance <= 10
       fee = balance
     else

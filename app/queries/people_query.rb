@@ -6,8 +6,7 @@ class PeopleQuery
   end
 
   def inactive_since(datetime)
-    scoped = relation.where('last_seen_at < ?', datetime)
-    scoped = scoped
+    scoped = relation
       .joins(account: {splits: :txn})
       .where.not(transactions: {type: 'Transaction::InternalTransfer::InactivityFee'})
       .select('people.id, people.email, sum(splits.amount) as balance')
