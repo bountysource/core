@@ -10,7 +10,7 @@ class ChargeUserInactivityFee
       next if person_charged_this_month?(inactive_person)
       next if inactive_person.email == 'support@bountysource.com'
       txn = Transaction::InternalTransfer::InactivityFee.charge_person(inactive_person)
-      inactive_person.send_email(:inactivity_fee_charged) if txn
+      # inactive_person.send_email(:inactivity_fee_charged) if txn
     end
   end
 
