@@ -238,6 +238,31 @@ angular.module('app').controller('BaseToolsController', function ($scope, $route
       }
     };
 
+    $scope.remove_plugin = function(plugin) {
+      if ($scope.current_tracker) {
+        $scope.plugin_loading = "Removing plugin...";
+
+        if (!$scope.__can_use_plugin__) {
+          // redirect through github to get public repo permission
+          $scope.github_auth($location.path() + "?tracker=" + ($scope.current_tracker || {}).full_name);
+        } else {
+          $api.tracker_plugin_destroy($scope.current_tracker.id).then(function(plugin) {
+            $scope.plugin_loading = false;
+
+            if (plugin.error) {
+              $scope.plugin_alert.text = plugin.error;
+            } else {
+              $scope.current_tracker.$plugin_installed = false;
+              
+              var index = $scope.plugins.indexOf(plugin);
+              $scope.plugins.splice(index, 1);
+              $scope.plugin_alert = { text: 'Plugin successfully removed.', type: 'success', initial_message: true};
+            }
+          });
+        }
+      }
+    };
+
     $scope.plugins = plugins;
     return plugins;
   });
