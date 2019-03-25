@@ -195,7 +195,7 @@ Api::Application.routes.draw do
 
           resources :bounty_claims
 
-          resources :tracker_plugins, only: [:show, :index, :create, :update, :delete]
+          resources :tracker_plugins, only: [:show, :index, :create, :update, :destroy]
 
           resources :cash_outs, only: [:index, :show, :update]
 

@@ -59,6 +59,7 @@
       <div>
         <!-- Modify existing plugin, show save button. Otherwise, show install button -->
         <button ng-show="current_tracker.$plugin_installed" class="btn btn-primary" ng-disabled="!plugin_changed(current_plugin)" ng-click="update_plugin(current_plugin)">Save</button>
+        <button ng-show="current_tracker.$plugin_installed" class="btn btn-danger" ng-click="remove_plugin(current_plugin)">Remove</button>
         <button ng-hide="current_tracker.$plugin_installed" class="btn btn-success" ng-click="create_plugin()">Install</button>
 
         <button class="btn btn-danger" ng-click="" ng-hide="true">Uninstall</button>

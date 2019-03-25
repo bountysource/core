@@ -711,10 +711,6 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/project_relations");
   };
 
-  this.tracker_plugin_update = function(tracker_id, data) {
-    return this.call("/trackers/"+tracker_id+"/tracker_plugin", "PUT", data);
-  };
-
   this.approve_connect = function(provider, data) {
     return this.call("/auth/"+provider+"/approve_connect", "POST", data);
   };
@@ -888,6 +884,14 @@ angular.module('services').config(function($httpProvider) {
   this.tracker_plugin_create = function(tracker_id, data) {
     data.tracker_id = tracker_id;
     return this.call("/tracker_plugins", "POST", data);
+  };
+
+  this.tracker_plugin_update = function(tracker_id, data) {
+    return this.call("/trackers/"+tracker_id+"/tracker_plugin", "PUT", data);
+  };
+
+  this.tracker_plugin_destroy = function(tracker_id, data) {
+    return this.call("/trackers/"+tracker_id+"/tracker_plugin", "DELETE", data);
   };
 
   this.job_finished = function(id) {
