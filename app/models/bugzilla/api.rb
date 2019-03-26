@@ -38,13 +38,13 @@ class Bugzilla::API < Tracker::RemoteAPI
     # Try to get name from various locations
     bugzilla_name = doc.css('link[rel="search"]').attribute('title').text.gsub(/\s*Bugzilla\s*/,'')
     bugzilla_name = doc.css('#title').text.gsub(%r{\s*bugzilla\s*}i,'').strip if bugzilla_name.blank?
-
+    
     if action == 'show_bug.cgi' && params[:id]
       product_name = doc.css('#field_container_product').text.strip
 
       # Try a slightly more hacky method if that failed to find the Product name
       if product_name.blank?
-        doc.css("a[href^=describecomponents]").each do |anchor| 
+        doc.css("a[href^=describecomponents], a[href^='/describecomponents']").each do |anchor| 
           link = anchor.attr('href')
           product_uri = URI.parse(link)
           product_uri_params = Rack::Utils.parse_nested_query(product_uri.query)
@@ -65,7 +65,7 @@ class Bugzilla::API < Tracker::RemoteAPI
 
       issue_title = (doc.css('#subtitle p').text.strip rescue nil)
       issue_title = (doc.css("#bug_title").text.strip rescue nil) if issue_title.blank?
-      issue_title = (doc.css('meta').find { |m| m.attribute('property').value == 'og:title' }.attribute('content').value.gsub(/^\d+ [-–] /,'') rescue nil) if issue_title.blank?
+      issue_title = (doc.css('meta[property="og:title"]').attribute('content').text rescue nil) if issue_title.blank?
       issue_title = (doc.css('#subtitle').text.strip rescue nil) if issue_title.blank?
 
       {
