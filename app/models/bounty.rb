@@ -94,6 +94,8 @@ class Bounty < ApplicationRecord
     team_ids << previous_changes[:owner_id] if previous_changes[:owner_id] && (previous_changes[:owner_type] || owner_type) == 'Team'
     team_ids << issue.tracker.team_id
     Team.where(id: team_ids.compact.uniq).each(&:update_activity_total)
+
+    update_issue_category
   end
 
   validate do
@@ -393,5 +395,12 @@ class Bounty < ApplicationRecord
       amount: active.sum(:amount),
       paid: paid.sum(:amount)
     }
+  end
+
+  def update_issue_category
+    if issue.category.nil?
+      issue.fiat!
+      issue.save
+    end
   end
 end

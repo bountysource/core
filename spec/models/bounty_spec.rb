@@ -69,6 +69,15 @@ describe Bounty do
     expect(bounty.display_amount).to eq('$5000.00')
   end
 
+  it 'should set the issue category to fiat on creation' do
+    issue = create(:issue, category: nil)
+    expect {
+      issue.bounties.create(amount: 1337)  
+    }.to change(issue, :fiat?).from(false).to(true)
+    
+
+  end
+
   #it "should have a default expiry of six months" do
   #  bounty = Bounty.new amount: 1
   #  bounty.expires_at.should be_within(1.day).of(6.months.from_now)
