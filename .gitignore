@@ -42,3 +42,5 @@ compiled_tests/
 
 .env
 .byebug_history
+
+dump.rdb

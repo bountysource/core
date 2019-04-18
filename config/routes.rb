@@ -193,7 +193,9 @@ Api::Application.routes.draw do
 
           resources :follows, controller: :follow_relations, only: [:index]
 
-          resources :bounty_claims
+          resources :bounty_claims do
+            resource :force_collect, only: :create, module: :bounty_claims
+          end
 
           resources :tracker_plugins, only: [:show, :index, :create, :update, :destroy]
 

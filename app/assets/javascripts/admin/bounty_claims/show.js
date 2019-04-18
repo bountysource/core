@@ -42,4 +42,20 @@ angular.module('app')
     });
   };
 
+  $scope.checkNull = function(obj) {
+    return obj === null
+  }
+
+  $scope.forceCollect = function(claim) {
+    if(confirm("Are you sure? This operation is irreversible")){
+      $api.force_collect_claim(claim.id).then(function(response){
+        if(response.meta.success) {
+          $window.location.reload();
+        } else {
+          $scope.error = response.data.error;
+        }
+      })
+    }
+  }
+
 });
