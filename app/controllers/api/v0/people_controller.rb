@@ -25,7 +25,7 @@ class Api::V0::PeopleController < Api::V0::BaseController
 
   def destroy
     @person = Person.find_by_id params[:id]
-    @person.safe_destroy
+    @person.delay.safe_destroy
     render "api/v1/people/show_admin"
   end
 

@@ -41,7 +41,6 @@ angular.module('app')
           } else {
             $api.get_person($routeParams.id).then(function(response) {
               $scope.person = response;
-              $scope.deleting_in_progress = false;
             });
           }
         });
