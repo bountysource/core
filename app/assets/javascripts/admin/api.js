@@ -556,7 +556,7 @@ angular.module('api.bountysource',[]).
       return this.call("/admin/bounty_claims/"+id+"/force_collect", "POST", function(response) {
         return response;
       });
-    }
+    };
 
     this.get_plugins = function(params) {
       return this.call("/admin/tracker_plugins", params, function(response) {

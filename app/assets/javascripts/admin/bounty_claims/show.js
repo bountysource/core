@@ -43,8 +43,8 @@ angular.module('app')
   };
 
   $scope.checkNull = function(obj) {
-    return obj === null
-  }
+    return obj === null;
+  };
 
   $scope.forceCollect = function(claim) {
     if(confirm("Are you sure? This operation is irreversible")){
@@ -54,8 +54,8 @@ angular.module('app')
         } else {
           $scope.error = response.data.error;
         }
-      })
+      });
     }
-  }
+  };
 
 });
