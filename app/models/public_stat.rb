@@ -197,14 +197,14 @@ class PublicStat < ApplicationRecord
           display_as += Pledge.not_refunded.where(created_at: tp).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
           display_as += Bounty.not_refunded.where(created_at: tp).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
           display_as += SupportLevelPayment.not_refunded.where('support_level_payments.created_at' => salt_month_shift(tp)).joins(:support_level).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
-          display_as.uniq.select { |d| d['Person'] }.count
+          display_as.uniq.reject(&:nil?).select { |d| d['Person'] }.count
         },
         spender_teams_cnt: time_periods.map { |tp|
           display_as = TeamPayin.not_refunded.where(created_at: tp).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
           display_as += Pledge.not_refunded.where(created_at: tp).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
           display_as += Bounty.not_refunded.where(created_at: tp).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
           display_as += SupportLevelPayment.not_refunded.where('support_level_payments.created_at' => salt_month_shift(tp)).joins(:support_level).pluck("coalesce(owner_type, 'Person') || coalesce(owner_id, person_id)")
-          display_as.uniq.select { |d| d['Team'] }.count
+          display_as.uniq.reject(&:nil?).select { |d| d['Team'] }.count
         },
 
         support_level_payments_sum: time_periods.map { |tp|
