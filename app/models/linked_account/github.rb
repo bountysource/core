@@ -171,10 +171,12 @@ class LinkedAccount::Github < LinkedAccount::Base
 
   # can this account modify the repository?
   def can_modify_repository?(tracker)
-    response = api(url: "/repos/#{tracker.full_name}", type: 'PATCH', body: {})
-    raise "Expected response to be NotFound or UnprocessableEntity (#{response.status})"
-  rescue Github::API::UnprocessableEntity
-    true
+    response = api(url: "/repos/#{tracker.full_name}/collaborators/#{login}/permission")
+    json = JSON.parse(response.body).with_indifferent_access
+    if ['admin', 'write'].include?(json[:permission])
+      return true
+    end
+    false
   rescue Github::API::Unauthorized
     false
   rescue Github::API::NotFound
