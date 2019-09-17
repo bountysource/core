@@ -20,7 +20,7 @@ class Crontab
           # remove it from the array so we don't delete_all it
           all_jobs.delete(job)
         else
-          Crontab.delay(queue: 'crontab', run_at: interval.from_now).execute(command)
+          Crontab.delay(queue: 'crontab', run_at: interval.from_now).execute(@jobs, command)
         end
       end
 
@@ -33,8 +33,8 @@ class Crontab
     @jobs[command] = interval
   end
 
-  def self.execute(command)
-    if !@jobs[command]
+  def self.execute(jobs, command)
+    if !jobs[command]
       Rails.logger.info "[CRONTAB] skipping unknown command: #{command}"
     else
       begin
@@ -44,7 +44,7 @@ class Crontab
         NewRelic::Agent.notice_error(exception)
         Rails.logger.info "[CRONTAB] Exception running #{command}: #{exception.inspect}"
       ensure
-        Crontab.delay(queue: 'crontab', run_at: @jobs[command].from_now).execute(command)
+        Crontab.delay(queue: 'crontab', run_at: jobs[command].from_now).execute(jobs, command)
       end
     end
   end
