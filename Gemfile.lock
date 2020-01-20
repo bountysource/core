@@ -173,7 +173,7 @@ GEM
     faraday_middleware-aws-sigv4 (0.2.4)
       aws-sigv4 (~> 1.0)
       faraday (>= 0.9)
-    ffi (1.9.23)
+    ffi (1.12.1)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (2.0.0)
