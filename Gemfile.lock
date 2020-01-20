@@ -425,7 +425,7 @@ GEM
     puma (3.11.3)
     rabl (0.13.1)
       activesupport (>= 2.3.14)
-    rack (2.0.4)
+    rack (2.0.8)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rack-timeout (0.4.2)
