@@ -523,7 +523,7 @@ GEM
       activemodel (>= 4.2)
       elasticsearch (>= 5)
       hashie
-    secure_headers (5.0.5)
+    secure_headers (5.2.0)
       useragent (>= 0.15.0)
     selenium-webdriver (2.42.0)
       childprocess (>= 0.5.0)
