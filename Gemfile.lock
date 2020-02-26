@@ -400,7 +400,7 @@ GEM
       execjs
       rails (>= 3.1)
     nio4r (2.3.0)
-    nokogiri (1.10.4)
+    nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
     oauth (0.5.4)
