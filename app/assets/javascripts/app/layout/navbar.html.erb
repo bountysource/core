@@ -62,14 +62,7 @@
             </div>
           </form>
         </li>
-        
-        <!-- BANCOR widget (CAN / ETH)-->
-        <li id='bancor-wc-nav'>
-          <a href="" class="font-weight-regular navbar-main-button">
-            <button ng-click="bancorWidget.toggle()" class="btn btn-light-blue font-weight-regular navbar-main-button">Get CAN</button>
-          </a>
-        </li>
-
+       
         <!-- User dropdown if logged in -->
         <li class="dropdown" ng-if="current_person">
           <a href="#" class="navbar-user-dropdown dropdown-toggle" data-toggle="dropdown">
@@ -139,16 +132,6 @@
 
     </div>
   </div>
-  <!-- redundant ng-hide for browsers that doesn't support the widget -->
-  <div ng-controller="BancorWidgetController" id="bancor-wc-container" ng-show="visible" class="ng-hide">
-    <div id="bancor-wc">
-    </div>
-    <div class="widget-close-long" ng-click="close()">
-      <strong>Close</strong>
-    </div>
-  </div>
-
-
 </div>
 
 
