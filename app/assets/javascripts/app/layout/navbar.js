@@ -39,7 +39,7 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
         };
 
         $scope.addIdentity = function(identity) {
-          for (var i=0; i<$scope.data.identities.length; i++) {
+          for (var i = 0; i < $scope.data.identities.length; i++) {
             if ($scope.data.identities[i].access_token === identity.access_token) {
               return;
             }
@@ -50,7 +50,7 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
         };
 
         $scope.removeIdentity = function(index) {
-          $scope.data.identities.splice(index,1);
+          $scope.data.identities.splice(index, 1);
           $cookieJar.setJson($scope.cookieName, $scope.data);
         };
 
@@ -82,12 +82,6 @@ angular.module('app').controller('NavbarController', function ($scope, $api, $mo
       }
     });
   };
-
-  $scope.bancorWidget = {
-    toggle: function() {
-      $scope.$emit('bancorWidgetToggle');
-    }
-  };
 });
 
 angular.module('app').controller('AlertNotificationBar', function ($scope, $location) {
@@ -105,29 +99,4 @@ angular.module('app').controller('NavbarLinkedAccountSignin', function($scope, $
     $scope.save_route();
     $location.url("/signin");
   };
-});
-
-angular.module('app').controller('BancorWidgetController', function ($rootScope, $scope, $location) {
-  $scope.visible = false;
-  $scope.close = function(){
-    $scope.visible = false;
-  };
-
-  BancorConvertWidget.init({ // jshint ignore:line
-    "type": "1",
-    "baseCurrencyId": "5a6f61ece3de16000123763a",
-    "pairCurrencyId": "5937d635231e97001f744267",
-    "primaryColor": "#00BFFF",
-    "primaryColorHover": "#55DAFB"
-  });
-
-  // $rootScope is AppController
-  $rootScope.$on('bancorWidgetToggle', function(){
-    $scope.visible = !$scope.visible;
-  });
-
-  $rootScope.$on('bancorWidgetClose', function(){
-    $scope.visible = false;
-  });
-
 });
