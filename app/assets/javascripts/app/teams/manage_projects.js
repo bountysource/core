@@ -26,6 +26,16 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
       return $api.tracker_typeahead($viewValue);
     };
 
+    $scope.addUrl = function (event) {
+      if (event.code === 'Enter') {
+        // TODO: validate url is github repo
+        $api.create_tracker(event.target.value, team.id, "Team")
+        .then(d => {
+          refreshOwnedTrackers();
+        })
+      }
+    }
+
     $scope.claimTrackerValue = undefined;
     $scope.claimTracker = function(tracker) {
       $scope.own_project(tracker.id);

@@ -11,11 +11,8 @@
                    class="form-control"
                    style="width: 300px;"
                    placeholder="Search for projects"
-                   ng-model="claimTrackerValue"
-                   typeahead-wait-ms="100"
-                   typeahead="project as project.name for project in doTypeahead($viewValue)"
-                   typeahead-on-select="claimTracker(claimTrackerValue)"
-                   typeahead-editable="true">
+                   ng-keypress="addUrl($event)"
+                   >
           </div>
         </form>
         <loading-bar ng-show="working">Searching</loading-bar>

@@ -29,8 +29,16 @@ class Api::V2::TrackersController < Api::BaseController
     @item.remote_sync_if_necessary(state: "open", person: current_user)
   end
 
-protected
+  def create
+    require_params :owner_id, :owner_type
 
+    @tracker = Github::Repository.extract_from_url(params[:url])
+    @owner = params[:owner_type].constantize.find_by_id(params[:owner_id])
+    @team = @tracker.claim(@owner) # need @team for rabl template
+    render "api/v1/teams/show", status: :created
+  end
+
+protected
   def parse_boolean_values
     @include_tracker_description = params[:include_description].to_bool
     @include_tracker_team = params[:include_team].to_bool

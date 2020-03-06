@@ -469,7 +469,7 @@ Api::Application.routes.draw do
               get :query_v3, to: 'issues#query_v3'
             end
           end
-          resources :trackers, only: [:index, :show]
+          resources :trackers, only: [:index, :show, :create]
           resources :comments, only: [:index, :show]
           resources :bounty_claims, only: [:index, :show]
           resources :fundraisers, only: [:index, :show]
