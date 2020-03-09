@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 volumes:
   database:
   search_conf:
@@ -8,6 +8,8 @@ services:
     image: postgres
     volumes:
       - database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   sphinx:
     container_name: sphinx
     image: leodido/sphinxsearch:2.2.9
@@ -18,6 +20,9 @@ services:
     volumes:
       - .:/app
       - search_conf:/usr/local/etc/
+    ports:
+      - "9306:9306"
+      - "9312:9312"
   bountysource:
     container_name: bountysource
     image: bountysource
@@ -45,4 +50,10 @@ services:
     command: bundle exec rake jobs:work
     volumes:
       - .:/app
-
+  elasticsearch:
+    image: elasticsearch:7.6.0
+    environment:
+      discovery.type: single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
