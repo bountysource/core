@@ -8,6 +8,8 @@ services:
     image: postgres
     volumes:
       - database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
   sphinx:
     container_name: sphinx
     image: leodido/sphinxsearch:2.2.9
@@ -25,6 +27,7 @@ services:
     links:
       - pgsql
       - sphinx
+      - elasticsearch
     build: .
     stdin_open: true
     tty: true
@@ -45,4 +48,10 @@ services:
     command: bundle exec rake jobs:work
     volumes:
       - .:/app
-
+  elasticsearch:
+    image: elasticsearch:7.6.1
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
