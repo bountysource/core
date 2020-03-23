@@ -811,6 +811,13 @@ angular.module('services').config(function($httpProvider) {
     }
   };
 
+  this.create_tracker = function(url, owner_id, owner_type) {
+    return this.v2.call({
+      method: "POST", 
+      url: "trackers", 
+      params: { url, owner_id: owner_id, owner_type: owner_type }
+    })
+  }
 
   this.bounty_claim_create = function(issue_id, data) {
     data.issue_id = issue_id;
