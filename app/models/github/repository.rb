@@ -83,6 +83,7 @@ class Github::Repository < Tracker
 
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
+    update_attributes!(sync_in_progress: true)
     previous_synced_at = options[:force] ? nil : self.synced_at
     update_from_github(options)
     find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
@@ -96,13 +97,18 @@ class Github::Repository < Tracker
         issue.update_attributes(deleted_at: nil, url: issue.url.partition("?deleted_at=").first)
       end
     end
+
+    update_attributes!(sync_in_progress: false)
   rescue Github::API::NotFound
     unless deleted_at
-      update_attributes(deleted_at: Time.now)
+      update_attributes(deleted_at: Time.now, sync_in_progress: false)
       issues.each do |issue|
         issue.update_attributes(deleted_at: Time.now)
       end
+      update_attributes!(sync_in_progress: false)
     end
+  rescue Github::API::RateLimitExceeded
+    delay(run_at: 5.minutes.from_now).remote_sync(options)
   end
 
   # make the actual API call and update the model. needs to be it's own method for message queueing
