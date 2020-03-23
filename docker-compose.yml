@@ -30,7 +30,6 @@ services:
     links:
       - pgsql
       - sphinx
-      - elasticsearch
     build: .
     stdin_open: true
     tty: true
@@ -52,9 +51,9 @@ services:
     volumes:
       - .:/app
   elasticsearch:
-    image: elasticsearch:7.6.1
+    image: elasticsearch:7.6.0
     environment:
-      - discovery.type=single-node
+      discovery.type: single-node
     ports:
       - "9200:9200"
       - "9300:9300"
