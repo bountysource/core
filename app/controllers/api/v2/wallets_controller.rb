@@ -1,8 +1,9 @@
 class Api::V2::WalletsController < Api::BaseController
 
   def index
-    @collection = current_user.wallets
-    render 'api/v2/wallets/index'
+    if current_user
+      @collection = current_user.wallets
+      render 'api/v2/wallets/index'
   end
 
   def create

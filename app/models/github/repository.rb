@@ -83,22 +83,25 @@ class Github::Repository < Tracker
 
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
-    update_attributes!(sync_in_progress: true)
-    previous_synced_at = options[:force] ? nil : self.synced_at
-    update_from_github(options)
-    find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
 
-    # these really shouldn't change, so let's only update the very first time
-    update_languages if previous_synced_at.nil?
+    ActiveRecord::Base.connection_pool.with_connection do
+      update_attributes!(sync_in_progress: true)
+      previous_synced_at = options[:force] ? nil : self.synced_at
+      update_from_github(options)
+      find_or_create_issues_from_github({ since: previous_synced_at }.merge(options))
 
-    if deleted_at
-      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
-      issues.each do |issue|
-        issue.update_attributes(deleted_at: nil, url: issue.url.partition("?deleted_at=").first)
+      # these really shouldn't change, so let's only update the very first time
+      update_languages if previous_synced_at.nil?
+
+      if deleted_at
+        update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
+        issues.each do |issue|
+          issue.update_attributes(deleted_at: nil, url: issue.url.partition("?deleted_at=").first)
+        end
       end
-    end
 
-    update_attributes!(sync_in_progress: false)
+      update_attributes!(sync_in_progress: false)
+    end
   rescue Github::API::NotFound
     unless deleted_at
       update_attributes(deleted_at: Time.now, sync_in_progress: false)
