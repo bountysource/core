@@ -85,12 +85,14 @@ class Github::Issue < ::Issue
   def remote_sync(options={})
     return if ENV['DISABLE_GITHUB']
 
-    previous_synced_at = self.synced_at
-    update_from_github(options)
-    sync_comments
+    ActiveRecord::Base.connection_pool.with_connection do
+      previous_synced_at = self.synced_at
+      update_from_github(options)
+      sync_comments
 
-    if deleted_at
-      update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
+      if deleted_at
+        update_attributes(deleted_at: nil, url: url.partition("?deleted_at=").first)
+      end
     end
 
     self
