@@ -24,10 +24,12 @@ class Github::Event
       current_events += get_current_events(2) if (current_events.map { |e| e['id'].to_i } - previous_event_ids).length == 30
       new_events = current_events.reject { |event| previous_event_ids.include?(event['id'].to_i) }
 
-      delay(queue: 'firehose', priority: 100).process_events(new_events)
-      ApplicationRecord.logger.info "Queued #{new_events.length} events"
+      unless new_events.length == 0
+        delay(queue: 'firehose', priority: 100).process_events(new_events)
+        ApplicationRecord.logger.info "Queued #{new_events.length} events"
 
-      previous_event_ids = (previous_event_ids + new_events.map { |e| e['id'].to_i }).sort.last(300)
+        previous_event_ids = (previous_event_ids + new_events.map { |e| e['id'].to_i }).sort.last(300)
+      end
 
       sleep 1
     end
@@ -36,9 +38,17 @@ class Github::Event
   def self.get_current_events(page=1)
     url = "https://api.github.com/events?client_id=#{ENV['GITHUB_FIREHOSE_CLIENT_ID']}&client_secret=#{ENV['GITHUB_FIREHOSE_CLIENT_SECRET']}&page=#{page}"
     response = HTTParty.get(url, headers: { "User-Agent" => "GithubEvents 0.1" } )
-    JSON.parse(response.body).reverse
+    body = JSON.parse(response.body)
+
+    if body['message'] 
+      puts "Github API message: #{body['message']}"
+      return []
+    else return body.reverse
+    end
+ 
   rescue => e
-    puts "Exception: #{e.message}"
+    puts "Exception while fetching events: #{e.message}"
+    puts response.body
     return []
   end
 
