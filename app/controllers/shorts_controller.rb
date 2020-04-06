@@ -7,7 +7,7 @@ class ShortsController < ActionController::Base
 
   def redirect
     slug = request.path[1..-1]
-    if !slug.blank? && (short = Short.where(slug: slug).first)
+    if !slug.blank? && (short = Short.find_by(slug: slug))
       redirect_to short.destination
     else
       redirect_to Api::Application.config.www_url

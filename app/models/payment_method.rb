@@ -154,7 +154,7 @@ class PaymentMethod < ApplicationRecord
 
       # update support levels appropraiately
       shopping_cart.items.each do |item|
-        shopping_cart.person.support_levels.where(id: item['support_level_id']).first!.update_attributes!(status: support_level_status)
+        shopping_cart.person.support_levels.find(item['support_level_id']).update_attributes!(status: support_level_status)
       end
 
       # send emails

@@ -39,7 +39,7 @@ class MixpanelEvent < ApplicationRecord
       MixpanelAlias.claim(person_id, distinct_id)
     elsif !distinct_id.nil? && person_id.nil?
       distinct_id = distinct_id.to_s
-      person_id = MixpanelAlias.where(distinct_id: distinct_id).pluck(:person_id).first # not guaranteed
+      person_id = MixpanelAlias.find_by(distinct_id: distinct_id).pluck(:person_id) # not guaranteed
     else
       raise "Missing distinct_id and person_id"
     end

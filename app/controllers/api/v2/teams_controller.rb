@@ -56,7 +56,7 @@ class Api::V2::TeamsController < Api::BaseController
     
     if params[:tag_child_type] == 'TeamSlug'
       params[:tag_child_type] = 'Team'
-      params[:tag_child_id] = Team.where(slug: params[:tag_child_id]).first!.id
+      params[:tag_child_id] = Team.find_by!(slug: params[:tag_child_id]).id
       child = Team.find(params[:tag_child_id])
     elsif params[:tag_child_type] == 'Tag'
       child = Tag.find(params[:tag_child_id])
@@ -70,12 +70,12 @@ class Api::V2::TeamsController < Api::BaseController
     end
 
     if params[:team_inclusion_parent]
-      parent_team = Team.where(slug: params[:team_inclusion_parent]).first!
+      parent_team = Team.find_by!(slug: params[:team_inclusion_parent])
       @collection = @collection.joins(:child_team_activity_inclusions).where("team_activity_inclusions.parent_team_id" => parent_team.id)
     end
 
     if params[:related_to_team]
-      team = Team.where(slug: params[:related_to_team]).first!
+      team = Team.find_by!(slug: params[:related_to_team])
       team_ids = []
 
       # they've included it in their feed
@@ -140,12 +140,12 @@ class Api::V2::TeamsController < Api::BaseController
 
       # TODO: could require is_admin on child_team as well
       if params[:add_child_team_inclusion]
-        child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
+        child_team = Team.find_by!(slug: params[:add_child_team_inclusion])
         @item.parent_team_activity_inclusions.where(child_team: child_team).first_or_create!
       end
 
       if params[:remove_child_team_inclusion]
-        child_team = Team.where(slug: params[:remove_child_team_inclusion]).first!
+        child_team = Team.find_by!(slug: params[:remove_child_team_inclusion])
         @item.parent_team_activity_inclusions.where(child_team: child_team).delete_all
       end
     end

@@ -28,7 +28,7 @@ class Api::V0::ShortsController < Api::V0::BaseController
 protected
 
   def require_short
-    @item = Short.where(id: params[:id]).first!
+    @item = Short.find(params[:id])
   end
 
   def short_params

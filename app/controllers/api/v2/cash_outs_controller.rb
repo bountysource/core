@@ -24,7 +24,7 @@ class Api::V2::CashOutsController < Api::BaseController
     raise "Checks are disabled" if params[:mailing_address_id]
     
     if team_id = params[:source].try(:match, /\Ateam(\d+)\Z/).try(:[], 1)
-      account = current_user.team_member_relations.where(admin: true, team_id: team_id).first.try(:team).try(:account)
+      account = current_user.team_member_relations.find_by(admin: true, team_id: team_id).try(:team).try(:account)
     else
       account = current_user.account
     end

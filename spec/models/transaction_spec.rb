@@ -81,7 +81,7 @@ describe Transaction do
     end
 
     it "should have an item" do
-      expect(transaction.splits.where('amount > 0').first.item).to eq(person)
+      expect(transaction.splits.find_by('amount > 0').item).to eq(person)
     end
   end
 

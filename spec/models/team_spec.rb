@@ -175,24 +175,24 @@ describe Team do
       team2.parent_tag_relations.where(child: company_tag).first_or_create.votes.create(person: person1, value: 1)
       expect(TagRelation.count).to eq(3)
       expect(TagVote.count).to eq(3)
-      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
-      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(1)
-      expect(team2.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
+      expect(team1.parent_tag_relations.find_by(child: company_tag).weight).to eq(1)
+      expect(team1.parent_tag_relations.find_by(child: lang_tag).weight).to eq(1)
+      expect(team2.parent_tag_relations.find_by(child: company_tag).weight).to eq(1)
 
       # person 2 tags team 1 with languages
       team1.parent_tag_relations.where(child: lang_tag).first_or_create.votes.create(person: person2, value: 1)
       expect(TagRelation.count).to eq(3)
       expect(TagVote.count).to eq(4)
-      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
-      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(2)
-      expect(team2.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
+      expect(team1.parent_tag_relations.find_by(child: company_tag).weight).to eq(1)
+      expect(team1.parent_tag_relations.find_by(child: lang_tag).weight).to eq(2)
+      expect(team2.parent_tag_relations.find_by(child: company_tag).weight).to eq(1)
 
       # teams get merged and new team should have 1 vote for companies and 2 for lang
       Team.merge!(team1,team2)
       expect(TagRelation.count).to eq(2)
       expect(TagVote.count).to eq(3)
-      expect(team1.parent_tag_relations.where(child: company_tag).first.weight).to eq(1)
-      expect(team1.parent_tag_relations.where(child: lang_tag).first.weight).to eq(2)
+      expect(team1.parent_tag_relations.find_by(child: company_tag).weight).to eq(1)
+      expect(team1.parent_tag_relations.find_by(child: lang_tag).weight).to eq(2)
     end
   end
 end

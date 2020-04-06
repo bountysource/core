@@ -43,7 +43,7 @@ class LinkedAccount::Bitbucket < LinkedAccount::Base
   def self.find_or_create_from_api_response(api_response)
     api_response = api_response.with_indifferent_access
 
-    if (linked_account = where(login: api_response[:author_name]).first)
+    if (linked_account = find_by(login: api_response[:author_name]))
       linked_account.update_attribute(:image_url, api_response[:author_image_url])
       linked_account
     else

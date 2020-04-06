@@ -31,7 +31,7 @@ class MixpanelAlias < ApplicationRecord
       " where not exists (select 1 from mixpanel_aliases where distinct_id=#{quoted[:distinct_id]})")
 
     # if this was already claimed by somebody else, raise an exception
-    raise AlreadyClaimed if MixpanelAlias.where(distinct_id: distinct_id.to_s).first.person_id != person_id
+    raise AlreadyClaimed if MixpanelAlias.find_by(distinct_id: distinct_id.to_s).person_id != person_id
 
     # if that insert worked, then go take over some new ones
     MixpanelAlias.find(inserted_id).delay.update_events_with_person_id if inserted_id

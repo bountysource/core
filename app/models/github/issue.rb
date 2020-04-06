@@ -313,7 +313,7 @@ class Github::Issue < ::Issue
     end
 
     # passed in, find by remote_id, or new
-    obj = options[:obj] || where(remote_id: remote_id).first || new
+    obj = options[:obj] || find_by(remote_id: remote_id) || new
 
     # set attributes
     obj.remote_id = remote_id
@@ -356,7 +356,7 @@ class Github::Issue < ::Issue
     obj.save! if obj.changed?
 
     # reload object if type changed
-    return type_changed ? Github::Issue.where(id: obj.id).first! : obj
+    return type_changed ? Github::Issue.find(obj.id) : obj
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, PG::UniqueViolation
 
     # if another issue has the same URL, it's probably outdated

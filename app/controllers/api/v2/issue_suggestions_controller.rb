@@ -4,7 +4,7 @@ class Api::V2::IssueSuggestionsController < Api::BaseController
   before_action :require_issue_suggestion_admin, only: [:update]
 
   def create
-    @team = Team.where(slug: params[:team]).first!
+    @team = Team.find_by!(slug: params[:team])
 
     issue_suggestion = @team.issue_suggestions.new(
       issue: Tracker.magically_turn_url_into_tracker_or_issue(params[:url]),
@@ -50,7 +50,7 @@ class Api::V2::IssueSuggestionsController < Api::BaseController
       @include_issue_team = true
       @include_issue_tracker = true
 
-      @team = Team.where(slug: params[:team]).first!
+      @team = Team.find_by!(slug: params[:team])
       @collection = @collection.where('team_id' => @team.id)
     elsif params[:issue_id]
       @collection = @collection.where('issue_id' => params[:issue_id])
@@ -60,7 +60,7 @@ class Api::V2::IssueSuggestionsController < Api::BaseController
 protected
 
   def require_issue_suggestion_admin
-    @issue_suggestion = IssueSuggestion.where(id: params[:id], team_id: current_user.admin_team_ids).first!
+    @issue_suggestion = IssueSuggestion.find_by!(id: params[:id], team_id: current_user.admin_team_ids)
   end
 
 end

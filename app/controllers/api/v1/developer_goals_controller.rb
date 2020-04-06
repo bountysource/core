@@ -11,7 +11,7 @@ class Api::V1::DeveloperGoalsController < ApplicationController
   def create
     require_params :amount
     
-    if (@developer_goal = @issue.developer_goals.where(person_id: @person.id).first)
+    if (@developer_goal = @issue.developer_goals.find_by(person_id: @person.id))
       render "api/v1/developer_goals/show", status: :not_modified
     else
       params[:amount] = convert_currency_if_necessary(params)
@@ -54,7 +54,7 @@ class Api::V1::DeveloperGoalsController < ApplicationController
 protected
 
   def require_developer_goals
-    unless (@developer_goal = @issue.developer_goals.where(person_id: @person.id).first)
+    unless (@developer_goal = @issue.developer_goals.find_by(person_id: @person.id))
       render json: { error: "Developer goal not found" }, status: :not_found
     end
   end

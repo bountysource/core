@@ -52,7 +52,7 @@ services:
     volumes:
       - .:/app
   elasticsearch:
-    image: elasticsearch:7.6.1
+    image: elasticsearch:6.8.8
     environment:
       - discovery.type=single-node
     ports:

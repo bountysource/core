@@ -22,7 +22,7 @@ class Api::V0::TeamPayinsController < Api::V0::BaseController
 protected
 
   def load_team_payin
-    @team_payin = TeamPayin.where(id: params[:id]).includes(:team, :person, :owner).first!
+    @team_payin = TeamPayin.includes(:team, :person, :owner).find(params[:id])
   end
 
 end

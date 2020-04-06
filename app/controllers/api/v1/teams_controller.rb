@@ -98,7 +98,7 @@ class Api::V1::TeamsController < ApplicationController
   def add_member
     require_params :email
 
-    person = params[:email].match(/\A\d+\Z/) ? Person.where(id: params[:email]).first! : Person.where(email: params[:email]).first!
+    person = params[:email].match(/\A\d+\Z/) ? Person.find(params[:email]) : Person.find_by!(email: params[:email])
     permissions = { admin: false, developer: false, public: true }
 
     permissions[:admin] = params[:admin].to_bool if params.has_key?(:admin)
