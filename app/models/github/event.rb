@@ -40,15 +40,15 @@ class Github::Event
     response = HTTParty.get(url, headers: { "User-Agent" => "GithubEvents 0.1" } )
     body = JSON.parse(response.body)
 
-    if body['message'] 
+    if body.is_a?(Array)
+      return body.reverse
+    else
       puts "Github API message: #{body['message']}"
       return []
-    else return body.reverse
     end
  
   rescue => e
     puts "Exception while fetching events: #{e.message}"
-    puts response.body
     return []
   end
 
