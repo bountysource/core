@@ -75,9 +75,9 @@ protected
 
   def load_team
     if params.has_key?(:team_id)
-      @team = Team.find_by(id: params[:team_id])!
+      @team = Team.find(params[:team_id])
     elsif params.has_key?(:team_slug)
-      @team = Team.find_by(slug: params[:team_slug])!
+      @team = Team.find_by!(slug: params[:team_slug])
     end
   end
 

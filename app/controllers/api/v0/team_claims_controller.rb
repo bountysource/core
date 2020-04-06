@@ -23,7 +23,7 @@ class Api::V0::TeamClaimsController < Api::V0::BaseController
 protected
 
   def require_team_claim
-    @team_claim = TeamClaim.find_by(id: params[:id])!
+    @team_claim = TeamClaim.find(params[:id])
   end
 
 end

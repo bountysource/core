@@ -29,7 +29,7 @@ class Api::V2::TimelineController < Api::BaseController
 
     # team
     if params[:team_id]
-      team = Team.find_by(id: params[:team_id])!
+      team = Team.find(params[:team_id])
       team_ids = [team.id] + team.parent_team_activity_inclusions_teams.pluck(:id)
       team_tracker_ids = Tracker.where(team_id: team_ids).pluck(:id)
       team_bountied_issue_ids = Bounty.not_refunded.where('owner_id in (?) and owner_type=?', team_ids, 'Team').pluck(:issue_id)
@@ -51,7 +51,7 @@ class Api::V2::TimelineController < Api::BaseController
     elsif params[:issue_id]
       newest_first = true
 
-      issue = Issue.where(id: params[:issue_id]).includes({:tracker => :team}, :author => :person).first!
+      issue = Issue.includes({:tracker => :team}, :author => :person).find(id: params[:issue_id])
       events[:bounty_created] = base_bounty_created.where('issue_id=?', issue.id)
       events[:solution_started] = base_solution_started.joins(:solution => :issue).where('issue_id=?', issue.id)
       events[:bounty_claimed] = base_bounty_claimed.where('issue_id=?', issue.id)
@@ -68,7 +68,7 @@ class Api::V2::TimelineController < Api::BaseController
 
     # person
     elsif params[:person_id]
-      person = Person.find_by(id: params[:person_id])!
+      person = Person.find(params[:person_id])
       events[:bounty_created] = base_bounty_created.visible.where("(owner_type='Person' and owner_id=?) or (owner_type is null and person_id=?)", person.id, person.id)
       events[:solution_started] = base_solution_started.joins(:solution => :issue).where('person_id=?', person.id)
       events[:bounty_claimed] = base_bounty_claimed.where('person_id=?', person.id)

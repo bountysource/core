@@ -3,7 +3,7 @@ module Api::V2::PeopleHelper
   def filter!(collection)
 
     if params[:bounty_hunters_for_team]
-      collection = collection.bounty_hunters(team: Team.find_by(slug: params[:bounty_hunters_for_team])!)
+      collection = collection.bounty_hunters(team: Team.find(slug: params[:bounty_hunters_for_team]))
       @include_bounty_claim_total = true
     end
 

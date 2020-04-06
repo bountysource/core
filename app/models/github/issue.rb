@@ -356,7 +356,7 @@ class Github::Issue < ::Issue
     obj.save! if obj.changed?
 
     # reload object if type changed
-    return type_changed ? Github::Issue.find_by(id: obj.id)! : obj
+    return type_changed ? Github::Issue.find(obj.id) : obj
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, PG::UniqueViolation
 
     # if another issue has the same URL, it's probably outdated

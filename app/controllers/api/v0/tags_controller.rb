@@ -8,12 +8,12 @@ class Api::V0::TagsController < Api::V0::BaseController
   end
 
   def show
-    @item = Tag.find_by(id: params[:id])!
+    @item = Tag.find(params[:id])
     render 'api/v0/tags/show'
   end
 
   def destroy
-    @tag = Tag.find_by(id: params[:id])!
+    @tag = Tag.find(id: params[:id])
 
     bad_relation_ids = TagRelation.where(parent_id: @tag.id, parent_type: 'Tag').pluck(:id)
     bad_relation_ids += TagRelation.where(child_id: @tag.id, child_type: 'Tag').pluck(:id)

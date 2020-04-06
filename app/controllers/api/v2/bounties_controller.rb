@@ -17,7 +17,7 @@ class Api::V2::BountiesController < Api::BaseController
   end
 
   def summary
-    @collection = Bounty.summary(Team.find_by(slug: params[:owner_team])!)
+    @collection = Bounty.summary(Team.find_by!(slug: params[:owner_team]))
   end
 
 end
