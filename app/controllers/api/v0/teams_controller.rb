@@ -37,7 +37,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
     end
 
     if params[:remove_child_team_inclusion]
-      child_team = Team.find_by!(slug: params[:remove_child_team_inclusion])!
+      child_team = Team.find_by!(slug: params[:remove_child_team_inclusion])
       @team.parent_team_activity_inclusions.where(child_team: child_team).delete_all
     end
 
