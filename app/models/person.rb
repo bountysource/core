@@ -286,13 +286,15 @@ class Person < ApplicationRecord
   def self.find_by_access_token(token)
     # sometimes acces_tokens will have 4 param for admin. if so, ignore.
     token = token.split('.')[0..2].join('.') unless token.blank?
-    access_token = AccessToken.where(token: token).first
-    if access_token.try(:still_valid?)
-      person = access_token.person
-      person.current_access_token = token
-      return person
-    else
-      return nil
+    unless token.blank?
+      access_token = AccessToken.find_by(token: token)
+      if access_token.try(:still_valid?)
+        person = access_token.person
+        person.current_access_token = token
+        return person
+      else
+        return nil
+      end
     end
   end
 
