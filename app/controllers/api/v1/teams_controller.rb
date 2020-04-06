@@ -98,7 +98,7 @@ class Api::V1::TeamsController < ApplicationController
   def add_member
     require_params :email
 
-    person = params[:email].match(/\A\d+\Z/) ? Person.where(id: params[:email]).first! : Person.where(email: params[:email]).first!
+    person = params[:email].match(/\A\d+\Z/) ? Person.find_by(id: params[:email])! : Person.find_by(email: params[:email])!
     permissions = { admin: false, developer: false, public: true }
 
     permissions[:admin] = params[:admin].to_bool if params.has_key?(:admin)
@@ -205,7 +205,7 @@ protected
 
   def require_member
     require_team unless @team
-    unless (@member = @team.members.where(id: params[:member_id]).first)
+    unless (@member = @team.members.find_by(id: params[:member_id]))
       render json: { error: "Member not found" }, status: :not_found
     end
   end

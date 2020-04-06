@@ -672,9 +672,9 @@ class Mailer < ActionMailer::Base
 
   def order_created(options)
     @person = options[:person]
-    @shopping_cart = options[:person].shopping_carts.where(id: options[:shopping_cart_id]).first!
+    @shopping_cart = options[:person].shopping_carts.find_by(id: options[:shopping_cart_id])!
     @transaction = @shopping_cart.order
-    @payment_notification = @shopping_cart.payment_method.notifications.where(id: options[:payment_notification_id]).first! if options[:payment_notification_id]
+    @payment_notification = @shopping_cart.payment_method.notifications.find_by(id: options[:payment_notification_id])! if options[:payment_notification_id]
 
     mail(to: @person.email, subject: %(Receipt for Order ##{options[:shopping_cart_id]})) do |format|
       format.text
@@ -684,8 +684,8 @@ class Mailer < ActionMailer::Base
 
   def order_failed(options)
     @person = options[:person]
-    @shopping_cart = options[:person].shopping_carts.where(id: options[:shopping_cart_id]).first!
-    @payment_notification = @shopping_cart.payment_method.notifications.where(id: options[:payment_notification_id]).first!
+    @shopping_cart = options[:person].shopping_carts.find_by(id: options[:shopping_cart_id])!
+    @payment_notification = @shopping_cart.payment_method.notifications.find_by(id: options[:payment_notification_id])!
 
     mail(to: @person.email, subject: %(Problem with Order ##{options[:shopping_cart_id]})) do |format|
       format.text

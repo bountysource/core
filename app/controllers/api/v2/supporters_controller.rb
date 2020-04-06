@@ -3,7 +3,7 @@ class Api::V2::SupportersController < Api::BaseController
   include Api::V2::PaginationHelper
 
   def index
-    @team = Team.where(slug: params[:team_slug]).first!
+    @team = Team.find_by(slug: params[:team_slug])!
 
     # compute page size
     values = {

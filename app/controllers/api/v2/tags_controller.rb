@@ -54,16 +54,16 @@ class Api::V2::TagsController < Api::BaseController
 
   def create
     if params[:parent_id] && params[:parent_type]=='Team'
-      parent = Team.where(id: params[:parent_id]).first!
+      parent = Team.find_by(id: params[:parent_id])!
     # TODO: add Person here
     else
       raise "unexpected parent type: #{params[:parent_type]}"
     end
 
     if params[:child_id] && params[:child_type] == 'Tag'
-      child = Tag.where(id: params[:child_id]).first!
+      child = Tag.find_by(id: params[:child_id])!
     elsif params[:child_id] && params[:child_type] == 'Team'
-      child = Team.where(id: params[:child_id]).first!
+      child = Team.find_by(id: params[:child_id])!
     elsif params[:child_text]
       #child = Team.where(slug: params[:child_text].downcase).first
       child = Tag.where(name: params[:child_text].downcase).first_or_create!
@@ -75,7 +75,7 @@ class Api::V2::TagsController < Api::BaseController
     end
 
     if params[:team_remove_child]
-      tag_relation = TagRelation.where(parent: parent, child: child).first.destroy
+      tag_relation = TagRelation.find_by(parent: parent, child: child).destroy
     end
 
 

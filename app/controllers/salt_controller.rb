@@ -11,7 +11,7 @@ class SaltController < ApplicationController
     end
 
     if request.path =~ /^\/teams\/([^\/]+)$/
-      @team = Team.where(slug: $1, accepts_public_payins: true).first
+      @team = Team.find_by(slug: $1, accepts_public_payins: true)
       @support_offering = @team.support_offering || @team.build_support_offering if @team
     end
 

@@ -296,7 +296,7 @@ class Tracker < ApplicationRecord
     # strip url hash
     url = url.gsub(/#.*/,'')
 
-    if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.where(id: issue_id).first)
+    if (issue_id = url.match(/\Ahttps:\/\/www\.bountysource\.com\/issues\/(\d+)/).try(:[], 1)) && (issue = Issue.find_by(id: issue_id))
       # we already have this as an issue in our DB
       return issue
     elsif issue = Issue.find_by_url(url)

@@ -32,12 +32,12 @@ class Api::V0::TeamsController < Api::V0::BaseController
   def update
     
     if params[:add_child_team_inclusion]
-      child_team = Team.where(slug: params[:add_child_team_inclusion]).first!
+      child_team = Team.find_by(slug: params[:add_child_team_inclusion])!
       @team.parent_team_activity_inclusions.where(child_team: child_team).first_or_create!
     end
 
     if params[:remove_child_team_inclusion]
-      child_team = Team.where(slug: params[:remove_child_team_inclusion]).first!
+      child_team = Team.find_by(slug: params[:remove_child_team_inclusion])!
       @team.parent_team_activity_inclusions.where(child_team: child_team).delete_all
     end
 
@@ -117,7 +117,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
           @team.linked_account = nil
         else
           preload = [LinkedAccount::Github::User, LinkedAccount::Github::Organization]
-          @team.linked_account = LinkedAccount::Github.where(login: params[:linked_account_login]).first!
+          @team.linked_account = LinkedAccount::Github.find_by(login: params[:linked_account_login])!
           Team.where(linked_account_id: @team.linked_account.id).where.not(id: @team.id).update_all(linked_account_id: nil)
         end
       end
@@ -131,7 +131,7 @@ class Api::V0::TeamsController < Api::V0::BaseController
   end
 
   def destroy
-    @team = Team.where(id: params[:id]).first!
+    @team = Team.find_by(id: params[:id])!
     @team.safe_destroy!
     render json: true
   end

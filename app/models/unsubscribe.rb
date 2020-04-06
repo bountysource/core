@@ -108,7 +108,7 @@ class Unsubscribe < ApplicationRecord
   def self.token_to_object(token)
     # allow plain email addresses to match for a few more months, then signatures are required
     # TODO: if it's after 2016-01-1, you can delete this
-    if Time.now < Time.parse('2016-01-01') && !(token.match(/^(email|person|linked):/)) && (person=Person.where(email: token).first)
+    if Time.now < Time.parse('2016-01-01') && !(token.match(/^(email|person|linked):/)) && (person=Person.find_by(email: token))
       return person
     end
 

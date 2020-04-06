@@ -39,7 +39,7 @@ class Api::V2::DeveloperGoalsController < Api::BaseController
 
   def update
     raise
-    # unless (@developer_goal = @issue.developer_goals.where(person_id: @person.id).first)
+    # unless (@developer_goal = @issue.developer_goals.find_by(person_id: @person.id))
     @item = current_user.addresses.create!(goal_params)
   end
 

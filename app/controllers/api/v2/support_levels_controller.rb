@@ -9,7 +9,7 @@ class Api::V2::SupportLevelsController < Api::BaseController
 
   def index
     if params[:supporters_for_team]
-      team = Team.where(slug: params[:supporters_for_team]).first!
+      team = Team.find_by(slug: params[:supporters_for_team])!
       raise "not allowed" unless team.person_is_admin?(current_user)
       @collection = SupportLevel.where(team: team).includes(:person, :owner, :reward)
       @disclude_team = true
@@ -18,9 +18,9 @@ class Api::V2::SupportLevelsController < Api::BaseController
       @collection = current_user.support_levels.includes(:payment_method, :reward)
 
       if params[:team_id]
-        @collection = @collection.where(team: Team.where(id: params[:team_id]).first!)
+        @collection = @collection.where(team: Team.find_by(id: params[:team_id])!)
       elsif params[:team_slug]
-        @collection = @collection.where(team: Team.where(slug: params[:team_slug]).first!)
+        @collection = @collection.where(team: Team.find_by(slug: params[:team_slug])!)
       end
     end
 
@@ -51,7 +51,7 @@ class Api::V2::SupportLevelsController < Api::BaseController
   def paypal_return
     if params[:token]
       # load info from temporary payment method
-      temp_payment_method = PaymentMethodTemporary.where(paypal_token: params[:token]).first!
+      temp_payment_method = PaymentMethodTemporary.find_by(paypal_token: params[:token])!
       current_user = temp_payment_method.person
       success_url = temp_payment_method.data['success_url']
       cancel_url = temp_payment_method.data['cancel_url']
@@ -61,7 +61,7 @@ class Api::V2::SupportLevelsController < Api::BaseController
 
       # load item
       if temp_payment_method.data['support_level']['id']
-        @item = current_user.support_levels.where(id: temp_payment_method.data['support_level']['id']).first!
+        @item = current_user.support_levels.find_by(id: temp_payment_method.data['support_level']['id'])!
       else
         @item = current_user.support_levels.build
       end
@@ -106,7 +106,7 @@ protected
     # params passed into SupportLevel.create!
     @item.assign_attributes(
       person: current_user,
-      team: Team.accepts_public_payins.where(id: params[:team_id]).first!,
+      team: Team.accepts_public_payins.find_by(id: params[:team_id])!,
       amount: params[:amount],
       owner: SupportLevel.owner_from_display_as(current_user, params[:display_as]),
 
@@ -178,7 +178,7 @@ protected
         end
       else
         # find existing payment method
-        @item.payment_method = current_user.payment_methods.where(id: params[:payment_method_id]).first!
+        @item.payment_method = current_user.payment_methods.find_by(id: params[:payment_method_id])!
       end
 
       # create the support level and render the success
@@ -188,7 +188,7 @@ protected
       if params[:bountysource_team_amount].to_f > 0
         SupportLevel.create!(
           person: @item.person,
-          team: Team.where(slug: 'bountysource').first!,
+          team: Team.find_by(slug: 'bountysource')!,
           amount: params[:bountysource_team_amount],
           owner: @item.owner,
           payment_method: @item.payment_method,
@@ -207,7 +207,7 @@ protected
   end
 
   def require_support_level
-    @item = current_user.support_levels.where(id: params[:id] || params[:id]).first!
+    @item = current_user.support_levels.find_by(id: params[:id] || params[:id])!
   end
 
 end

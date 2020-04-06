@@ -27,7 +27,7 @@ class PaymentNotification::BalancedPayments < PaymentNotification
   end
 
   def shopping_cart
-    ShoppingCart.where(id: params[:meta][:shopping_cart_id]).first!
+    ShoppingCart.find_by(id: params[:meta][:shopping_cart_id])!
   end
 
   def txn_id

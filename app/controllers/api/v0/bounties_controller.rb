@@ -21,10 +21,10 @@ class Api::V0::BountiesController < Api::V0::BaseController
     updates[:featured] = params[:featured].to_bool if params.has_key?(:featured)
     updates[:anonymous] = params[:anonymous].to_bool if params.has_key?(:anonymous)
 
-    if params[:owner_type] == 'Person' && (person = Person.where(id: params[:owner_id]).first)
+    if params[:owner_type] == 'Person' && (person = Person.find_by(id: params[:owner_id]))
       updates[:owner_type] = 'Person'
       updates[:owner_id] = person.id
-    elsif params[:owner_type] == 'Team' && (team = Team.where(id: params[:owner_id]).first || Team.where(slug: params[:owner_id]).first)
+    elsif params[:owner_type] == 'Team' && (team = Team.find_by(id: params[:owner_id]) || Team.find_by(slug: params[:owner_id]))
       updates[:owner_type] = 'Team'
       updates[:owner_id] = team.id
     end

@@ -60,7 +60,7 @@ class Api::V0::AccountsController < Api::V0::BaseController
 protected
 
   def require_account
-    unless (@account = Account.where(id: params[:id]).first)
+    unless (@account = Account.find_by(id: params[:id]))
       render(json: { error: "Account not found" }, status: :not_found)
     end
   end

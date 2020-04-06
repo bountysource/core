@@ -604,7 +604,7 @@ class Github::Repository < Tracker
     end
 
     # Reload object
-    return type_changed ? Github::Repository.where(id: obj.id).first! : obj
+    return type_changed ? Github::Repository.find_by(id: obj.id)! : obj
   rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotUnique, PG::UniqueViolation
 
     # if another tracker has the same URL, it's probably outdated

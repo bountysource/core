@@ -70,7 +70,7 @@ class Pledge < ApplicationRecord
     self.owner ||= self.person
 
     # Temp hack: pull survey response from table
-    if (!self.survey_response && pledge_survey_response = PledgeSurveyResponse.where(reward_id: self.reward_id, person_id: self.person_id).first)
+    if (!self.survey_response && pledge_survey_response = PledgeSurveyResponse.find_by(reward_id: self.reward_id, person_id: self.person_id))
       self.survey_response = pledge_survey_response.survey_response
       pledge_survey_response.destroy
     end

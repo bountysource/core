@@ -45,7 +45,7 @@ class TagRelation < ApplicationRecord
     if bad_model.is_a?(Team)
       # delete duplicates
       bad_model.parent_tag_relations.each do |bad_tag_relation|
-        if (good_tag_relation = good_model.parent_tag_relations.where(child_id: bad_tag_relation.child_id, child_type: bad_tag_relation.child_type).first)
+        if (good_tag_relation = good_model.parent_tag_relations.find_by(child_id: bad_tag_relation.child_id, child_type: bad_tag_relation.child_type))
           bad_tag_relation.votes.where(person_id: good_tag_relation.votes.pluck(:person_id)).delete_all
           bad_tag_relation.votes.update_all(tag_relation_id: good_tag_relation.id)
           bad_tag_relation.delete
@@ -58,7 +58,7 @@ class TagRelation < ApplicationRecord
 
     # delete duplicate child votes and tags (teams and tags)
     bad_model.child_tag_relations.each do |bad_tag_relation|
-      if (good_tag_relation = good_model.child_tag_relations.where(parent_id: bad_tag_relation.parent_id, parent_type: bad_tag_relation.parent_type).first)
+      if (good_tag_relation = good_model.child_tag_relations.find_by(parent_id: bad_tag_relation.parent_id, parent_type: bad_tag_relation.parent_type))
         bad_tag_relation.votes.where(person_id: good_tag_relation.votes.pluck(:person_id)).delete_all
         bad_tag_relation.votes.update_all(tag_relation_id: good_tag_relation.id)
         bad_tag_relation.delete

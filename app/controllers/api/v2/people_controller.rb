@@ -25,12 +25,12 @@ class Api::V2::PeopleController < Api::BaseController
     end
 
     if params[:bounty_hunter_opt_in_team]
-      team = Team.where(slug: params[:bounty_hunter_opt_in_team]).first!
+      team = Team.find_by(slug: params[:bounty_hunter_opt_in_team])!
       current_user.is_bounty_hunter!(team: team)
     end
 
     if params[:bounty_hunter_opt_out_team]
-      team = Team.where(slug: params[:bounty_hunter_opt_out_team]).first!
+      team = Team.find_by(slug: params[:bounty_hunter_opt_out_team])!
       current_user.is_not_bounty_hunter!(team: team)
     end
 
