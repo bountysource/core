@@ -100,6 +100,15 @@ class Github::Issue < ::Issue
     unless deleted_at
       update_attributes(deleted_at: Time.now)
     end
+  rescue Github::API::RateLimitExceeded => error
+    # only queue remote sync job if it's not already queued
+    unless sync_in_progress
+      # queue it to run after the rate limit expires
+      rate_limit_resets_at = error.response.headers['x-ratelimit-reset'][0]
+      reset_time = Time.strptime(rate_limit_resets_at, "%s")
+
+      delay(run_at: reset_time, priority: 150).remote_sync(options)
+    end
   end
 
   # INSTANCE METHODS
