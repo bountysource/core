@@ -48,6 +48,7 @@ params = CGI.parse(uri.query || "")
   <%= attribute "host",     host %>
   <%= attribute "port",     port %>
   pool: 10
+  prepared_statement: false
 
 <% params.each do |key, value| %>
   <%= key %>: <%= value.first %>
