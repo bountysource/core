@@ -48,15 +48,15 @@ module Github::API
     elsif response.unprocessable?
       raise UnprocessableEntity.new("Unprocessable entity -- #{options.inspect}", response: response)
 
+    elsif response.rate_limited?
+      new_relic_data_point "Custom/external_api/github/failure"
+      raise RateLimitExceeded.new("Exceeded rate limit -- #{options.inspect}", response: response)
+
     elsif response.forbidden?
       raise Forbidden.new("Forbidden -- #{options.inspect}", response: response)
 
     elsif response.unauthorized?
       raise Unauthorized.new("Unauthorized -- #{options.inspect}", response: response)
-
-    elsif response.rate_limited?
-      new_relic_data_point "Custom/external_api/github/failure"
-      raise RateLimitExceeded.new("Exceeded rate limit -- #{options.inspect}", response: response)
 
     else
       new_relic_data_point "Custom/external_api/github/failure"
@@ -249,12 +249,12 @@ private
       status == 422
     end
 
-    def forbidden?
-      status == 403
-    end
-
     def rate_limited?
       rate_limit.remaining <= 0
+    end
+
+    def forbidden?
+      status == 403
     end
 
     def rate_limit
