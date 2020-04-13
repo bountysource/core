@@ -8,22 +8,22 @@ require 'ostruct'
 require 'csv'
 require 'optparse'
 
-ruby '2.4.3'
+ruby '2.7.0'
 
-gem 'rails', '5.1.5'
+gem 'rails', '5.2.4.2'
 gem 'json'
-gem 'pg', '~> 0.18.1'
+gem 'pg', '~> 0.18.4'
 gem 'puma'
 gem 'oj'
 
 gem 'rabl'
 gem 'jbuilder'
-gem 'bcrypt', '3.1.10'
+gem 'bcrypt', '3.1.12'
 gem 'github-markdown', :require => 'github/markdown'
 
 # Note: version 1.0.0 is totally broken, lock the version in at
 # the last known working one.
-gem 'jwt', '= 0.1.11' # for Google Wallet JWT creation
+gem 'jwt', '= 2.2.1' # for Google Wallet JWT creation
 gem 'money'  # used to be included through the checkout gem
 gem 'monetize'
 
@@ -49,7 +49,7 @@ gem 'maildown'
 gem 'htmlentities'
 
 # Frontend
-gem 'sass-rails', '~> 5.0.7'
+gem 'sassc-rails'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
@@ -58,7 +58,7 @@ gem 'typhoeus'
 gem 'faraday_middleware-aws-sigv4'
 
 gem 'cloudinary'
-gem 'eventmachine', '1.0.4'
+gem 'eventmachine', '1.2.7'
 gem 'em-http-request'
 gem 'angular-rails-templates'
 
@@ -101,7 +101,7 @@ group :test do
   gem 'database_cleaner'
   gem 'poltergeist-suppressor'
   gem 'shoulda-matchers', require: false
-  gem 'selenium-webdriver', '~> 2.42.0'
+  gem 'selenium-webdriver', '~> 2.53.4'
   gem 'launchy'
   gem 'vcr'
   gem 'webmock'
