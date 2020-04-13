@@ -121,3 +121,5 @@ group :production do
   gem 'ngannotate-rails'
   gem 'rack-timeout'
 end
+
+gem "barnes"

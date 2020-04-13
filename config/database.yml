@@ -40,6 +40,10 @@ params = CGI.parse(uri.query || "")
 
 %>
 
+default: &default
+  pool: 10
+  prepared_statements: false
+
 <%= ENV["RAILS_ENV"] || ENV["RACK_ENV"] %>:
   <%= attribute "adapter",  adapter %>
   <%= attribute "database", database %>
