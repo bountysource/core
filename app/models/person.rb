@@ -299,7 +299,7 @@ class Person < ApplicationRecord
   end
 
   def send_email(which, options={})
-    Rails.env.test? ? deliver_email(which, options) : delay.deliver_email(which, options)
+    Rails.env.test? ? deliver_email(which, options) : delay(priority: 25).deliver_email(which, options)
   end
 
   def deliver_email(which, options={})

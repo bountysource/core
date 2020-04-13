@@ -76,7 +76,7 @@ class Github::Issue < ::Issue
     if synced_at.nil? || deleted_at
       remote_sync(options)
     elsif synced_at < 1.minute.ago
-      delay.remote_sync(options)
+      delay(priority: 150).remote_sync(options)
     else
       # no syncing since we've sync'd within past minute
     end
@@ -107,7 +107,7 @@ class Github::Issue < ::Issue
       rate_limit_resets_at = error.response.headers['x-ratelimit-reset'][0]
       reset_time = Time.strptime(rate_limit_resets_at, "%s")
 
-      delay(run_at: reset_time).remote_sync(options)
+      delay(run_at: reset_time, priority: 150).remote_sync(options)
     end
   end
 
