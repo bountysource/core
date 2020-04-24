@@ -99,7 +99,7 @@ class Team < ApplicationRecord
 
   scope :featured, lambda { where(featured: true) }
   scope :accepts_public_payins, lambda { where(accepts_public_payins: true) }
-  scope :newest, lambda { joins(:member_relations).where('team_member_relations.admin=true').group('teams.id').reorder('min(team_member_relations.created_at) desc') }
+  scope :newest, lambda { joins(:member_relations).where('team_member_relations.admin=true').group('teams.id').reorder(Arel.sql('min(team_member_relations.created_at) desc')) }
 
   class Error < StandardError ; end
   class Forbidden < Error ; end

@@ -23,7 +23,7 @@ class Api::V2::TeamsController < Api::BaseController
     end
 
     if params.has_key?(:accepts_public_payins)
-      @collection = @collection.accepts_public_payins.order('GREATEST(COALESCE(monthly_contributions_sum,0.0), COALESCE(previous_month_contributions_sum,0.0)) desc')
+      @collection = @collection.accepts_public_payins.order(Arel.sql('GREATEST(COALESCE(monthly_contributions_sum,0.0), COALESCE(previous_month_contributions_sum,0.0)) desc'))
     end
 
     # Filter by featured
