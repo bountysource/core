@@ -20,7 +20,7 @@ class Api::V2::SupportLevelsController < Api::BaseController
       if params[:team_id]
         @collection = @collection.where(team: Team.find(params[:team_id]))
       elsif params[:team_slug]
-        @collection = @collection.where(team: Team.find(params[:team_slug]))
+        @collection = @collection.where(team: Team.find_by(slug: params[:team_slug]))
       end
     end
 
