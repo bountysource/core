@@ -155,13 +155,13 @@ GEM
       dotenv (= 2.7.5)
       railties (>= 3.2, < 6.1)
     dry-inflector (0.2.0)
-    elasticsearch (7.5.0)
-      elasticsearch-api (= 7.5.0)
-      elasticsearch-transport (= 7.5.0)
-    elasticsearch-api (7.5.0)
+    elasticsearch (6.0.3)
+      elasticsearch-api (= 6.0.3)
+      elasticsearch-transport (= 6.0.3)
+    elasticsearch-api (6.0.3)
       multi_json
-    elasticsearch-transport (7.5.0)
-      faraday (>= 0.14, < 1)
+    elasticsearch-transport (6.0.3)
+      faraday
       multi_json
     em-http-request (1.1.5)
       addressable (>= 2.3.4)
@@ -567,9 +567,9 @@ GEM
     sawyer (0.8.2)
       addressable (>= 2.3.5)
       faraday (> 0.8, < 2.0)
-    searchkick (4.3.0)
-      activemodel (>= 5)
-      elasticsearch (>= 6)
+    searchkick (3.0.2)
+      activemodel (>= 4.2)
+      elasticsearch (>= 5)
       hashie
     secure_headers (6.3.0)
     selenium-webdriver (2.53.4)
@@ -658,6 +658,7 @@ DEPENDENCIES
   date_validator
   delayed_job_active_record
   dotenv-rails
+  elasticsearch (~> 6.0.2)
   em-http-request
   eventmachine (= 1.2.7)
   execjs
@@ -702,7 +703,7 @@ DEPENDENCIES
   rspec-rails
   sassc-rails
   savon (~> 2.12)
-  searchkick
+  searchkick (= 3.0.2)
   secure_headers
   selenium-webdriver (~> 2.53.4)
   shoulda-matchers
@@ -721,4 +722,4 @@ RUBY VERSION
    ruby 2.7.0p0
 
 BUNDLED WITH
-   2.1.4
+   2.1.2

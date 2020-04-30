@@ -53,7 +53,8 @@ gem 'sassc-rails'
 gem 'bootstrap-sass'
 gem 'savon', '~> 2.12'
 
-gem 'searchkick'
+gem 'searchkick', '3.0.2'
+gem 'elasticsearch', '~> 6.0.2'
 gem 'typhoeus'
 gem 'faraday_middleware-aws-sigv4'
 
