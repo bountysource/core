@@ -93,7 +93,7 @@ class Api::V2::TeamsController < Api::BaseController
     end
 
     if params[:top_rewards]
-      @collection = Team.joins(:bounties).group('teams.id').order('SUM(bounties.amount) desc').limit(5)
+      @collection = Team.joins(:bounties).group('teams.id').order(Arel.sql('SUM(bounties.amount) desc')).limit(5)
       @include_team_top_reward = true
     end
 

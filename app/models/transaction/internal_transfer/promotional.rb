@@ -33,7 +33,7 @@ class Transaction::InternalTransfer::Promotional < Transaction::InternalTransfer
 
   def self.gift_to_with_amount(target, amount)
     target = (target.account || target.create_account) unless target.is_a?(Account)
-    amount = BigDecimal.new(Money.new(amount * 100).to_s)
+    amount = BigDecimal(Money.new(amount * 100).to_s)
     transaction = nil
 
     ApplicationRecord.transaction do

@@ -150,7 +150,7 @@ class Account < ApplicationRecord
 
   # Balance report for a single Account instance
   def self.balance_at(date)
-    BigDecimal.new(joins(:splits => [:account]).where('splits.created_at < ?', date).sum('splits.amount * -1'))
+    BigDecimal(joins(:splits => [:account]).where('splits.created_at < ?', date).sum('splits.amount * -1'))
   end
 
   def self.balance_per_type_at(timestamp, include_sweep)
@@ -187,7 +187,7 @@ class Account < ApplicationRecord
 
   # Liability at date. Simple the sum of account balances
   def self.liability_at(date)
-    calculate = lambda { |klass| BigDecimal.new(klass.joins(:splits).where('splits.created_at < ?', date).sum(:amount)) }
+    calculate = lambda { |klass| BigDecimal(klass.joins(:splits).where('splits.created_at < ?', date).sum(:amount)) }
     [
       calculate[Account::Fundraiser],
       calculate[Account::IssueAccount],
