@@ -32,18 +32,18 @@
 class Transaction::CashOut < Transaction
   def self.sales
     joins(:splits => [:account]).where('splits.account_id = ?', escrow_account.id).group('transactions.id, splits.transaction_id').select('-MAX(splits.amount) as sales').sum do |result|
-      BigDecimal.new(result.sales)
+      BigDecimal(result.sales)
     end
   end
 
   def self.processing_fees
     processing_fees_account = Account::BountySourceFeesPayment.instance
     joins(:splits => [:account]).where('splits.account_id = ?', processing_fees_account.id).group('transactions.id, splits.transaction_id').select('-MIN(splits.amount) as processing_fees').sum do |result|
-      BigDecimal.new(result.processing_fees)
+      BigDecimal(result.processing_fees)
     end
   end
 
   def self.liability
-    BigDecimal.new( joins(:splits => [:account]).where('accounts.type = ? OR accounts.type LIKE ?', 'Account::Personal', 'Account::Team%').sum('splits.amount') )
+    BigDecimal( joins(:splits => [:account]).where('accounts.type = ? OR accounts.type LIKE ?', 'Account::Personal', 'Account::Team%').sum('splits.amount') )
   end
 end

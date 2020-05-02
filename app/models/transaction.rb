@@ -171,17 +171,17 @@ class Transaction < ApplicationRecord
     case item
 
     when Bounty
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     when Pledge
       merch_fee = item.reward.try(:merchandise_fee) || 0
-      BigDecimal.new(Money.new((item.amount - merch_fee) * 100).to_s)
+      BigDecimal(Money.new((item.amount - merch_fee) * 100).to_s)
 
     when TeamPayin
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     when Proposal
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     else
       raise "Unknown item type: #{item.inspect}"
@@ -195,16 +195,16 @@ class Transaction < ApplicationRecord
     case item
 
     when Bounty
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     when Pledge
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     when TeamPayin
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
 
     when Proposal
-      BigDecimal.new(Money.new(item.amount * 100).to_s)
+      BigDecimal(Money.new(item.amount * 100).to_s)
     else
       raise "Unknown item type: #{item.inspect}"
     end
