@@ -108,7 +108,7 @@ class Team < ApplicationRecord
   # quick hack so rabl can pull from these
   def prioritized_trackers
     tracker_ids = trackers.pluck(:id) + owned_trackers.pluck(:id)
-    Tracker.where(id: tracker_ids.uniq).order('COALESCE(open_issues,0) desc')
+    Tracker.where(id: tracker_ids.uniq).order(Arel.sql('COALESCE(open_issues,0) desc'))
   end
 
   def manage_issue?(issue)
