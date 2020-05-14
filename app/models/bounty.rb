@@ -65,12 +65,11 @@ class Bounty < ApplicationRecord
   scope :active, lambda { where(status: Status::ACTIVE) }
   scope :refunded, lambda { where(status: Status::REFUNDED) }
   scope :paid, lambda { where(status: Status::PAID) }
-  scope :not_refunded, lambda { where("status < :status AND status > :status", status: Status::REFUNDED) }
-
+  scope :not_refunded, lambda { where("status != :status", status: Status::REFUNDED) }
   # A bounty is visible so long as it has not been refunded, and is not anon
   scope :visible, lambda { where("anonymous = false AND status != :status", status: Status::REFUNDED) }
 
-  scope :expiring_soon,       lambda { |date=2.weeks.from_now, count=nil| where('expires_at < ?', date).order('expires_at desc').limit(count) }
+  scope :expiring_soon, lambda { |date=2.weeks.from_now, count=nil| where('expires_at < ?', date).order('expires_at desc').limit(count) }
 
   # bounties that count toward the displayed bounty total of issues
   scope :valuable, lambda { active.where('amount > 0') }
