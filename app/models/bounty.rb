@@ -65,7 +65,7 @@ class Bounty < ApplicationRecord
   scope :active, lambda { where(status: Status::ACTIVE) }
   scope :refunded, lambda { where(status: Status::REFUNDED) }
   scope :paid, lambda { where(status: Status::PAID) }
-  scope :not_refunded, lambda { where("status != :status", status: Status::REFUNDED) }
+  scope :not_refunded, lambda { where("status < :status OR status > :status", status: Status::REFUNDED) }
   # A bounty is visible so long as it has not been refunded, and is not anon
   scope :visible, lambda { where("anonymous = false AND status != :status", status: Status::REFUNDED) }
 

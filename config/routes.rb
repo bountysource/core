@@ -51,7 +51,6 @@ Api::Application.routes.draw do
 
     # track user generated events (compatible with mixpanel API)
     match '/track', to: 'track#track', via: :post
-    match '/decide', to: 'track#decide', via: :get
 
     # All things money related
     scope path: 'payments', controller: 'payments' do
