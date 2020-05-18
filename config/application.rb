@@ -99,7 +99,7 @@ module Api
     config.bountysource_tax = 0.10
 
     # Cookies
-    # config.secret_token = ENV['COOKIE_SECRET_TOKEN']
+    config.secret_token = ENV['COOKIE_SECRET_TOKEN']
     config.secret_key_base = ENV['COOKIE_SECRET_KEY_BASE']
 
     # Gravatar host
