@@ -111,14 +111,7 @@ class Github::Repository < Tracker
       update_attributes!(sync_in_progress: false)
     end
   rescue Github::API::RateLimitExceeded => error
-    # only queue remote sync job if it's not already queued
-    unless sync_in_progress
-      # queue it to run after the rate limit expires
-      rate_limit_resets_at = error.response.headers['x-ratelimit-reset'][0]
-      reset_time = Time.strptime(rate_limit_resets_at, "%s")
-
-      delay(run_at: reset_time, priority: 150).remote_sync(options)
-    end
+    # do nothing
   end
 
   # make the actual API call and update the model. needs to be it's own method for message queueing
