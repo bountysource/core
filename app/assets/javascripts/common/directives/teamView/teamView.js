@@ -221,7 +221,7 @@ angular.module('directives').directive('teamView', function($rootScope, $locatio
           $api.v2.backers({
             team_id: team.id,
             order: '+amount',
-            per_page: 100
+            per_page: 10
           }).then(function(response) {
             scope.backers = angular.copy(response.data);
           });

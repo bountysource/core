@@ -11,7 +11,7 @@ angular.module('app')
   $scope.date = { title: "Date", col: "created_at", order: "asc"};
 
   $scope.updatePage = function(page, order_hash) {
-    var params = { page: page, per_page: 30, order: order_hash, unaudited: true};
+    var params = { page: page, per_page: 10, order: order_hash, unaudited: true};
 
     $scope.working = true;
     $api.get_unaudited_transactions(params).then(function(response) {

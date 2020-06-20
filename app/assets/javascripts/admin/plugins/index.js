@@ -8,7 +8,7 @@ angular.module('app')
   })
   .controller("Plugins", function ($scope, $window, $api) {
     // only for pagination
-    $scope.request_params = { per_page: 100 };
+    $scope.request_params = { per_page: 10 };
 
     $scope.plugins = $api.call("/admin/tracker_plugins", $scope.request_params, function(response) {
       if (response.meta && response.meta.pagination) {

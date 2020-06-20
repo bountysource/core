@@ -12,7 +12,7 @@ angular.module('app')
   $scope.accepted_at = { title: "Accepted At", col: "solutions.accepted_at", order: "asc"};
 
   $scope.updatePage = function(page, order_hash) {
-    var params = { page: page, per_page: 50, order: order_hash};
+    var params = { page: page, per_page: 10, order: order_hash};
     $scope.working = true;
     $api.get_issues(params).then(function(response) {
       if (response.meta.success) {
