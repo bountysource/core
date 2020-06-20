@@ -17,7 +17,7 @@ angular.module('app')
     };
 
     $scope.updatePage = function(page) {
-      var params = { page: page, per_page: 100, paginate: true };
+      var params = { page: page, per_page: 10, paginate: true };
 
       $api.get_access_tokens(params).then(function(response) {
         $scope.access_tokens = response.data;

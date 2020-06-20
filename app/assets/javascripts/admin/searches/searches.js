@@ -19,7 +19,7 @@ angular.module('app')
     $scope.maxSize = 10;
 
     $scope.updatePage = function(page, order_hash) {
-      var params = { page: page, per_page: 100, order: order_hash};
+      var params = { page: page, per_page: 10, order: order_hash};
 
       $api.get_searches(params).then(function(searches) {
         $scope.all_searches = searches.data;

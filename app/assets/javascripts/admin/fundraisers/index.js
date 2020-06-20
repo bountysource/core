@@ -16,7 +16,7 @@ angular.module('app')
 
 
   $scope.updatePage = function(page, order_hash) {
-    var params = { page: page, per_page: 50, order: order_hash};
+    var params = { page: page, per_page: 10, order: order_hash};
 
     $scope.working = true;
     $api.get_fundraisers(params).then(function(response) {

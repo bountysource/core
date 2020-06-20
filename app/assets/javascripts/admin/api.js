@@ -443,7 +443,7 @@ angular.module('api.bountysource',[]).
     };
 
     this.get_trackers = function(page) {
-      return this.call("/admin/trackers", { page: page, per_page: 50}, function(response) {
+      return this.call("/admin/trackers", { page: page, per_page: 10}, function(response) {
         return response;
       });
     };
