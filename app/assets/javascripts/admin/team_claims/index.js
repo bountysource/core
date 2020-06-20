@@ -8,7 +8,7 @@ angular.module('app').config(function ($routeProvider) {
     
         $scope.working = true;
     
-        $api.call('/admin/team_claims', params).then(function(response) {
+        $api.call('/admin/team_claims', params, function(response) {
           if (response.meta.success) {
             $scope.working = false;
             $scope.team_claims = response.data;

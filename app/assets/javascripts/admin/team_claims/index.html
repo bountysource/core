@@ -1,6 +1,8 @@
 <div>
   <h1>Team Claims</h1>
-  <table class="table table-striped">
+  <loading-bar ng-show="working">Fetching Team claims...</loading-bar>
+
+  <table class="table table-striped" ng-hide="working">
     <thead>
     <tr>
       <th>ID</th>
