@@ -6,6 +6,8 @@ services:
   pgsql:
     container_name: pgsql
     image: postgres
+    environment: 
+      POSTGRES_PASSWORD: password
     volumes:
       - database:/var/lib/postgresql/data
     ports:
