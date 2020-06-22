@@ -169,7 +169,7 @@ protected
   def update_all_issues
     processed_issue_ids = []
     # loop through all issues ("updated" to maintain github order)
-    options = { state: 'open', page: 1, sort: 'updated', direction: 'asc', per_page: 10 }
+    options = { state: 'open', page: 1, sort: 'updated', direction: 'asc', per_page: 100 }
     while true
       # get next 100 from API
       api_response = api(url: File.join(tracker.github_api_path, "issues"), params: options)

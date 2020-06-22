@@ -142,7 +142,7 @@ class LinkedAccount::Github::User < LinkedAccount::Github
       # assigned/created/mentioned/subscribed across owned/member/org repos
       date_cursor = Date.tomorrow
       loop do
-        response = api(url: "/search/issues", params: { q: "involves:#{self.login} created:<#{date_cursor}", per_page: 10, sort: 'created', order: 'desc' })
+        response = api(url: "/search/issues", params: { q: "involves:#{self.login} created:<#{date_cursor}", per_page: 100, sort: 'created', order: 'desc' })
         raise "ERROR: auto paginating #{response.status}" unless response.success?
         break if response.data['items'].empty?
         old_date_cursor = date_cursor
@@ -173,7 +173,7 @@ protected
     response_data = []
     #load the maximum of 100 items since we're going to paginate
     options[:params] ||= {}
-    options[:params].merge!(per_page: 10)
+    options[:params].merge!(per_page: 100)
     loop do
       response = api(options.clone)
       raise "ERROR: auto paginating #{response.status}" unless response.success?

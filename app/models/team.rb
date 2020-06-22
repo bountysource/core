@@ -434,7 +434,7 @@ class Team < ApplicationRecord
   end
 
   def import_projects_from_github
-    response = Github::API.call(url: "/orgs/#{linked_account.login}/repos", params: { per_page: 10 })
+    response = Github::API.call(url: "/orgs/#{linked_account.login}/repos", params: { per_page: 100 })
 
     if response.success?
       repos = response.data
@@ -466,7 +466,7 @@ class Team < ApplicationRecord
   end
 
   def import_members_from_github
-    org_members_response = Github::API.call(url: "/orgs/#{linked_account.login}/members", params: { per_page: 10 })
+    org_members_response = Github::API.call(url: "/orgs/#{linked_account.login}/members", params: { per_page: 100 })
 
     members = []
 

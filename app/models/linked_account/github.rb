@@ -192,7 +192,7 @@ class LinkedAccount::Github < LinkedAccount::Base
       end
 
       uri = URI.parse("https://api.github.com#{path}")
-      uri.query = Api::Application.config.github_api.merge(page: i, per_page: 10).to_param
+      uri.query = Api::Application.config.github_api.merge(page: i, per_page: 30).to_param
       uri.to_s
     end
 
