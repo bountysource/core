@@ -240,7 +240,7 @@ class Github::Repository < Tracker
   end
 
   def self.issues_and_repositories_for_org(org_name, access_token=nil)
-    members = Github::API.call(url: "/orgs/#{org_name}/members", params: { access_token: access_token, per_page: 10 }).data
+    members = Github::API.call(url: "/orgs/#{org_name}/members", params: { access_token: access_token, per_page: 100 }).data
     issues_and_repositories_for_logins(members.map { |m| m['login'] }, access_token)
   end
 

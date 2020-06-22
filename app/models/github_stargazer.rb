@@ -108,7 +108,7 @@ protected
           end
 
           # generate request
-          params = { per_page: 10 }
+          params = { per_page: 100 }
           params[:page] = request[:page] if request[:page]
           if options[:oauth_token]
             params[:oauth_token] = options[:oauth_token]
