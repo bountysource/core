@@ -1,6 +1,6 @@
 angular.module('app').controller('TeamHomeController', function ($route, $scope, $routeParams, $api, $pageTitle, $filter, $timeout, $window, Timeline, Team) {
   $scope.markdown_side_by_side = true;
-  $scope.bounty_hunters_for_team = $api.people.query({ bounty_hunters_for_team: $routeParams.id, per_page: 15 });
+  $scope.bounty_hunters_for_team = $api.people.query({ bounty_hunters_for_team: $routeParams.id, per_page: 10 });
 
   $scope.team_promise.then(function(team) {
     if (!team || !team.id) {
@@ -11,7 +11,7 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
     $scope.show_right_column = !team.bounties_disabled && (team.bounty_hunter_count>0 || team.closed_bounties_amount>0 ||  team.open_bounties_amount>0);
 
     $pageTitle.set(team.name, 'Bountysource');
-    $scope.events = Timeline.query({ per_page: 30, team_id: team.id });
+    $scope.events = Timeline.query({ per_page: 10, team_id: team.id });
 
     /* start team admin */
     $scope.form_data = {

@@ -29,6 +29,6 @@ angular.module('app').controller('TrackersIndex', function ($scope, $api, $windo
     include_team: true,
     order: '+bounty',
     page: 1,
-    per_page: 30
+    per_page: 10
   });
 });
