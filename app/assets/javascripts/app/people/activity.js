@@ -12,7 +12,7 @@ angular.module('app').controller('PeopleShow', function ($scope, $routeParams, $
     return person;
   });
 
-  $scope.events = Timeline.query({ per_page: 10, person_id: $routeParams.id });
+  $scope.events = Timeline.query({ per_page: 30, person_id: $routeParams.id });
 
   $api.person_teams($routeParams.id).then(function(teams) {
     $scope.teams = teams;
