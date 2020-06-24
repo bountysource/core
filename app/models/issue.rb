@@ -201,6 +201,13 @@ class Issue < ApplicationRecord
     end
   end
 
+  # Ensure bounty total data integrity
+  after_find do
+    if bounty_total != bounties.active.sum(:amount)
+      update_bounty_total
+    end
+  end
+
   #scope :search, lambda { |terms|
   #  terms = terms.split(' ').map { |t| "%#{t}%" }
   #  sql_frags = terms.map { '(title like ? OR body like ?)' }.join(' AND ')
