@@ -48,7 +48,14 @@ module Api::V2::PaginationHelper
       {
         'Link' => [link_headers[:next], link_headers[:last], link_headers[:first], link_headers[:prev]].compact.join(', '),
         'Total-Pages' => values[:num_pages].to_s,
-        'Total-Items' => values[:total_items].to_s
+        'Total-Items' => values[:total_items].to_s,
+        'Pagination' => {
+          page: values[:page],
+          pages: values[:num_pages],
+          per_page: values[:per_page],
+          items: values[:total_items],
+          request_path: path
+        }.to_json
       }
     else
       Hash.new
@@ -131,6 +138,6 @@ module Api::V2::PaginationHelper
   end
 
   def expose_pagination_header
-    response.headers['Access-Control-Expose-Headers'] = "Link, Total-Pages, Total-Items"
+    response.headers['Access-Control-Expose-Headers'] = "Link, Total-Pages, Total-Items, Pagination"
   end
 end
