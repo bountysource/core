@@ -396,10 +396,6 @@ GEM
     ipaddress (0.8.3)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
-    jshint (1.5.0)
-      execjs (>= 1.4.0)
-      multi_json (~> 1.0)
-      therubyracer (~> 0.12.1)
     json (2.3.0)
     jwt (2.2.1)
     kramdown (2.1.0)
@@ -407,7 +403,6 @@ GEM
       addressable (~> 2.7)
     letter_opener (1.7.0)
       launchy (~> 2.2)
-    libv8 (3.16.14.19)
     loofah (2.5.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -517,7 +512,6 @@ GEM
       optimist (~> 3.0)
     rchardet (1.8.0)
     rdoc (6.2.1)
-    ref (2.0.0)
     regexp_parser (1.7.0)
     representable (3.0.4)
       declarative (< 0.1.0)
@@ -597,9 +591,6 @@ GEM
     statsd-ruby (1.4.0)
     stripe (5.17.0)
     temple (0.8.2)
-    therubyracer (0.12.3)
-      libv8 (~> 3.16.14.15)
-      ref
     thin (1.7.2)
       daemons (~> 1.0, >= 1.0.9)
       eventmachine (~> 1.0, >= 1.0.4)
@@ -676,7 +667,6 @@ DEPENDENCIES
   htmlentities
   httparty
   jbuilder
-  jshint (= 1.5.0)
   json
   jwt (= 2.2.1)
   launchy
@@ -712,7 +702,6 @@ DEPENDENCIES
   shoulda-matchers
   slack-notifier
   stripe
-  therubyracer
   thin
   timecop
   typhoeus
