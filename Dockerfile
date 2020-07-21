@@ -1,4 +1,6 @@
-FROM ruby:2.4.3
+FROM ruby:2.7.0
+
+RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
@@ -6,11 +8,11 @@ FROM ruby:2.4.3
 # ---
 # Also, let's enable backports and install sphinxsearch
 # so we get searchd, needed to generate Sphinx config.
-RUN echo "deb http://ftp.debian.org/debian jessie-backports main" \
-    > /etc/apt/sources.list.d/backports.list; \
-    apt-get update && apt-get install -y \
-    build-essential \
-    sphinxsearch
+# RUN echo "deb http://ftp.debian.org/debian jessie-backports main" \
+#    > /etc/apt/sources.list.d/backports.list; \
+#    apt-get update && apt-get install -y \
+#    build-essential \
+#    sphinxsearch
 
 # Configure the main working directory. This is the base
 # directory used in any further RUN, COPY, and ENTRYPOINT
@@ -33,4 +35,4 @@ COPY . ./
 EXPOSE 3000
 
 # The default command to run when the container starts.
-CMD ["rails", "c"]
+CMD ["rails", "s"]

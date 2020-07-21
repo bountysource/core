@@ -34,8 +34,6 @@ services:
       - sphinx
       - elasticsearch
     build: .
-    stdin_open: true
-    tty: true
     ports:
       - "3000:3000"
     command: rails s Puma
