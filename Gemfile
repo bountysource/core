@@ -75,6 +75,7 @@ group :development do
   gem 'rdoc'
   gem 'annotate'
   gem "letter_opener"
+  gem "rubocop"
 end
 
 group :development, :test do
