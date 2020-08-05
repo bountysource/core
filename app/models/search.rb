@@ -49,6 +49,7 @@ class Search < ApplicationRecord
     reject_merged_trackers!(tracker_search)
   end
 
+  # 1596655061 problematic unoptimized search query
   def self.bounty_search(params)
     page = params[:page] || 1
     per_page = params[:per_page].present? ? params[:per_page].to_i : 50

@@ -387,10 +387,11 @@ angular.module('services').config(function($httpProvider) {
 
     // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
     // Query string parameter takes precedence over this value
+    // 1596655061 Just in case rolling this back to 50 ... thanks for being lazy
     if (this.$$perPage) {
       params.per_page = this.$$perPage;
     } else {
-      params.per_page = params.per_page || 250;
+      params.per_page = params.per_page || 50;
     }
 
     if (this.$$page) {
