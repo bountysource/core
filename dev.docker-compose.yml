@@ -1,0 +1,64 @@
+version: "3"
+volumes:
+  search_conf:
+services:
+  pgsql:
+    image: postgres
+    environment:
+      POSTGRES_USER: bountysource
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: bountysource_dev
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+      - ./db_scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+  bountysource:
+    build: .
+    image: bountysource
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://bountysource:password@pgsql/bountysource_dev
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    links:
+      - pgsql
+      - elasticsearch
+      # - sphinx
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+  elasticsearch:
+    image: elasticsearch:6.8.8
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  # sphinx:
+  #   image: leodido/sphinxsearch:2.2.9
+  #   hostname: sphinx
+  #   command: searchd.sh
+  #   links:
+  #     - pgsql
+  #   volumes:
+  #     - .:/app
+  #     - search_conf:/usr/local/etc/
+  #   ports:
+  #     - "9306:9306"
+  #     - "9312:9312"
+  # delayedjob:
+  #   build: .
+  #   container_name: delayedjob
+  #   image: bountysource
+  #   env_file: .env
+  #   environment:
+  #     DATABASE_URL: postgres://bountysource:password@pgsql/bountysource_dev
+  #     ELASTICSEARCH_URL: http://elasticsearch:9200
+  #   links:
+  #     - bountysource
+  #     - pgsql
+  #     - sphinx
+  #   command: bundle exec rake jobs:work
+  #   volumes:
+  #     - .:/app
