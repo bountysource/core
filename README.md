@@ -73,7 +73,7 @@ RAILS_ENV=test rake db:create
 ./bin/rake
 ```
 
-## Local Development Environment with Docker (New version under development.)
+## Local Development Environment with Docker (New version under development)
 
 For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 
