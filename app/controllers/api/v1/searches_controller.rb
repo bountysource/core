@@ -49,7 +49,8 @@ class Api::V1::SearchesController < ApplicationController
 
     # Log the search
     # 1596655061 in order to solve the hanging search the loging functionality is commented out for now
-    # Search.create(query: "bounty search", params: options, person: @person)
+    # Update 11/08/2020 Uncommented because of the revert on Heroku will settle this later
+      Search.create(query: "bounty search", params: options, person: @person)
 
     @issues = @results[:issues]
     @issues_total = @results[:issues_total]
