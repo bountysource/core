@@ -61,7 +61,7 @@ angular.module('api.bountysource',[]).
         };
 
         var headers = {};
-        headers.Accept = 'application/vnd.bountysource+json; version=0';
+        headers.Accept = '*';
         
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback).error(cors_errback); }
