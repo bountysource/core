@@ -19,13 +19,6 @@ module Api
       allow do
         origins '*'
         resource '*', headers: :any, methods: [:get, :post, :delete, :put, :patch, :options, :head]
-      end
-    end
-  end
-end
-    
-module Api
-  class Application < Rails::Application
 
     # All times should be in UTC
     ENV['TZ'] = 'UTC'
