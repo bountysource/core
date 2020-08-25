@@ -16,7 +16,8 @@ module Api
       allow do
         origins '*'
         resource '*', headers: :any, methods: [:get, :post, :delete, :put, :patch, :options, :head]
-
+      end
+    end
     # All times should be in UTC
     ENV['TZ'] = 'UTC'
     config.time_zone = 'UTC'
