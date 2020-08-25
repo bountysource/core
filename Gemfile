@@ -15,6 +15,7 @@ gem 'json'
 gem 'pg', '~> 0.18.1'
 gem 'puma'
 gem 'oj'
+gem 'rack-cors'
 
 gem 'rabl'
 gem 'jbuilder'
