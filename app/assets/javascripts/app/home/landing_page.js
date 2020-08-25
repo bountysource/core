@@ -19,7 +19,7 @@ angular.module('app').controller('LandingPageController', function ($scope, $api
   };
 
   // Recent Activity
-  $scope.events = Timeline.query({ per_page: 10, bounties_only: true });
+  $scope.events = Timeline.query({ per_page: 30, bounties_only: true });
 
   // Top Backers
   $api.v2.teams({
@@ -38,7 +38,7 @@ angular.module('app').controller('LandingPageController', function ($scope, $api
   $api.ad_spaces()
     .then(function(response) {
       $scope.ads = {
-        header_ad: response(function(ad) { return ad.position === 'header'; }),
+        header_ad: response.find(function(ad) { return ad.position === 'header'; }),
         interstitial_ads: response.filter(function(ad) { return ad.position === 'interstitial'; })
       };
     });

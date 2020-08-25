@@ -1,12 +1,12 @@
 angular.module('app').controller('TeamsIndexController', function ($scope, $location, $routeParams, $anchorScroll, $api, $pageTitle, Team, Tag) {
   $pageTitle.set("Teams");
 
-  $scope.tags = Tag.query({ featured: true, per_page: 50 });
+  $scope.tags = Tag.query({ featured: true, per_page: 250 });
 
   $scope.set_params = function(params) {
     var options = {
       include_bio: true,
-      per_page: 50
+      per_page: 250
     };
 
     if (!params.tag_id) {

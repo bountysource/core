@@ -26,7 +26,7 @@ angular.module('services').config(function($httpProvider) {
   // Set API host
   $rootScope.api_host = window.BS_ENV.api_host;
 
-  this.$$maxPerPage = 50;
+  this.$$maxPerPage = 250;
   this.$$perPage = undefined;
 
   this.perPage = function(value) {
@@ -390,7 +390,7 @@ angular.module('services').config(function($httpProvider) {
     if (this.$$perPage) {
       params.per_page = this.$$perPage;
     } else {
-      params.per_page = params.per_page || 50;
+      params.per_page = params.per_page || 250;
     }
 
     if (this.$$page) {
@@ -436,7 +436,7 @@ angular.module('services').config(function($httpProvider) {
       // make actual HTTP call with promise
 
       var headers = {};
-      headers.Accept = '*';
+      headers.Accept = 'application/vnd.bountysource+json; version=1';
 
       if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
       else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }

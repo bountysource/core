@@ -33,7 +33,7 @@ angular.module('api.bountysource',[]).
       if ($cookieJar.getJson($api.access_token_cookie_name)) {
         params.access_token = $cookieJar.getJson($api.access_token_cookie_name);
       }
-      params.per_page = params.per_page || 50;
+      params.per_page = params.per_page || 250;
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
@@ -102,7 +102,7 @@ angular.module('api.bountysource',[]).
       if ($cookieJar.getJson($api.access_token_cookie_name)) {
         params.access_token = $cookieJar.getJson($api.access_token_cookie_name);
       }
-      params.per_page = params.per_page || 50;
+      params.per_page = params.per_page || 250;
 
       // deferred JSONP call with a promise
       var deferred = $q.defer();
@@ -126,7 +126,7 @@ angular.module('api.bountysource',[]).
         };
 
         var headers = {};
-        headers.Accept = '*';
+        headers.Accept = 'application/vnd.bountysource+json; version=1';
         if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
         else if (method === 'DELETE') { $http.delete(url, { params: params, headers: headers }).success(cors_callback); }

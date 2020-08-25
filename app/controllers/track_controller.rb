@@ -9,7 +9,7 @@ class TrackController < ActionController::Base
     headers['Access-Control-Allow-Origin'] = request.headers['Origin'] || '*'
     headers['Access-Control-Allow-Credentials'] = true
 
-    headers['Access-Control-Allow-Methods'] = 'OPTIONS, GET, POST, PATCH, PUT, DELETE'
+    headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE'
     headers['Access-Control-Allow-Headers'] = 'Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, X-Requested-With'
     headers['Access-Control-Max-Age'] = '86400'
     headers['Cache-Control'] = "no-cache, no-store, max-age=0, must-revalidate"
