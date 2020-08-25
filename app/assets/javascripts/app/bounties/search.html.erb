@@ -123,8 +123,8 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
-    <div ng-show="!loading_search_results">
+    <loading-bar ng-show="bounties_only">Searching...</loading-bar>
+    <div ng-show="!bounties_only">
       <div ng-show="issues_count == 0" class="alert alert-salmon">No results found.</div>
 
       <div ng-show="search_results.length > 0">
