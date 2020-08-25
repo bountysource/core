@@ -120,11 +120,11 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $location.search(cleaned_form_data);
     $api.bounty_search(cleaned_form_data).then(function(response) {
       $scope.search_results = response.issues;
-      $scope.issues_count = response.issues_total;
+      $scope.issues_count = response.issues;
       $scope.perPage = 10;
       $scope.maxSize = 10;
       $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
-      $scope.loading_search_results = true;
+      $scope.loading_search_results = false;
       $anchorScroll();
     });
   };
