@@ -429,6 +429,8 @@ GEM
     rabl (0.13.1)
       activesupport (>= 2.3.14)
     rack (2.2.2)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rack-timeout (0.4.2)
@@ -647,6 +649,7 @@ DEPENDENCIES
   pry
   puma
   rabl
+  rack-cors
   rack-timeout
   rails (= 5.1.5)
   rails-controller-testing
@@ -671,7 +674,7 @@ DEPENDENCIES
   zeus
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.4.3
 
 BUNDLED WITH
    2.1.4
