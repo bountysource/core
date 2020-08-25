@@ -4,7 +4,7 @@ require ::File.expand_path('../config/environment',  __FILE__)
 run Api::Application
 
 require 'rack/cors'
-use "Rack::Cors" do
+use Rack::Cors do
 
  # allow all origins in development
  allow do

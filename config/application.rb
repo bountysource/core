@@ -11,14 +11,6 @@ end
 
 module Api
   class Application < Rails::Application
-    # ...
-
-    # For Rails 5 Appications
-
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins '*'
-        resource '*', headers: :any, methods: [:get, :post, :delete, :put, :patch, :options, :head]
 
     # All times should be in UTC
     ENV['TZ'] = 'UTC'
