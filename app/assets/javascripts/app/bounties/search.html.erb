@@ -123,12 +123,12 @@
 
 <div class="row">
   <div class="col-xs-12">
-    <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
-    <div ng-show="!loading_search_results">
+    <loading-bar ng-show="bounty">Searching...</loading-bar>
+    <div ng-show="!bounty">
       <div ng-show="issues_count == 0" class="alert alert-salmon">No results found.</div>
 
-      <div ng-show="search_results.length > 0">
-        <div ng-repeat="issue in search_results">
+      <div ng-show="bounty.length > 0">
+        <div ng-repeat="bounty">
           <!-- INTERSTITIAL ADS BEGIN -->
           <info-space info-space="getInterstitialAd($index)"></info-space>
           <!-- INTERSTITIAL ADS END -->
@@ -136,8 +136,8 @@
         </div>        
       </div>
 
-      <div ng-show="issues_count > 10">
-        <pagination total-items="issues_count" page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
+      <div ng-show="bounty > 50">
+        <pagination total-items="bounty" page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
       </div>
     </div>
   </div>
