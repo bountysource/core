@@ -30,7 +30,7 @@ angular.module('app').controller('LandingPageController', function ($scope, $api
 
   // Top Hunters
   $api.v2.people({
-    bounty_hunters: '3'
+    bounty_hunters: 30;
   }).then(function(response) {
     $scope.bounty_hunters = angular.copy(response.data);
   });
