@@ -29,7 +29,7 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
 
-## Local Development Environment (OS X)
+## Local Development Environment (OS X) 
 ```
 # dependencies
 brew install rbenv
