@@ -390,7 +390,7 @@ angular.module('services').config(function($httpProvider) {
     if (this.$$perPage) {
       params.per_page = this.$$perPage;
     } else {
-      params.per_page = params.per_page || 250;
+      params.per_page = params.per_page || 50;
     }
 
     if (this.$$page) {
