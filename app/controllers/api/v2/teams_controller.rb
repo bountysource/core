@@ -39,7 +39,7 @@ class Api::V2::TeamsController < Api::BaseController
 
     # used in topnav
     if params.has_key?(:my_teams_and_suggestions) && current_user
-      params[:per_page] ||= 250
+      params[:per_page] ||= 50
       my_team_ids = current_user.team_member_relations.pluck(:team_id)
       @collection = @collection.where(id: my_team_ids)
       @include_team_permissions = true

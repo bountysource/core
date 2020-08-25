@@ -149,7 +149,7 @@ Rabl.configure do |config|
 
   config.pagination = {
     per_page:       30,
-    max_per_page:   250,
+    max_per_page:   50,
     params_filter:  [:access_token, :callback, :cache]
   }
 end
