@@ -124,7 +124,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
       $scope.perPage = 10;
       $scope.maxSize = 10;
       $scope.pageCount = Math.ceil($scope.issues_count / $scope.perPage);
-      $scope.loading_search_results = false;
+      $scope.loading_search_results = true;
       $anchorScroll();
     });
   };
