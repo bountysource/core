@@ -671,7 +671,7 @@ DEPENDENCIES
   zeus
 
 RUBY VERSION
-   ruby 2.4.3p205
+   ruby 2.7.0
 
 BUNDLED WITH
-   2.1.4
+   2.0.2
