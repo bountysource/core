@@ -436,7 +436,7 @@ angular.module('services').config(function($httpProvider) {
       // make actual HTTP call with promise
 
       var headers = {};
-      headers.Accept = 'application/vnd.bountysource+json; version=1';
+      headers.Accept = '*';
 
       if (method === 'GET') { $http.get(url, { params: params, headers: headers }).success(cors_callback); }
       else if (method === 'HEAD') { $http.head(url, { params: params, headers: headers }).success(cors_callback); }
