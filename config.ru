@@ -3,13 +3,14 @@ require ::File.expand_path('../config/environment',  __FILE__)
 
 run Api::Application
 
+require 'rack/cors'
 use Rack::Cors do
-    allow do
-      origins '*', '*',
-              # regular expressions can be used here
-  
-      resource '*',
-          methods: [:get, :post, :delete, :put, :patch, :options, :head],
-          max_age: 600
-          # headers to expose
-    end
+
+ # allow all origins in development
+ allow do
+   origins '*'
+   resource '*',
+       :headers => :any,
+       :methods => [:get, :post, :delete, :put, :patch, :options, :head]
+ end
+end
