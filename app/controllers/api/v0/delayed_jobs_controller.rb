@@ -27,8 +27,8 @@ class Api::V0::DelayedJobsController < Api::V0::BaseController
     else
       stats = {
         new_jobs: Delayed::Job.where("locked_at is null and attempts = 0 and run_at <= now()").count,
-        #failed_jobs: Delayed::Job.where("attempts > 0").count,
-        #locked_jobs: Delayed::Job.where("locked_at is not null").count
+        failed_jobs: Delayed::Job.where("attempts > 0").count,
+        locked_jobs: Delayed::Job.where("locked_at is not null").count
       }
     end
 
