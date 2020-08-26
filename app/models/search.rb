@@ -51,7 +51,7 @@ class Search < ApplicationRecord
 
   def self.bounty_search(params)
     page = params[:page] || 1
-    per_page = params[:per_page].present? ? params[:per_page].to_i : 50
+    per_page = params[:per_page].present? ? params[:per_page].to_i : 25
     query = params[:search] || "*"
     min = params[:min].present? ? params[:min].to_f : 0.01
     max = params[:max].present? ? params[:max].to_f : 1_000_000_000.0
