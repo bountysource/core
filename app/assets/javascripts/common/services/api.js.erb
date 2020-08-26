@@ -26,8 +26,8 @@ angular.module('services').config(function($httpProvider) {
   // Set API host
   $rootScope.api_host = window.BS_ENV.api_host;
 
-  this.$$maxPerPage = 250;
-  this.$$perPage = undefined;
+  this.$$maxPerPage = 50;
+  this.$$perPage = 25;
 
   this.perPage = function(value) {
     if (value < 0) { value = 0; }
@@ -385,7 +385,7 @@ angular.module('services').config(function($httpProvider) {
       params.access_token = $api.get_access_token();
     }
 
-    // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
+    // Pull off perPage if it was set. Otherwise... default everything to 50 because we are lazy right now.
     // Query string parameter takes precedence over this value
     if (this.$$perPage) {
       params.per_page = this.$$perPage;

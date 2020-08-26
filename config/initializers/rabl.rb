@@ -148,8 +148,8 @@ Rabl.configure do |config|
   #config.cache_all_output = Rails.env != 'development'
 
   config.pagination = {
-    per_page:       30,
-    max_per_page:   250,
+    per_page:       20,
+    max_per_page:   50,
     params_filter:  [:access_token, :callback, :cache]
   }
 end
