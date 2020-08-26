@@ -50,7 +50,7 @@ describe Api::V2::PaginationHelper do
 
   context "min per_page value" do
     it "should use per_page defined on params" do
-      values = calculate_pagination_values(Issue.all, { per_page: 1 })
+      values = calculate_pagination_values(Issue.all, { per_page: 25 })
       expect(values[:per_page]).to eq(Api::V2::PaginationHelper::DEFAULT_PER_PAGE)
     end
   end
