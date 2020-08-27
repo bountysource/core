@@ -12,7 +12,7 @@ angular.module('app')
   $scope.created = { title: "Created", col: "created_at", order: "asc"};
 
   $scope.updatePage = function(page, order_hash) {
-    var params = { page: page, per_page: 30, order: order_hash};
+    var params = { page: page, per_page: 25, order: order_hash};
 
     $scope.working = true;
     $api.get_pledges(params).then(function(response) {

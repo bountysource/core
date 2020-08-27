@@ -6,7 +6,7 @@ angular.module('app').controller('TeamsIndexController', function ($scope, $loca
   $scope.set_params = function(params) {
     var options = {
       include_bio: true,
-      per_page: 50
+      per_page: 25
     };
 
     if (!params.tag_id) {

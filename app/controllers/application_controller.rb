@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   before_action do
     # default per page
-    params[:per_page] ||= 50
+    params[:per_page] ||= 25
   end
 
   class Error < StandardError ; end

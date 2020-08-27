@@ -7,7 +7,7 @@ angular.module('app')
   });
 })
 .controller("Follows", function ($scope, $window, $api) {
-  var params = {per_page: 50};
+  var params = {per_page: 25};
   //imitating current admin page.. probably should add pagination and sorting
   $scope.follows = $api.get_follows(params).then(function(response) {
     if (response.meta.success) {
