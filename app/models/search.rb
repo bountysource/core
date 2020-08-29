@@ -49,56 +49,6 @@ class Search < ApplicationRecord
     reject_merged_trackers!(tracker_search)
   end
 
-  /def self.bounty_search(params)
-    page = params[:page] || 1
-    per_page = params[:per_page].present? ? params[:per_page] : 25
-    query = params[:search] || "*"
-    min = params[:min].present? ? params[:min].to_f : 0.01
-    max = params[:max].present? ? params[:max].to_f : 1_000_000_000.0
-    order = ["bounty_total", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
-    direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
-    languages = params[:languages].present? ? params[:languages].split(',') : []
-    trackers = params[:trackers].present? ? params[:trackers].split(',') : []
-    category = params[:category] || []
-    #build a "with" hash for the filtering options. order hash for sorting options.
-    with_hash = {
-      tracker_name: trackers,
-      languages_name: languages,
-      can_add_bounty: true,
-      category: category,
-      _or: [{bounty_total: { gte: min, lte: max }}]
-    }.select {|param, value| value.present?}
-
-    #if an order is specified, build the order query. otherwise, pass along an empty string to order
-    if order
-      order_hash = {order => direction}
-    else
-      order_hash = nil
-    end
-    
-    bounteous_issue_search = Issue.search(query, where: with_hash, 
-      per_page: per_page, page: page, includes: [:issue_address, author: [:person], tracker: [:languages, :team]],
-      fields: ["title^50", "tracker_name^25", "languages_name^5", "body"],
-      order: order_hash)
-
-    reject_merged_issues!(bounteous_issue_search.to_a)
-
-    {
-      issues: bounteous_issue_search,
-      issues_total: bounteous_issue_search.total_count
-    }
-  end
-
-  # Get all of the bounty searches
-  def self.bounty
-    where("query = 'bounty search'")
-  end
-
-  # Get all of the general searches
-  def self.general
-    where("query != 'bounty search'")
-  end/
-
   def self.bounty_search(params)
     page = params[:page] || 1
     per_page = params[:per_page].present? ? params[:per_page] : 20
