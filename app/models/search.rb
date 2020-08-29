@@ -49,7 +49,7 @@ class Search < ApplicationRecord
     reject_merged_trackers!(tracker_search)
   end
 
-  def self.bounty_search(params)
+  /def self.bounty_search(params)
     page = params[:page] || 1
     per_page = params[:per_page].present? ? params[:per_page] : 25
     query = params[:search] || "*"
@@ -97,6 +97,64 @@ class Search < ApplicationRecord
   # Get all of the general searches
   def self.general
     where("query != 'bounty search'")
+  end/
+
+  def self.bounty_search(params)
+    page = params[:page] || 1
+    per_page = params[:per_page].present? ? params[:per_page].to_i : 50
+    query = params[:search] || "*"
+    direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
+    order = ["bounty_total","updated_at", "created_at", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
+    category = params[:category] || "fiat"
+    
+    if category == "crypto"
+      crypto_bounties = CryptoBounty.find_by_sql("SELECT * FROM public.crypto_bounties")
+      cryptoIds = []
+      queryString = ""
+ 
+      crypto_bounties.each do |bounty|
+        cryptoIds.push(bounty.issue_id)
+      end
+ 
+      cryptoIds = cryptoIds.uniq
+ 
+      cryptoIds.each do |issue_id|
+        queryString += "#{issue_id},"
+      end
+ 
+      queryString = queryString.chop
+ 
+      bounties = Issue.find_by_sql("SELECT * FROM public.issues
+      WHERE id IN (#{queryString}) AND can_add_bounty=true
+      ORDER BY #{order} #{direction}");
+ 
+    else
+      bounties = Issue.find_by_sql("SELECT * FROM public.issues
+        WHERE can_add_bounty=true AND bounty_total > 0
+        ORDER BY #{order} #{direction}");
+    end
+      
+    if query != "*"
+      bounties = bounties.select { |bounty| bounty.title.include? query }
+    end
+    
+    total_bounties = bounties.length()
+    page = page.to_i
+    if page > 1
+      drop_first_n = (page - 1) * per_page
+      puts drop_first_n
+      bounties = bounties.drop(drop_first_n)
+      bounties = bounties.take(per_page)
+    else
+      bounties = bounties.take(per_page)
+    end
+    
+    ActiveRecord::Associations::Preloader.new.preload(bounties, [:issue_address, author: [:person], tracker: [:languages, :team]])
+ 
+    {
+      issues: bounties,
+      issues_total: total_bounties
+    }
   end
 
 protected

@@ -1,7 +1,11 @@
+# app/assets/javascripts/app/bounties/search.html.erb
+# just commented out the advanced-search button => line:17-21
+# and added a bootstrap class => line:4
+ 
 <section id="bounty-search">
   <form ng-submit="submit_query()" class="form bounty-search-form">
     <div class="row display-flex vertical-align-middle">
-      <div class="col-sm-11">
+      <div class="col-sm-12">
         <div class="form-group m-0">
           <div class="input-group search-input">
             <input type="text" placeholder="Search Issues, Bounties, Teams" ng-model="form_data.search" class="form-control">
@@ -13,14 +17,14 @@
           </div>
         </div>
       </div>
-
-      <div class="col-sm-1 toggle-advance-search">
+ 
+      <%# <div class="col-sm-1 toggle-advance-search">
         <a ng-click="toggle_advanced_search()">
           <%= image_tag 'icons/icon_advanced_search.svg', class: 'advanced-img', style: 'height: 50px;' %>
-        </a>
-      </div>
+        <%# </a>
+      </div> %>
     </div>
-
+ 
     <div class="row basic-search">
       <div class="col-sm-4 text-center text-sm-left">
         <div class="btn-group">
@@ -29,7 +33,7 @@
           </span>
         </div>
       </div>
-
+ 
       <div class="col-sm-5 col-sm-offset-3">
         <div class="sort-select">
           <label class="label-control">Sort by:</label>
@@ -46,7 +50,7 @@
         </div>
       </div>
     </div>
-
+ 
     <div class="row advanced-search">
       <div ng-show="show_advanced_search">
         <div class="col-xs-12 col-sm-6 col-lg-4">
@@ -67,7 +71,7 @@
             </div>
           </div>
         </div>
-
+ 
         <div class="col-xs-12 col-sm-6 col-lg-4">
           <div class="form-group">
             <label>Language:</label>
@@ -79,7 +83,7 @@
                    typeahead-wait-ms="150"
                    typeahead-on-select="selectLanguage($item, $model, $label)">
           </div>
-
+ 
           <div class="filter-box" collapse="form_data.languages.length <= 0">
             <span class="badge search-filter" ng-repeat="language in form_data.languages">
               <button type="button" class="close" ng-click="remove_language(language)">
@@ -89,7 +93,7 @@
             </span>
           </div>
         </div>
-
+ 
         <div class="col-xs-12 col-sm-6 col-lg-4">
           <div class="form-group">
             <label class="label-control">Limit to projects:</label>
@@ -101,7 +105,7 @@
                    typeahead-wait-ms="150"
                    typeahead-on-select="selectTracker($item, $model, $label)">
           </div>
-
+ 
           <div class="project-box" collapse="form_data.trackers <= 0">
             <span class="badge search-filter" ng-repeat="tracker in form_data.trackers">
               <button type="button" class="close" ng-click="remove_tracker(tracker)">
@@ -111,7 +115,7 @@
             </span>
           </div>
         </div>
-
+ 
         <div class="clearfix"></div>
         <div class="form-group">
           <button class="btn btn-light-blue center-block btn-long" type="submit">Search</button>
@@ -120,13 +124,13 @@
     </div>
   </form>
 </section>
-
+ 
 <div class="row">
   <div class="col-xs-12">
     <loading-bar ng-show="loading_search_results">Searching...</loading-bar>
     <div ng-show="!loading_search_results">
       <div ng-show="issues_count == 0" class="alert alert-salmon">No results found.</div>
-
+ 
       <div ng-show="search_results.length > 0">
         <div ng-repeat="issue in search_results">
           <!-- INTERSTITIAL ADS BEGIN -->
@@ -135,7 +139,7 @@
           <issue-card issue="issue"></issue-card>  
         </div>        
       </div>
-
+ 
       <div ng-show="issues_count > 50">
         <pagination total-items="issues_count" page="form_data.page" max-size="maxSize" num-pages="pageCount" items-per-page="perPage" on-select-page="updatePage(page)"></pagination>
       </div>

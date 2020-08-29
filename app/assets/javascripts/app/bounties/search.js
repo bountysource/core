@@ -26,13 +26,24 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
   };
 
   //sets drop-down sorting options
+  //$scope.sort_options = {
+    //option1 : { label: "Value (Highest to Lowest)", value: "bounty_total", direction: "desc"},
+    //option2 : { label: "Value (Lowest to Highest)", value: "bounty_total", direction: "asc"},
+    //option3 : { label: "Date (Newest to Oldest)", value: "earliest_bounty", direction: "desc"},
+    //option4 : { label: "Date (Oldest to Newest)", value: "earliest_bounty", direction: "asc"},
+    //option5 : { label: "Backers (Most to Least)", value: "backers_count", direction: "desc"},
+    //option6 : { label: "Backers (Least to Most)", value: "backers_count", direction: "asc"}
+  //};
+
+  // Line 29-36 changed the sorting query => these things go as an argument to the search
+ 
   $scope.sort_options = {
     option1 : { label: "Value (Highest to Lowest)", value: "bounty_total", direction: "desc"},
     option2 : { label: "Value (Lowest to Highest)", value: "bounty_total", direction: "asc"},
-    option3 : { label: "Date (Newest to Oldest)", value: "earliest_bounty", direction: "desc"},
-    option4 : { label: "Date (Oldest to Newest)", value: "earliest_bounty", direction: "asc"},
-    option5 : { label: "Backers (Most to Least)", value: "backers_count", direction: "desc"},
-    option6 : { label: "Backers (Least to Most)", value: "backers_count", direction: "asc"}
+    option3 : { label: "Date (Newest to Oldest)", value: "created_at", direction: "desc"},
+    option4 : { label: "Date (Oldest to Newest)", value: "created_at", direction: "asc"},
+    option5 : { label: "Backers (Most to Least)", value: "participants_count", direction: "desc"},
+    option6 : { label: "Backers (Least to Most)", value: "participants_count", direction: "asc"}
   };
 
   $scope.selectSort = function() {
