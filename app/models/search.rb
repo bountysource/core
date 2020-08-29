@@ -101,7 +101,7 @@ class Search < ApplicationRecord
 
   def self.bounty_search(params)
     page = params[:page] || 1
-    per_page = params[:per_page].present? ? params[:per_page].to_i : 50
+    per_page = params[:per_page].present? ? params[:per_page] : 20
     query = params[:search] || "*"
     direction = ['asc', 'desc'].include?(params[:direction]) ? params[:direction] : 'desc'
     order = ["bounty_total","updated_at", "created_at", "backers_count", "earliest_bounty", "participants_count", "thumbs_up_count", "remote_created_at"].include?(params[:order]) ? params[:order] : "bounty_total"
