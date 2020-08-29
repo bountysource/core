@@ -48,7 +48,7 @@ class Api::V1::SearchesController < ApplicationController
     @results = Search.bounty_search(options)
 
     # Log the search
-    # Search.create(query: "bounty search", params: options, person: @person)
+    #Search.create(query: "bounty search", params: options, person: @person)
 
     @issues = @results[:issues]
     @issues_total = @results[:issues_total]
