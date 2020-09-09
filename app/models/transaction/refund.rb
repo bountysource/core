@@ -32,15 +32,15 @@
 class Transaction::Refund < Transaction
   def self.sales
     processing_fees_account = Account::BountySourceFeesPayment.instance
-    BigDecimal(joins(:splits => [:account]).where('splits.account_id IN (?)', [escrow_account.id, processing_fees_account.id]).sum('splits.amount')) * -1
+    BigDecimal.new(joins(:splits => [:account]).where('splits.account_id IN (?)', [escrow_account.id, processing_fees_account.id]).sum('splits.amount')) * -1
   end
 
   def self.processing_fees
     processing_fees_account = Account::BountySourceFeesPayment.instance
-    BigDecimal(joins(:splits => [:account]).where('splits.account_id = ?', processing_fees_account.id).sum('splits.amount'))
+    BigDecimal.new(joins(:splits => [:account]).where('splits.account_id = ?', processing_fees_account.id).sum('splits.amount'))
   end
 
   def self.liability
-    BigDecimal( joins(:splits => [:account]).where('accounts.type = ? OR accounts.type LIKE ?', 'Account::Personal', 'Account::Team%').sum('splits.amount') )
+    BigDecimal.new( joins(:splits => [:account]).where('accounts.type = ? OR accounts.type LIKE ?', 'Account::Personal', 'Account::Team%').sum('splits.amount') )
   end
 end

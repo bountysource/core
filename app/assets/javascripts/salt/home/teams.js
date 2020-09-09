@@ -21,7 +21,7 @@ angular.module('app').config(function($stateProvider) {
     },
     resolve: {
       tags: function($api) {
-        return $api.tags.query({ featured: true, accept_public_payins: true, per_page: 10 }).$promise;
+        return $api.tags.query({ featured: true, accept_public_payins: true, per_page: 250 }).$promise;
       }
     }
   });

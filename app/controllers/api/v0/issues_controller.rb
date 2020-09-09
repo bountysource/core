@@ -14,10 +14,6 @@ class Api::V0::IssuesController < Api::V0::BaseController
   def update
     @issue.featured = params[:featured].to_bool if params.has_key?(:featured)
 
-    if params.has_key?(:closed)
-      @issue.can_add_bounty = !params[:closed].to_bool
-    end
-
     if @issue.save
       render "api/v1/issues/show"
     else

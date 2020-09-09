@@ -21,7 +21,7 @@
           Newest
         </a>
       </li>
-      <li ng-class="{active: state.params.tag && (state.params.tag == tag.slug || state.params.tag == tag.id) }" ng-repeat="tag in tags">
+      <li ng-class="{active: state.params.tag && (state.params.tag == tag.slug || state.params.tag == tag.id) }" ng-repeat="tag in tags | limitTo:71">
         <a class="text-gunmetal" ui-sref="root.home.teams.list({ tag: tag.slug || tag.id })" ui-sref-opts="{ location: 'replace', inherit: false }">
           <span class="glyphicon glyphicon-tag" ng-if="tag.type=='Tag'"></span>
           <img ng-if="tag.type=='Team'" ng-src="{{tag.image_url}}" style="width:16px; height:16px"/>

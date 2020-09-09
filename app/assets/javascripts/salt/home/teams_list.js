@@ -19,7 +19,7 @@ angular.module('app').config(function($stateProvider) {
           accepts_public_payins: true,
           include_supporter_stats: true,
           include_bio: true,
-          per_page: 10
+          per_page: 25
         };
         if ($stateParams.search) {
           request.search = $stateParams.search;

@@ -12,7 +12,7 @@ angular.module('app')
   $scope.created_at = { title: "Created", col: "created_at", order: "desc"};
 
   $scope.updatePage = function(page, order_hash) {
-    var params = { page: page, per_page: 10, order: order_hash};
+    var params = { page: page, per_page: 25, order: order_hash};
 
     $scope.working = true;
 

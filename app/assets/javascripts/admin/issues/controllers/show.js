@@ -14,7 +14,6 @@ angular.module('app')
     if (response.meta.success) {
       $scope.issue = response.data;
       $scope.form_data.featured = response.data.featured;
-      $scope.form_data.closed = !response.data.can_add_bounty;
       $scope.backers = [];
       for (var i = 0; i < response.data.bounties.length; i++) {
         $scope.backers.push(response.data.bounties[i].person);

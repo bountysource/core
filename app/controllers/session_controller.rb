@@ -2,7 +2,7 @@ class SessionController < ApplicationController
 
   before_action :require_auth, only: [:approve_connect]
 
-  WHITELISTED_REDIRECT_URL = /^https?:\/\/((www|api|salt|staging|staging-api|staging-salt)\.bountysource\.com)\//
+  WHITELISTED_REDIRECT_URL = /^https?:\/\/((www|api|salt)\.bountysource\.com)\//
 
   # get an oauth code, which is exchanged for an access_token in #callback
   def login

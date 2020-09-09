@@ -60,7 +60,7 @@ class LinkedAccount::Github::Organization < LinkedAccount::Github
   #   retrieved_ids = []
   #   date_cursor = Date.tomorrow
   #   loop do
-  #     response = ::Github::API.call(url: "/search/users", params: { q: "type:Organization created:<=#{date_cursor}", per_page: 10, sort: 'created', order: 'desc' })
+  #     response = ::Github::API.call(url: "/search/users", params: { q: "type:Organization created:<=#{date_cursor}", per_page: 100, sort: 'created', order: 'desc' })
   #     raise "ERROR: auto paginating #{response.status}" unless response.success?
   #     issues = LinkedAccount::Github.update_attributes_from_github_array(response.data['items'])
   #   end

@@ -624,7 +624,7 @@ class Person < ApplicationRecord
 
   def yearly_cash_out_totals
     #self.cash_outs.completed.inject({}) { |hash, cash_out| hash[cash_out.sent_at.year] = (hash[cash_out.sent_at.year] || 0.0) + cash_out.final_payment_amount; hash }
-    self.cash_outs.completed.group('year').pluck(Arel.sql('extract(year from sent_at) as year, sum(amount-coalesce(fee,0)+coalesce(fee_adjustment,0)) as final_payment_amount')).inject({}) { |hash, (year, amnt)| hash[year.to_i] = amnt; hash }
+    self.cash_outs.completed.group('year').pluck('extract(year from sent_at) as year, sum(amount-coalesce(fee,0)+coalesce(fee_adjustment,0)) as final_payment_amount').inject({}) { |hash, (year, amnt)| hash[year.to_i] = amnt; hash }
   end
 
   def suspend!

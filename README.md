@@ -29,7 +29,7 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
 
-## Local Development Environment (OS X) 
+## Local Development Environment (OS X)
 ```
 # dependencies
 brew install rbenv
@@ -40,7 +40,7 @@ brew install postgresql
 git clone git@github.com:bountysource/core.git bountysource-core
 cd bountysource-core
 
-# make sure you're running ruby 2.7.0 (if not, mess with rbenv)
+# make sure you're running ruby 2.4.3 (if not, mess with rbenv)
 ruby -v
 
 # install Gemfile
@@ -73,7 +73,7 @@ RAILS_ENV=test rake db:create
 ./bin/rake
 ```
 
-## Local Development Environment with Docker (New version under development)
+## Local Development Environment with Docker (deprecated)
 
 For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 

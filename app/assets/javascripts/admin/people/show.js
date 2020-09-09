@@ -82,7 +82,7 @@ angular.module('app')
 
     $scope.giftMoney = function(giftValue, person) {
       if (giftValue > 0) {
-        if (confirm("Are you sure you want to gift $" + giftValue + " to " + (person ? person.display_name : $scope.person_id) + "?")) {
+        if (confirm("Are you sure you want to gift $" + giftValue + " to " + person.display_name + "?")) {
           $api.gift_money(person.id, giftValue).then(function(response) {
             if (response.created_at) {
               $scope.success_message = "Successfully gifted!";

@@ -33,6 +33,6 @@
 class Transaction::InternalTransfer::BountyClaim < Transaction::InternalTransfer
   def self.liability
     charity_accounts = %w(Account::FreeSoftwareFoundation Account::SoftwarePublicInterest Account::ElectronicFrontierFoundation Account::DoctorsWithoutBorders Account::Apache)
-    BigDecimal( joins(:splits => [:account]).where('account.type IN (?)', charity_accounts).sum('splits.amount') )
+    BigDecimal.new( joins(:splits => [:account]).where('account.type IN (?)', charity_accounts).sum('splits.amount') )
   end
 end

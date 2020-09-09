@@ -50,7 +50,7 @@ Api::Application.routes.draw do
     get '/badge/team', to: 'badge#team'
 
     # track user generated events (compatible with mixpanel API)
-    match '/track', to: 'track#track', via: :post
+    match '/track', to: 'track#track', via: :get
 
     # All things money related
     scope path: 'payments', controller: 'payments' do

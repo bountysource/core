@@ -6,7 +6,7 @@
     salt_host: '<%=Api::Application.config.salt_url%>',
     www_host: '<%=Api::Application.config.www_url%>',
     mixpanel: '<%=Api::Application.config.mixpanel_token%>',
-    mixpanel_config: { 'api_host': '<%=Api::Application.config.api_url%>'.replace(/\/$/,''), 'autotrack': false },
+    mixpanel_config: { 'api_host': '<%=Api::Application.config.api_url%>'.replace(/\/$/,'') },
     google_analytics: '<%=ENV['GOOGLE_ANALYTICS_SITE']%>',
     stripe_key: '<%=ENV['STRIPE_PUBLIC_KEY']%>',
     stripe_image: 'https://s3.amazonaws.com/stripe-uploads/acct_15jcQ4LM04M7PZLcmerchant-icon-1427143578024-Bountysource-square-100.png',
