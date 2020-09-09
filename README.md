@@ -29,6 +29,103 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 * [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
 * [API Docs](http://bountysource.github.io/)
 
+## Local Development Environment (Ubuntu)
+
+### Ruby
+
+First install ruby. In order to maintain different versions of ruby and switch between them install rbenv instead of following the official ruby guide.
+
+```
+sudo apt install curl
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+
+sudo apt-get update
+sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
+
+```
+
+A more in depth guide can be found on https://gorails.com/setup/ubuntu/16.04
+
+### Rails
+
+Official guide: https://guides.rubyonrails.org/v5.0/getting_started.html
+
+#### Troubleshoot
+
+An error occurred while installing ovirt-engine-sdk (4.3.0), and Bundler cannot continue.
+
+```
+sudo apt-get install build-essential libcurl4-openssl-dev
+sudo apt-get install libxml2-dev
+
+```
+
+An error occurred while installing pg (0.18.4)
+
+```
+sudo apt-get install libpq-dev
+```
+
+### Starting the app
+
+WIP
+
+In one terminal run (runs the app on localhost:3000)
+
+```
+rails server
+```
+
+and in the other
+
+```
+docker-compose -f docker-compose.dev.yml up
+```
+
+seed scripts
+
+```
+# basic migration setup
+rake db:setup
+
+# seeds from ./db/seeds.rb
+rake db:seed
+```
+
+You can check the db contents by using Adminer on localhost:8086 (Or PgAdmin)
+
+```
+System: PostgreSQL
+Server: pgsql
+Username: bountysource
+Password: password
+```
+
+## Generating a visual representation of the db
+
+We're using railroady for this
+https://github.com/preston/railroady
+
+Run the app and the db and run:
+
+```
+rake diagram:all
+```
+
+The svgs are located in the doc folder.
+
+## Caching
+
+https://blog.appsignal.com/2018/04/17/rails-built-in-cache-stores.html#:~:text=To%20use%20Redis%20as%20a,it%20reaches%20its%20maximum%20size.
+
+config/enviorments/production.rb
+
+We should also check
+
+tmp/cache - filesize on the server
+
 ## Local Development Environment (OS X)
 ```
 # dependencies
