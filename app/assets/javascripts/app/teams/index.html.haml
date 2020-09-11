@@ -14,7 +14,7 @@
               %span.glyphicon.glyphicon-star
               Featured
 
-          %li{ "ng-repeat"=>"tag in tags", "ng-class"=>"{active: tag.type == 'Tag' ? (selected=='tag:'+tag.id) : (selected=='team:'+tag.slug) }"}
+          %li{ "ng-repeat"=>"tag in tags | limitTo: 70", "ng-class"=>"{active: tag.type == 'Tag' ? (selected=='tag:'+tag.id) : (selected=='team:'+tag.slug) }"}
             %a.text-ellipsis{ "ng-href"=>"/teams?tag_id={{tag.type == 'Tag' ? tag.id : tag.slug}}", "ng-click"=>"set_params({ tag_id: tag.type == 'Tag' ? tag.id : tag.slug })" }
               %span.glyphicon.glyphicon-tag{ "ng-if"=>"tag.type=='Tag'", "style"=>"color:#aaa"  }
               %img.img-circle{ "ng-if"=>"tag.type=='Team'", "ng-src"=>"{{tag.image_url}}", "style"=>"width:16px; height:16px" }
