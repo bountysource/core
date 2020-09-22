@@ -70,6 +70,8 @@ sudo apt-get install libpq-dev
 
 ### Starting the app
 
+WIP
+
 In one terminal run (runs the app on localhost:3000)
 
 ```
@@ -119,6 +121,8 @@ The svgs are located in the doc folder.
 https://blog.appsignal.com/2018/04/17/rails-built-in-cache-stores.html#:~:text=To%20use%20Redis%20as%20a,it%20reaches%20its%20maximum%20size.
 
 config/enviorments/production.rb
+
+We should also check
 
 tmp/cache - filesize on the server
 

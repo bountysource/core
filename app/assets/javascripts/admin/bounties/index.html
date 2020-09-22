@@ -7,17 +7,22 @@
       <p style="margin-top: 5px" ng-show="totalItems">
         Total Bounties: {{totalItems}}
       </p>
-      <pagination
-        direction-links="false"
-        boundary-links="true"
-        total-items="totalItems"
-        current-page="currentPage"
-        max-size="maxSize"
-        num-pages="pageCount"
-        items-per-page="itemsPerPage"
-        on-select-page="updatePage(page, order_hash)"
-        rotate="true"
-      ></pagination>
+      <div class="pagination row-fluid">
+        <pagination
+          direction-links="false"
+          boundary-links="true"
+          total-items="totalItems"
+          current-page="currentPage"
+          max-size="maxSize"
+          num-pages="pageCount"
+          items-per-page="itemsPerPage"
+          on-select-page="updatePage(page, order_hash)"
+          rotate="true"
+        ></pagination>
+        <button class="btn btn-primary" ng-click="downloadCSV()">
+          DOWNLOAD CSV
+        </button>
+      </div>
       <table
         class="table table-condensed table-striped table-bordered"
         style="margin-top: 15px"
