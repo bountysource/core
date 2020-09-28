@@ -91,7 +91,12 @@ angular.module('services').config(function($httpProvider) {
       };
       return $http(options).then(callback, callback);
     },
-
+    teamsPagination: function(params) {
+      return this.call({
+        url: '/teams',
+        params: params || {}
+      });
+    },
     issues: function(params) {
       return this.call({
         url: '/issues',
