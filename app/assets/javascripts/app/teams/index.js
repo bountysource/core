@@ -17,7 +17,7 @@ angular
     };
     function initalLoad() {
       $pageTitle.set("Teams");
-      $scope.tags = Tag.query({ featured: true, per_page: 250 });
+      $scope.tags = Tag.query({ featured: true, per_page: 25 });
       $scope.currentPage = 1;
       $scope.perPage = defaultOptions.per_page;
       $scope.set_params({
