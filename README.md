@@ -172,7 +172,7 @@ RAILS_ENV=test rake db:create
 
 ## Local Development Environment with Docker (deprecated)
 
-For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
+For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/)
 
 The following was tested on Ubuntu 16.04 LTS. It'll likely work very similar on other Linux distros.
 
