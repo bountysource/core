@@ -153,7 +153,7 @@ rake db:setup
 open http://localhost:3000/
 ```
 
-### Hostnames for local development
+### Hostnames for local development 
 We need different hostnames, so by default we use these:
 * http://localhost:3000/ - bountysource
 * http://127.0.0.1:3000/ - salt
