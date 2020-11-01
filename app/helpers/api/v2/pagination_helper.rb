@@ -2,8 +2,8 @@ module Api::V2::PaginationHelper
 
   include Api::V2::BaseHelper
 
-  DEFAULT_PER_PAGE = 30
-  MAX_PER_PAGE = 100
+  DEFAULT_PER_PAGE = 25
+  MAX_PER_PAGE = 25
 
   class Error < StandardError ; end
 

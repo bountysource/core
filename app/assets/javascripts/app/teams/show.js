@@ -11,7 +11,7 @@ angular.module('app').controller('TeamHomeController', function ($route, $scope,
     $scope.show_right_column = !team.bounties_disabled && (team.bounty_hunter_count>0 || team.closed_bounties_amount>0 ||  team.open_bounties_amount>0);
 
     $pageTitle.set(team.name, 'Bountysource');
-    $scope.events = Timeline.query({ per_page: 10, team_id: team.id });
+    $scope.events = Timeline.query({ per_page: 25, team_id: team.id });
 
     /* start team admin */
     $scope.form_data = {

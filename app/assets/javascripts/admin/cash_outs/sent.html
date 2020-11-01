@@ -1,11 +1,35 @@
 <loading-bar ng-hide="contentLoaded">Fetching cash outs...</loading-bar>
-
+ 
 <div ng-show="contentLoaded">
   <h1>Sent Cash Outs</h1>
-  <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
-  <cash-out-table cash-outs="cashOuts" options="{ markAsSentButton: false }"></cash-out-table>
-
-  <div ng-show='cashOuts.length > 5'>
-    <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+  <pagination
+    direction-links="false"
+    boundary-links="true"
+    total-items="totalItems"
+    current-page="currentPage"
+    max-size="maxSize"
+    num-pages="pageCount"
+    items-per-page="itemsPerPage"
+    on-select-page="updatePage(page, order_hash)"
+    rotate="true"
+  ></pagination>
+ 
+  <button class="btn btn-primary" ng-click="downloadCSV()">DOWNLOAD CSV</button>
+  <cash-out-table
+    cash-outs="cashOuts"
+    options="{ markAsSentButton: false }"
+  ></cash-out-table>
+  <div ng-show="cashOuts.length > 5">
+    <pagination
+      direction-links="false"
+      boundary-links="true"
+      total-items="totalItems"
+      current-page="currentPage"
+      max-size="maxSize"
+      num-pages="pageCount"
+      items-per-page="itemsPerPage"
+      on-select-page="updatePage(page, order_hash)"
+      rotate="true"
+    ></pagination>
   </div>
 </div>
