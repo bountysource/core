@@ -18,7 +18,7 @@
 
       <section class="top-hunters">
         <h4 class='section-title'>Top Hunters</h4>
-        <div class="mt-3" ng-repeat="person in bounty_hunters" style="display: flex; flex-direction: row;">
+        <div class="mt-3" ng-repeat="person in bounty_hunters | limitTo:25" style="display: flex; flex-direction: row;">
           <div>
             <a class="ml-3 mr-3" ng-href="/people/{{person.slug}}" style="float: left">
               <img ng-src="{{person.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>
@@ -35,7 +35,7 @@
 
       <section class="top-team">
         <h4 class='section-title'>Top Teams</h4>
-        <div class="mt-3" ng-repeat="team in topTeams" style="display: flex; flex-direction: row;">
+        <div class="mt-3" ng-repeat="team in topTeams | limitTo:25" style="display: flex; flex-direction: row;">
           <div>
             <a class="ml-3 mr-3" ng-href="/teams/{{team.slug}}" style="float: left">
               <img ng-src="{{team.image_url_small}}" style="width:60px; height: 60px;" class="img-circle"/>

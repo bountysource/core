@@ -58,7 +58,7 @@
 
 class Mantis::Tracker < ::Tracker
 
-  MAX_RESULT_PER_PAGE = 50
+  MAX_RESULT_PER_PAGE = 25
 
   has_many :issues, class_name: "Mantis::Issue", foreign_key: :tracker_id
 

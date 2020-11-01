@@ -23,7 +23,7 @@ angular.module('app')
     };
 
     $scope.updatePage = function(page, order_hash) {
-      var params = { page: page, per_page: 10, order: order_hash};
+      var params = { page: page, per_page: 25, order: order_hash};
 
       $api.get_celebrities(params).then(function(response) {
         $scope.celebrities = response.data;

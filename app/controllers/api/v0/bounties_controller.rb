@@ -11,8 +11,13 @@ class Api::V0::BountiesController < Api::V0::BaseController
       @bounties = Person.find(params[:person_id]).bounties.includes(:issue => :tracker)
       render "api/v0/bounties/index_for_person"
     else
+      if params[:csv]
+        @csv_bounties = Bounty.find_by_sql("SELECT * FROM public.bounties");
+        render "api/v0/bounties/csv.json.rb"
+      else
       @bounties = Bounty.includes(:person, :issue).order('created_at desc')
       render "api/v0/bounties/index"
+      end
     end
   end
 

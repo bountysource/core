@@ -8,13 +8,14 @@ require 'ostruct'
 require 'csv'
 require 'optparse'
 
-ruby '2.7.0'
+ruby '2.7.1'
 
 gem 'rails', '5.2.4.2'
 gem 'json'
 gem 'pg', '~> 0.18.4'
 gem 'puma'
 gem 'oj'
+gem 'rack-cors'
 
 gem 'rabl'
 gem 'jbuilder'
@@ -26,7 +27,7 @@ gem 'github-markdown', :require => 'github/markdown'
 gem 'jwt', '= 2.2.1' # for Google Wallet JWT creation
 gem 'money'  # used to be included through the checkout gem
 gem 'monetize'
-
+gem 'rails_autoscale_agent'
 gem 'newrelic_rpm'
 
 gem 'delayed_job_active_record'
