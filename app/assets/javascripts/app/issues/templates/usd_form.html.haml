@@ -59,6 +59,15 @@
         %select.form-control.input-sm{:name => "uponExpireSelect", "ng-model" => "usdCart.upon_expiration", "ng-options" => "option.value as option.description for option in bountyUponExpirationOptions"}
           %option{:value => ""} Select an option
 
+  / Tweet promotion
+  .form-group
+    .checkbox
+      %label
+        %input{"ng-model" => "usdCart.tweet", :type => "checkbox"}/
+        %small
+          Tweet from @Bountysource
+          = succeed "?" do
+            %strong (+{{20|dollars}})
   %div.text-left{ "ng-include" => "'app/issues/_payment_method.html'" }
   %div.mt-5
     %button.btn.btn-light-blue.btn-responsive.py-3{"ng-click" => "checkoutUsd()",  "ng-disabled" => "!canCheckout()"} CHECKOUT

@@ -7,8 +7,8 @@ module Rabl
     attr_accessor :per_page, :max_per_page, :params_filter
 
     def initialize(options={})
-      @per_page     = options[:per_page] || 25
-      @max_per_page = options[:max_per_page] || 25
+      @per_page     = options[:per_page] || 30
+      @max_per_page = options[:max_per_page] || 100
 
       # params filter, always exclude params added by Rails
       @params_filter = %w(page action controller)
@@ -149,8 +149,8 @@ Rabl.configure do |config|
   #config.cache_all_output = Rails.env != 'development'
 
   config.pagination = {
-    per_page:       25,
-    max_per_page:   25,
+    per_page:       30,
+    max_per_page:   250,
     params_filter:  [:access_token, :callback, :cache]
   }
 end

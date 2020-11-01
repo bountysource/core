@@ -48,7 +48,7 @@ angular.module("app").controller('TeamIssuesController', function ($scope, $api,
         bounty_max: $scope.bounty_max,
         order: $scope.order || defaultOrder,
         page: page || 1,
-        per_page: $scope.per_page || 25
+        per_page: $scope.per_page || 30
       }).then(function (response) {
         $scope.issues = angular.copy(response.data.issues);
         setPagination({
