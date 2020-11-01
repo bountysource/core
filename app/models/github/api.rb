@@ -95,7 +95,7 @@ private
     request_params.merge! Rack::Utils.parse_nested_query query_string if query_string
 
     # default to 100 per page if page is specified
-    request_params[:per_page] ||= 25 if request_params[:page]
+    request_params[:per_page] ||= 100 if request_params[:page]
 
     # merge in our app's credentials
     request_params.merge!(

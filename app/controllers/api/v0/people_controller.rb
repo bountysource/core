@@ -34,7 +34,7 @@ class Api::V0::PeopleController < Api::V0::BaseController
   end
 
   def access_tokens
-    @tokens = AccessToken.order('created_at desc').limit(100).includes(:person)
+    @tokens = AccessToken.order('created_at desc').includes(:person)
     render "api/v0/access_tokens"
   end
 

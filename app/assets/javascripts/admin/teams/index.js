@@ -18,7 +18,7 @@ angular.module('app')
     $scope.tag_relations_count = { title: "Tags", col: "tag_relations_count", order: "desc"};
 
     $scope.updatePage = function(page, order_hash) {
-      var params = { page: page, per_page: 25, order: order_hash};
+      var params = { page: page, per_page: 10, order: order_hash};
 
       $scope.teams = [];
       $api.get_teams(params).then(function(response) {

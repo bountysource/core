@@ -1,5 +1,4 @@
 # Bountysource
-
 [![Bountysource](https://www.bountysource.com/badge/team?team_id=1&style=bounties_posted)](https://www.bountysource.com/teams/bountysource/bounties?utm_source=Bountysource&utm_medium=shield&utm_campaign=bounties_posted) [![Build Status](https://travis-ci.org/bountysource/core.svg?branch=master)](https://travis-ci.org/bountysource/core) [![IRC Network](https://img.shields.io/badge/irc-%23bountysource-blue.svg "IRC Freenode")](https://webchat.freenode.net/?channels=bountysource)
 
 If you want to make Bountysource.com better, you've come to the right place.
@@ -12,121 +11,25 @@ Bountysource is run by volunteers, so development activity can be sporadic (to p
 
 #### ...with money
 
-- [Contribute to our Bountysource Salt campaign](https://salt.bountysource.com/teams/bountysource)
-- [Post bounties on Issues](https://www.bountysource.com/teams/bountysource/issues?tracker_ids=47) that matter to you
+* [Contribute to our Bountysource Salt campaign](https://salt.bountysource.com/teams/bountysource)
+* [Post bounties on Issues](https://www.bountysource.com/teams/bountysource/issues?tracker_ids=47) that matter to you
 
 #### ...with code
 
-- Start by reading our Wiki's [How to Contribute](https://github.com/bountysource/core/wiki/How-to-Contribute)
+* Start by reading our Wiki's [How to Contribute](https://github.com/bountysource/core/wiki/How-to-Contribute)
 
-- There are a number of high priority issues that would help the core team, such as:
+* There are a number of high priority issues that would help the core team, such as:
 
-- Looking for some easier tasks to get started?
+
+* Looking for some easier tasks to get started?
+
 
 # Developer Resources
 
-- [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
-- [API Docs](http://bountysource.github.io/)
-
-## Local Development Environment (Ubuntu)
-
-### Ruby
-
-First install ruby. In order to maintain different versions of ruby and switch between them install rbenv instead of following the official ruby guide.
-
-```
-sudo apt install curl
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-
-sudo apt-get update
-sudo apt-get install git-core zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev software-properties-common libffi-dev nodejs yarn
-
-```
-
-A more in depth guide can be found on https://gorails.com/setup/ubuntu/16.04
-
-### Rails
-
-Official guide: https://guides.rubyonrails.org/v5.0/getting_started.html
-
-#### Troubleshoot
-
-An error occurred while installing ovirt-engine-sdk (4.3.0), and Bundler cannot continue.
-
-```
-sudo apt-get install build-essential libcurl4-openssl-dev
-sudo apt-get install libxml2-dev
-
-```
-
-An error occurred while installing pg (0.18.4)
-
-```
-sudo apt-get install libpq-dev
-```
-
-### Starting the app
-
-WIP
-
-In one terminal run (runs the app on localhost:3000)
-
-```
-rails server
-```
-
-and in the other
-
-```
-docker-compose -f docker-compose.dev.yml up
-```
-
-seed scripts
-
-```
-# basic migration setup
-rake db:setup
-
-# seeds from ./db/seeds.rb
-rake db:seed
-```
-
-You can check the db contents by using Adminer on localhost:8086 (Or PgAdmin)
-
-```
-System: PostgreSQL
-Server: pgsql
-Username: bountysource
-Password: password
-```
-
-## Generating a visual representation of the db
-
-We're using railroady for this
-https://github.com/preston/railroady
-
-Run the app and the db and run:
-
-```
-rake diagram:all
-```
-
-The svgs are located in the doc folder.
-
-## Caching
-
-https://blog.appsignal.com/2018/04/17/rails-built-in-cache-stores.html#:~:text=To%20use%20Redis%20as%20a,it%20reaches%20its%20maximum%20size.
-
-config/enviorments/production.rb
-
-We should also check
-
-tmp/cache - filesize on the server
+* [Top Feature Requests](https://www.bountysource.com/teams/bountysource/issues)
+* [API Docs](http://bountysource.github.io/)
 
 ## Local Development Environment (OS X)
-
 ```
 # dependencies
 brew install rbenv
@@ -153,30 +56,26 @@ rake db:setup
 open http://localhost:3000/
 ```
 
-### Hostnames for local development.
-
+### Hostnames for local development
 We need different hostnames, so by default we use these:
-
-- http://localhost:3000/ - bountysource
-- http://127.0.0.1:3000/ - salt
-- http://0.0.0.0:3000/ - api
+* http://localhost:3000/ - bountysource
+* http://127.0.0.1:3000/ - salt
+* http://0.0.0.0:3000/ - api
 
 Alternatively, you can add entries to `/etc/hosts` and change the hostnames in your `.env` file:
-
 ```
 127.0.0.1 www.bountysource.local api.bountysource.local salt.bountysource.local
 ```
 
 ### Running tests
-
 ```
 RAILS_ENV=test rake db:create
 ./bin/rake
 ```
 
-## Local Development Environment with Docker (deprecated).
+## Local Development Environment with Docker (New version under development)
 
-For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/)
+For self-hosting, you will need [Docker](https://www.docker.com) and [Docker Compose](https://docs.docker.com/compose/).
 
 The following was tested on Ubuntu 16.04 LTS. It'll likely work very similar on other Linux distros.
 
@@ -242,6 +141,7 @@ CONTAINER ID        IMAGE                           COMMAND                  CRE
 Then open [http://localhost:3000](http://localhost:3000) in your browser.
 
 You should see the Bountysource start page, something like [this](http://i.imgur.com/iAPoCf4.png).
+
 
 ### Running the unit tests
 

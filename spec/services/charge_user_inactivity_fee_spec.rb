@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe ChargeUserInactivityFee do
   before(:each) do
-    @inactive_person = create(:person, last_seen_at: 90.days.ago)
+    @inactive_person = create(:person, last_seen_at: 100.days.ago)
   end
 
   it 'charges a user the correct fee' do
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
 
@@ -19,8 +19,8 @@ describe ChargeUserInactivityFee do
 
   it 'charges a fee rounded to 2 decimals' do
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 899.55, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -899.55, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 899.55, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -899.55, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
 
@@ -31,8 +31,8 @@ describe ChargeUserInactivityFee do
 
   it 'charges a fee that sets the balance to be 0 if less than 10 remaining' do
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 8.99, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -8.99, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 8.99, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -8.99, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
 
@@ -44,8 +44,8 @@ describe ChargeUserInactivityFee do
   it 'does not double charge a user in a single month' do
 
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
     ChargeUserInactivityFee.charge!
@@ -59,12 +59,12 @@ describe ChargeUserInactivityFee do
     @inactive_person_2 = create(:person, last_seen_at: 200.days.ago)
 
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 8.99, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -8.99, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 8.99, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -8.99, txn: transaction, created_at: 100.days.ago)
 
     transaction = create(:transaction)
-    create(:split, item: @inactive_person_2, amount: 1000, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person_2, amount: 1000, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
 
@@ -77,8 +77,8 @@ describe ChargeUserInactivityFee do
 
   it 'can charge a user every month' do
     transaction = create(:transaction)
-    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 90.days.ago)
-    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 90.days.ago)
+    create(:split, item: @inactive_person, amount: 1000, txn: transaction, created_at: 100.days.ago)
+    create(:split, account: Account::Liability.instance, amount: -1000, txn: transaction, created_at: 100.days.ago)
 
     ChargeUserInactivityFee.charge!
 

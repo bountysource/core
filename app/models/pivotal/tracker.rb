@@ -59,7 +59,7 @@
 class Pivotal::Tracker < ::Tracker
 
   has_many :issues, class_name: "Pivotal::Issue", foreign_key: :tracker_id
-  MAX_RESULT_ = 50
+  MAX_RESULT_PER_PAGE = 50
 
   # REMOTE SYNC INSTANCE METHODS
   def remote_sync_if_necessary(options={})

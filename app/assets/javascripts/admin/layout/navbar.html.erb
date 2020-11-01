@@ -14,14 +14,13 @@
 
       <div class="nav-collapse" collapse="!isCollapsed">
         <ul class="nav pull-right" ng-controller="Navbar">
-        <%# Commenting out the delayed jobs for now since it strains the db %>
-        <%# <li ng-show="current_person">
-          <a href="/admin/delayed_jobs"><strong>Jobs: <span class="text-success" tooltip="Processing" tooltip-placement="bottom">{{jobs_info.locked_jobs+'' | number}}</span> / <span class="text-warning" tooltip="Queued" tooltip-placement="bottom">{{jobs_info.new_jobs+'' | number}}</span> / <span class="text-error" tooltip="Failed" tooltip-placement="bottom">{{jobs_info.failed_jobs+'' | number}}</span></strong></a>
-        </li>
+          <li ng-show="current_person">
+            <a href="/admin/delayed_jobs"><strong>Jobs: <span class="text-success" tooltip="Processing" tooltip-placement="bottom">{{jobs_info.locked_jobs+'' | number}}</span> / <span class="text-warning" tooltip="Queued" tooltip-placement="bottom">{{jobs_info.new_jobs+'' | number}}</span> / <span class="text-error" tooltip="Failed" tooltip-placement="bottom">{{jobs_info.failed_jobs+'' | number}}</span></strong></a>
+          </li>
 
-        <li ng-show="current_person">
-          <a class=""btn ng-click="refresh_jobs_info()">Refresh Jobs</a>
-        </li> %>
+          <li ng-show="current_person">
+            <a class=""btn ng-click="refresh_jobs_info()">Refresh Jobs</a>
+          </li>
 
           <li ng-show="current_person">
             <a href="/admin/login" ng-click="signout()" id="navbar-user-signout">

@@ -9,6 +9,6 @@ angular.module('app')
       $scope.jobs_info = $api.delayed_jobs_info();
     };
 
-    // $scope.refresh_jobs_info();
+    $scope.refresh_jobs_info();
 
   });

@@ -58,7 +58,7 @@
 
 class Savannah::Tracker < ::Tracker
 
-  MAX_RESULT_PER_PAGE = 25
+  MAX_RESULT_PER_PAGE = 50
 
   has_many :issues, class_name: "Savannah::Issue", foreign_key: :tracker_id
 

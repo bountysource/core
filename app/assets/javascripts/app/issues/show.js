@@ -19,7 +19,7 @@ angular.module('app').controller('IssueShowController', function ($scope, $api, 
 
   // get list of 100 events for issue home page
   $scope.events = Timeline.query({
-    per_page: 25,
+    per_page: 10,
     issue_id: issue_id
   });
 

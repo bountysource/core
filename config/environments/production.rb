@@ -42,7 +42,7 @@ Api::Application.configure do
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
   # Use a different cache store in production
-  config.cache_store = :memory_store, { size: 64.megabytes }
+  # config.cache_store = :mem_cache_store
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )

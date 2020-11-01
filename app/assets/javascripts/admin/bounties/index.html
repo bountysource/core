@@ -1,111 +1,48 @@
 <loading-bar ng-show="working">Fetching bounties...</loading-bar>
- 
+
 <div class="row-fluid" ng-hide="working">
   <div class="span12">
     <div>
-      <h3 style="margin-top: 0px">Bounties</h3>
-      <p style="margin-top: 5px" ng-show="totalItems">
-        Total Bounties: {{totalItems}}
-      </p>
-      <div class="pagination row-fluid">
-        <pagination
-          direction-links="false"
-          boundary-links="true"
-          total-items="totalItems"
-          current-page="currentPage"
-          max-size="maxSize"
-          num-pages="pageCount"
-          items-per-page="itemsPerPage"
-          on-select-page="updatePage(page, order_hash)"
-          rotate="true"
-        ></pagination>
-        <button class="btn btn-primary" ng-click="downloadCSV()">
-          DOWNLOAD CSV
-        </button>
-      </div>
-      <table
-        class="table table-condensed table-striped table-bordered"
-        style="margin-top: 15px"
-      >
+      <h3 style="margin-top:0px;">Bounties</h3>
+      <p style="margin-top:5px;" ng-show="totalItems">Total Bounties: {{totalItems}}</p>
+      <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page, order_hash)" rotate="true"></pagination>
+      <table class="table table-condensed table-striped table-bordered" style="margin-top:15px;">
         <thead>
           <tr>
             <th>ID</th>
-            <th style="text-align: center">Status</th>
             <th>
-              <a ng-click="applySort(currentPage, amount)"
-                >{{ amount.title }}
-                <icon
-                  class="icon-chevron-up"
-                  ng-show="order_hash[amount.col] && order_hash[amount.col] == 'desc'"
-                ></icon>
-                <icon
-                  class="icon-chevron-down"
-                  ng-show="order_hash[amount.col] && order_hash[amount.col] == 'asc'"
-                ></icon>
-              </a>
+            <a ng-click="applySort(currentPage, amount)">{{ amount.title }} 
+              <icon class="icon-chevron-up" ng-show="order_hash[amount.col] && order_hash[amount.col] == 'desc'"></icon>
+              <icon class="icon-chevron-down" ng-show="order_hash[amount.col] && order_hash[amount.col] == 'asc'"></icon>
+            </a>
             </th>
             <th>
-              <a ng-click="applySort(currentPage, created_at)"
-                >{{ created_at.title }}
-                <icon
-                  class="icon-chevron-up"
-                  ng-show="order_hash[created_at.col] && order_hash[created_at.col] == 'asc'"
-                ></icon>
-                <icon
-                  class="icon-chevron-down"
-                  ng-show="order_hash[created_at.col] && order_hash[created_at.col] == 'desc'"
-                ></icon>
+              <a ng-click="applySort(currentPage, created_at)">{{ created_at.title }} 
+                <icon class="icon-chevron-up" ng-show="order_hash[created_at.col] && order_hash[created_at.col] == 'asc'"></icon>
+                <icon class="icon-chevron-down" ng-show="order_hash[created_at.col] && order_hash[created_at.col] == 'desc'"></icon>
               </a>
             </th>
-            <th>Updated at</th>
-            <th>Paid at</th>
             <th>Backer</th>
             <th>Issue</th>
-            <th style="text-align: center">Expiration</th>
-            <th style="text-align: center">After Expiration</th>
-            <th style="text-align: center">Paid Tweet?</th>
-            <th style="text-align: center">Acknowledged</th>
+            <th style="text-align: center;">Expiration</th>
+            <th style="text-align: center;">After Expiration</th>
+            <th style="text-align: center;">Paid Tweet?</th>
+            <th style="text-align: center;">Acknowledged</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="bounty in bounties">
-            <td style="word-wrap: break-word">
-              <a ng-href="/admin/bounties/{{bounty.id}}">{{bounty.id}}</a>
-            </td>
-            <td style="word-wrap: break-word">{{bounty.status}}</td>
-            <td style="word-wrap: break-word">{{bounty.amount | dollars}}</td>
-            <td style="word-wrap: break-word">
-              {{bounty.created_at | date:'short'}}
-            </td>
-            <td style="word-wrap: break-word">
-              {{bounty.updated_at | date:'short'}}
-            </td>
-            <td style="word-wrap: break-word">
-              {{bounty.paid_at | date:'short'}}
-            </td>
-            <td style="word-wrap: break-word">
-              <a ng-href="/admin/people/{{bounty.person.id}}"
-                >{{bounty.person.display_name}}</a
-              >
-            </td>
-            <td style="word-wrap: break-word">
-              <a ng-href="/admin{{bounty.issue.frontend_path}}"
-                >{{bounty.issue.title}}</a
-              >
-              - <a ng-href="{{bounty.issue.url}}" target="_blank">[GitHub]</a>
-            </td>
- 
-            <td style="text-align: center">
-              {{bounty.bounty_expiration|| ""}}
-            </td>
-            <td style="text-align: center">{{bounty.upon_expiration}}</td>
-            <td style="text-align: center">{{bounty.tweet || ""}}</td>
-            <td style="text-align: center">
-              <input
-                type="checkbox"
-                ng-model="bounty.$acknowledged"
-                ng-change="toggle_acknowledged(bounty)"
-              />
+            <td style="word-wrap: break-word;"><a ng-href="/admin/bounties/{{bounty.id}}">{{bounty.id}}</a></td>
+            <td style="word-wrap: break-word;">{{bounty.amount | dollars}}</td>
+            <td style="word-wrap: break-word;">{{bounty.created_at | date:'short'}}</td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin/people/{{bounty.person.id}}">{{bounty.person.display_name}}</a></td>
+            <td style="word-wrap: break-word;"><a ng-href="/admin{{bounty.issue.frontend_path}}">{{bounty.issue.title}}</a> - <a ng-href="{{bounty.issue.url}}" target="_blank">[GitHub]</a></td>
+
+            <td style="text-align: center;">{{bounty.bounty_expiration}}</td>
+            <td style="text-align: center;">{{bounty.upon_expiration}}</td>
+            <td style="text-align: center;">{{bounty.tweet || ""}}</td>
+            <td style="text-align: center;">
+              <input type="checkbox" ng-model="bounty.$acknowledged" ng-change="toggle_acknowledged(bounty)" />
             </td>
           </tr>
         </tbody>

@@ -59,7 +59,7 @@
 class Gitlab::Tracker < ::Tracker
   has_many :issues, class_name: "Gitlab::Issue", foreign_key: :tracker_id
 
-  MAX_RESULT_PER_PAGE = 25
+  MAX_RESULT_PER_PAGE = 100
 
   def remote_sync_if_necessary(options={})
     if synced_at.nil?
