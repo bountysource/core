@@ -51,7 +51,7 @@ class Api::V2::TimelineController < Api::BaseController
     elsif params[:issue_id]
       newest_first = true
 
-      issue = Issue.includes({:tracker => :team}, :author => :person).find(params[:issue_id])
+      issue = Issue.includes({:tracker => :team}, :author => :person).find(id: params[:issue_id])
       events[:bounty_created] = base_bounty_created.where('issue_id=?', issue.id)
       events[:solution_started] = base_solution_started.joins(:solution => :issue).where('issue_id=?', issue.id)
       events[:bounty_claimed] = base_bounty_claimed.where('issue_id=?', issue.id)

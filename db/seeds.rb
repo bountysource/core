@@ -1,19 +1,12 @@
-require 'faker'
-
-Faker::Config.locale = 'en'
-I18n.reload!
-ApplicationRecord.reset_column_information
-
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 def create_users
   50.times do
-    Person.create!(
+    Person.create(
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
-      display_name: Faker::Job.title,
+      display_name: Faker::Name.title,
       email: Faker::Internet.email,
       password: "test1234",
       password_confirmation: "test1234"

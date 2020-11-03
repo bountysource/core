@@ -44,4 +44,3 @@ compiled_tests/
 .byebug_history
 
 dump.rdb
-pgdata/

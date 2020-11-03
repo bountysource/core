@@ -1,0 +1,71 @@
+<ul class="breadcrumb">
+    <li>
+      <a href="/">Home</a>
+    </li>
+    <li class="active">
+      <a href="/teams">Teams</a>
+    </li>
+  </ul>
+  <div class="row">
+    <div class="col-sm-3 col-md-3">
+      <div class="panel panel-default">
+        <div class="panel-body p-5">
+          <ul class="nav nav-pills nav-stacked">
+            <li ng-class="{active: selected == 'featured'}">
+              <a ng-click="set_params({})" ng-href="/teams">
+                <span class="glyphicon glyphicon-star"></span>
+                Featured
+              </a>
+            </li>
+            <li ng-class="{active: selected == 'all'}">
+              <a ng-click="set_params({all:true})" ng-href="/teams">
+                <span class="glyphicon glyphicon-star"></span>
+                All teams
+              </a>
+            </li>
+            <li
+              ng-class="{active: tag.type == 'Tag' ? (selected=='tag:'+tag.id) : (selected=='team:'+tag.slug)}"
+              ng-repeat="tag in tags | limitTo: 70"
+            >
+              <a
+                class="text-ellipsis"
+                ng-click="set_params({ tag_id: tag.type == 'Tag' ? tag.id : tag.slug })"
+                ng-href="/teams?tag_id={{tag.type == 'Tag' ? tag.id : tag.slug}}"
+              >
+                <span
+                  class="glyphicon glyphicon-tag"
+                  ng-if="tag.type=='Tag'"
+                  style="color: #aaa"
+                ></span>
+                <img
+                  class="img-circle"
+                  ng-if="tag.type=='Team'"
+                  ng-src="{{tag.image_url}}"
+                  style="width: 16px; height: 16px"
+                />
+                {{tag.name}}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-9 col-md-9">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <span ng-if="selected=='all'">
+            <pagination
+              direction-links="false"
+              boundary-links="true"
+              page="currentPage"
+              max-size="10"
+              total-items="totalItems"
+              items-per-page="perPage"
+              on-select-page="changePage(page)"
+            ></pagination>
+          </span>
+          <div ng-include="'app/teams/_team_table.html'"></div>
+        </div>
+      </div>
+    </div>
+  </div>

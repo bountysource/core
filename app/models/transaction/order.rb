@@ -173,24 +173,24 @@ class Transaction::Order < Transaction
   end
 
   def self.merch_sales
-    BigDecimal( joins(:splits).where('splits.account_id = ?', Account::BountySourceMerch.instance.id).sum('splits.amount') )
+    BigDecimal.new( joins(:splits).where('splits.account_id = ?', Account::BountySourceMerch.instance.id).sum('splits.amount') )
   end
 
   def self.bounty_sales
-    fees = BigDecimal( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesBounty.instance.id).sum('splits.amount') )
-    bounty = BigDecimal( joins(:splits => [:account]).where('accounts.type = ?', 'Account::IssueAccount').sum('splits.amount') )
+    fees = BigDecimal.new( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesBounty.instance.id).sum('splits.amount') )
+    bounty = BigDecimal.new( joins(:splits => [:account]).where('accounts.type = ?', 'Account::IssueAccount').sum('splits.amount') )
     fees + bounty
   end
 
   def self.pledge_sales
-    fees = BigDecimal( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesPledge.instance.id).sum('splits.amount') )
-    pledge = BigDecimal( joins(:splits => [:account]).where('(select type from accounts where id = splits.account_id) = ?', 'Account::Fundraiser').sum('splits.amount') )
+    fees = BigDecimal.new( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesPledge.instance.id).sum('splits.amount') )
+    pledge = BigDecimal.new( joins(:splits => [:account]).where('(select type from accounts where id = splits.account_id) = ?', 'Account::Fundraiser').sum('splits.amount') )
     fees + pledge
   end
 
   def self.team_sales
-    fees = BigDecimal( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesTeam.instance.id).sum('splits.amount') )
-    team = BigDecimal( joins(:splits => [:account]).where('(select type from accounts where id = splits.account_id) LIKE ?', 'Account::Team%').sum('splits.amount') )
+    fees = BigDecimal.new( joins(:splits).where('splits.account_id = ?', Account::BountySourceFeesTeam.instance.id).sum('splits.amount') )
+    team = BigDecimal.new( joins(:splits => [:account]).where('(select type from accounts where id = splits.account_id) LIKE ?', 'Account::Team%').sum('splits.amount') )
     fees + team
   end
 
@@ -199,15 +199,15 @@ class Transaction::Order < Transaction
   end
 
   def self.bounty_liability
-    BigDecimal( joins(:splits => [:account]).where('accounts.type = ?', 'Account::IssueAccount').sum('splits.amount') )
+    BigDecimal.new( joins(:splits => [:account]).where('accounts.type = ?', 'Account::IssueAccount').sum('splits.amount') )
   end
 
   def self.pledge_liability
-    BigDecimal( joins(:splits => [:account]).where('accounts.type = ?', 'Account::Fundraiser').sum('splits.amount') )
+    BigDecimal.new( joins(:splits => [:account]).where('accounts.type = ?', 'Account::Fundraiser').sum('splits.amount') )
   end
 
   def self.team_liability
-    BigDecimal( joins(:splits => [:account]).where('accounts.type LIKE ?', 'Account::Team%').sum('splits.amount') )
+    BigDecimal.new( joins(:splits => [:account]).where('accounts.type LIKE ?', 'Account::Team%').sum('splits.amount') )
   end
 
   def self.gross_liability
@@ -217,7 +217,7 @@ class Transaction::Order < Transaction
   def self.processing_fees
     processing_fees_account = Account::BountySourceFeesPayment.instance
     joins(:splits => [:account]).where('splits.account_id = ?', processing_fees_account.id).group('transactions.id, splits.transaction_id').select('MIN(splits.amount) as processing_fees').sum do |result|
-      BigDecimal(result.processing_fees)
+      BigDecimal.new(result.processing_fees)
     end
   end
 

@@ -57,7 +57,7 @@ angular.module('app').controller('TrackerShow', function ($scope, $routeParams, 
       bounty_max: $scope.bounty_max,
       order: $scope.order || "+bounty",
       page: page || 1,
-      per_page: $scope.per_page || 30
+      per_page: $scope.per_page || 25
     }).then(function (response) {
         var issues = response.data.issues;
         $scope.issues_resolved = true;

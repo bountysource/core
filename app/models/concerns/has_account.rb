@@ -10,7 +10,7 @@ module HasAccount
         has_many  :txns,  through: :splits
 
         def account_balance
-          account.try(:balance) || BigDecimal('0.00', 2)
+          account.try(:balance) || BigDecimal.new('0.00', 2)
         end
 
         def account_balance_money

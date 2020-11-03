@@ -10,7 +10,7 @@ angular.module('app').controller('TeamManageProjectsController', function ($scop
   $scope.team_promise.then(function (team) {
 
     var refreshOwnedTrackers = function() {
-      Tracker.query({ owner_team_id: team.id, include_team: true, per_page: 10, order: 'open_issues' }, function(trackers) {
+      Tracker.query({ owner_team_id: team.id, include_team: true, per_page: 100, order: 'open_issues' }, function(trackers) {
         $scope.ownedTrackers = trackers;
       });
     };

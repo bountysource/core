@@ -5,19 +5,24 @@ class Api::V0::CashOutsController < Api::V0::BaseController
 
   def index
     @collection = ::CashOut.includes(:person, :address, :mailing_address, :account => :owner).order('created_at asc')
-
+ 
     @include_person = true
     @include_person_email = true
     @include_address = true
     @include_mailing_address = true
     @include_yearly_cash_out_totals = true
     @include_account_owner = true
-
-    @collection = paginate!(@collection)
-    @collection = filter!(@collection)
-    @collection = order!(@collection)
-
-    render 'api/v2/cash_outs/index'
+    if params[:csv]
+      @collection = filter!(@collection)
+      @collection = order!(@collection)
+      render 'api/v2/cash_outs/csv.json.rb'
+    else
+      @collection = paginate!(@collection)
+      @collection = filter!(@collection)
+      @collection = order!(@collection)
+ 
+      render 'api/v2/cash_outs/index'
+    end
   end
 
   def show

@@ -99,7 +99,7 @@ class Team < ApplicationRecord
 
   scope :featured, lambda { where(featured: true) }
   scope :accepts_public_payins, lambda { where(accepts_public_payins: true) }
-  scope :newest, lambda { joins(:member_relations).where('team_member_relations.admin=true').group('teams.id').reorder(Arel.sql('min(team_member_relations.created_at) desc')) }
+  scope :newest, lambda { joins(:member_relations).where('team_member_relations.admin=true').group('teams.id').reorder('min(team_member_relations.created_at) desc') }
 
   class Error < StandardError ; end
   class Forbidden < Error ; end
@@ -108,7 +108,7 @@ class Team < ApplicationRecord
   # quick hack so rabl can pull from these
   def prioritized_trackers
     tracker_ids = trackers.pluck(:id) + owned_trackers.pluck(:id)
-    Tracker.where(id: tracker_ids.uniq).order(Arel.sql('COALESCE(open_issues,0) desc'))
+    Tracker.where(id: tracker_ids.uniq).order('COALESCE(open_issues,0) desc')
   end
 
   def manage_issue?(issue)

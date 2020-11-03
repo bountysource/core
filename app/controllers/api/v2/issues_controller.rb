@@ -72,7 +72,6 @@ class Api::V2::IssuesController < Api::BaseController
 
     @item = ::Issue.find_with_merge(params[:id], include: includes)
     @item.remote_sync_if_necessary(person: @person)
-    @item.update_bounty_total
     
     if @item.deleted_at
       render json: { error: 'Issue Not Found' }, status: :not_found

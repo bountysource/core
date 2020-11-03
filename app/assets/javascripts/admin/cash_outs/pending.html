@@ -1,8 +1,4 @@
 <div>
   <h1>Pending Cash Outs</h1>
-  <loading-bar ng-show="working">Loading...</loading-bar>
-
-  <cash-out-table cash-outs="cashOuts" options="{ markAsSentButton: true }" ng-hide="working"></cash-out-table>
-
-  <pagination direction-links="false" boundary-links="true" total-items="totalItems" current-page="currentPage" max-size="maxSize" num-pages="pageCount" items-per-page="itemsPerPage" on-select-page="updatePage(page)" rotate="true"></pagination>
+  <cash-out-table cash-outs="cashOuts" options="{ markAsSentButton: true }"></cash-out-table>
 </div>

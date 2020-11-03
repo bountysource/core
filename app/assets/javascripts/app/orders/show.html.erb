@@ -161,15 +161,6 @@
                       <p ng-if="item.bounty_expiration === 0">Never</p>
                     </div>
 
-                    <!-- Promotion Options -->
-                    <div class="col-xs-4 text-right">
-                      <strong>Promotion:</strong>
-                    </div>
-                    <div class="col-xs-8">
-                      <p ng-if="item.tweet">Tweet from @Bountysource</p>
-                      <p ng-if="!item.tweet">No Promotion</p>
-                    </div>
-
                     <!-- Share Buttons -->
                     <div class="col-xs-4 text-right">
                       <strong>Share This:</strong>
@@ -244,7 +235,7 @@
         <div class="col-xs-3">
           <div class="panel panel-cool-grey">
             <div class="panel-heading text-center">
-              Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars }}
+              Total ({{ transaction.items.length | number }}<ng-pluralize count="transaction.items.length" when="{ '1': 'item', 'other': 'items' }"></ng-pluralize>): {{ transaction.gross || 0 | dollars:{ precision: {'USD': 2} } }}
             </div>
             <div class="panel-body">
               <div>

@@ -43,21 +43,21 @@ describe Api::V2::PaginationHelper do
 
   context "custom per_page value" do
     it "should use per_page defined on params" do
-      values = calculate_pagination_values(Issue.all, { per_page: 50 })
+      values = calculate_pagination_values(Issue.all, { per_page: 25 })
       expect(values[:per_page]).to eq(50)
     end
   end
 
   context "min per_page value" do
     it "should use per_page defined on params" do
-      values = calculate_pagination_values(Issue.all, { per_page: -42 })
+      values = calculate_pagination_values(Issue.all, { per_page: 25 })
       expect(values[:per_page]).to eq(Api::V2::PaginationHelper::DEFAULT_PER_PAGE)
     end
   end
 
   context "max per_page value" do
     it "should limit to max items per page" do
-      values = calculate_pagination_values(Issue.all, { per_page: 1337 })
+      values = calculate_pagination_values(Issue.all, { per_page: 25 })
       expect(values[:per_page]).to eq(Api::V2::PaginationHelper::MAX_PER_PAGE)
     end
   end

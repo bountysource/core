@@ -59,7 +59,7 @@
 class Jira::Tracker < ::Tracker
 
   has_many :issues, class_name: "Jira::Issue", foreign_key: :tracker_id
-  MAX_RESULT_PER_PAGE = 100
+  MAX_RESULT_PER_PAGE = 25
 
   # REMOTE SYNC INSTANCE METHODS
   def remote_sync_if_necessary(options={})

@@ -23,7 +23,7 @@ class Api::V2::TeamsController < Api::BaseController
     end
 
     if params.has_key?(:accepts_public_payins)
-      @collection = @collection.accepts_public_payins.order(Arel.sql('GREATEST(COALESCE(monthly_contributions_sum,0.0), COALESCE(previous_month_contributions_sum,0.0)) desc'))
+      @collection = @collection.accepts_public_payins.order('GREATEST(COALESCE(monthly_contributions_sum,0.0), COALESCE(previous_month_contributions_sum,0.0)) desc')
     end
 
     # Filter by featured
@@ -39,7 +39,7 @@ class Api::V2::TeamsController < Api::BaseController
 
     # used in topnav
     if params.has_key?(:my_teams_and_suggestions) && current_user
-      params[:per_page] ||= 250
+      params[:per_page] ||= 25
       my_team_ids = current_user.team_member_relations.pluck(:team_id)
       @collection = @collection.where(id: my_team_ids)
       @include_team_permissions = true
@@ -93,7 +93,7 @@ class Api::V2::TeamsController < Api::BaseController
     end
 
     if params[:top_rewards]
-      @collection = Team.joins(:bounties).group('teams.id').order(Arel.sql('SUM(bounties.amount) desc')).limit(5)
+      @collection = Team.joins(:bounties).group('teams.id').order('SUM(bounties.amount) desc').limit(5)
       @include_team_top_reward = true
     end
 

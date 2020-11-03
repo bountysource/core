@@ -26,8 +26,8 @@ angular.module('services').config(function($httpProvider) {
   // Set API host
   $rootScope.api_host = window.BS_ENV.api_host;
 
-  this.$$maxPerPage = 250;
-  this.$$perPage = undefined;
+  this.$$maxPerPage = 50;
+  this.$$perPage = 25;
 
   this.perPage = function(value) {
     if (value < 0) { value = 0; }
@@ -91,7 +91,12 @@ angular.module('services').config(function($httpProvider) {
       };
       return $http(options).then(callback, callback);
     },
-
+    teamsPagination: function(params) {
+      return this.call({
+        url: '/teams',
+        params: params || {}
+      });
+    },
     issues: function(params) {
       return this.call({
         url: '/issues',
@@ -385,13 +390,12 @@ angular.module('services').config(function($httpProvider) {
       params.access_token = $api.get_access_token();
     }
 
-    // Pull off perPage if it was set. Otherwise... default everything to 250 because we are lazy right now.
+    // Pull off perPage if it was set. Otherwise... default everything to 50 because we are lazy right now.
     // Query string parameter takes precedence over this value
-    // 1596655061 Just in case rolling this back to 50 ... thanks for being lazy
     if (this.$$perPage) {
       params.per_page = this.$$perPage;
     } else {
-      params.per_page = params.per_page || 50;
+      params.per_page = params.per_page || 25;
     }
 
     if (this.$$page) {
