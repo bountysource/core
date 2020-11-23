@@ -8,7 +8,7 @@ require 'ostruct'
 require 'csv'
 require 'optparse'
 
-ruby '2.7.1'
+ruby '2.7.0'
 
 gem 'rails', '5.1.5'
 gem 'json'
