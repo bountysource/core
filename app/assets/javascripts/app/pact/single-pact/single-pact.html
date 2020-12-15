@@ -1,0 +1,58 @@
+<div class="single-pact-page">
+  <div class="flex-row">
+    <div class="panel pact-info">
+      <div class="flex-row title">
+        <h3>{{pact.name}}</h3>
+        <div class="label label-success label-padded label-lg">Open</div>
+      </div>
+      <div class="flex-row">
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-calendar"></i>
+          {{pact.created_at}}
+        </span>
+        <span class="text-muted">
+          <i class="glyphicon glyphicon-user"></i>
+          Posted by {{pact.display_name}}
+        </span>
+      </div>
+      <p class="description">{{pact.description}}</p>
+      <div class="flex-row buttons">
+        <a
+          ng-if="pact.issue_link"
+          href="pact.issue_link"
+          class="btn btn-gunmetal btn-small-radius font-weight-semibold"
+        >
+          <span class="glyphicon glyphicon-new-window"></span>
+          Github
+        </a>
+        <a href="" class="btn btn-light-blue">Start working</a>
+      </div>
+    </div>
+    <div class="pact-right-side">
+      <div class="panel">
+        <div class="panel-heading text-white text-center pt-5 pb-5">
+          <h5 class="font-weight-semibold">TOTAL BOUNTY VALUE</h5>
+          <h3 class="m-0 ng-binding">${{pact.amount}} USD</h3>
+        </div>
+        <div class="info-container">
+          <div class="info-row">
+            <p class="font-medium">Pact type:</p>
+            <p class="font-medium bold">{{pact.issue_type}}</p>
+          </div>
+          <div class="info-row">
+            <p class="font-medium">Experience level:</p>
+            <p class="font-medium bold">{{pact.exp_lvl}}</p>
+          </div>
+          <div class="info-row">
+            <p class="font-medium">Time commitment:</p>
+            <p class="font-medium bold">{{pact.time_commitment}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel pact-actions">
+        <p class="font-medium">Are you a developer who can solve this issue?</p>
+        <button class="mt-3 btn btn-long btn-light-blue">Get Started</button>
+      </div>
+    </div>
+  </div>
+</div>
