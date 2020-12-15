@@ -1,0 +1,92 @@
+<div class="font-weight-semibold payment-selection">
+    <button
+      class="btn btn-rounded btn-light-blue-inverse btn-md"
+      ng-click="setUsdAmount(15)"
+    >
+      $15
+    </button>
+    <button
+      class="btn btn-rounded btn-light-blue-inverse btn-md"
+      ng-click="setUsdAmount(50)"
+    >
+      $50
+    </button>
+    <button
+      class="btn btn-rounded btn-light-blue-inverse btn-md"
+      ng-click="setUsdAmount(500)"
+    >
+      $500
+    </button>
+  </div>
+  <div class="usd-input">
+    <input
+      type="number"
+      placeholder="Enter Amount"
+      ng-model="usdCart.amount"
+      class="form form-control input-borderless"
+    />
+    <button
+      id="fiatSelect"
+      class="btn btn-borderless btn-default font-weight-semibold"
+      type="button"
+      style="height: 100%"
+    >
+      USD
+    </button>
+  </div>
+  <hr class="my-0" style="height: 2px" />
+  <small class="text-muted pull-right">*Minimum $5 USD</small>
+  <div class="clearfix"></div>
+  <div class="mt-3">
+    <div class="form-group display-as">
+      <span class="text-muted text-left display-as-label"
+        ><small>Display As</small></span
+      >
+      <div class="row">
+        <div class="col-xs-12">
+          <button
+            class="btn btn-default btn-responsive btn-small-radius dropdown-toggle"
+            data-toggle="dropdown"
+          >
+            <div class="name">
+              <span
+                ng-if="owner.display_name !=='Anonymous' && owner !== undefined"
+                ng-include="'app/pact/create/templates/current-person-img.html'"
+              ></span>
+              <span
+                ng-if="owner.display_name === 'Anonymous' || owner === undefined"
+                ng-include="'app/pact/create/templates/anon-img.html'"
+              ></span>
+              <span>{{owner.display_name || owner.name || 'Anonymous'}}</span>
+            </div>
+            <div class="span caret"></div>
+          </button>
+          <ul class="dropdown-menu">
+            <li ng-if="current_person">
+              <a ng-click="setOwner('person',current_person)">
+                <span ng-include="'app/pact/create/templates/current-person-img.html'"></span>
+                {{current_person.display_name}}
+              </a>
+            </li>
+            <li ng-if="current_person">
+              <a ng-click="setOwner('anonymous')">
+                <span ng-include="'app/pact/create/templates/anon-img.html'"></span>
+                Anonymous
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-left ng-scope" ng-include="'app/issues/_payment_method.html'"><div class="text-center pt-5 ng-scope">Select payment method</div>
+<ng-form class="ng-scope ng-pristine ng-valid">
+  <!-- PayPal -->
+  <div class="mt-3">
+    <label>
+      <input type="radio" ng-model="checkout.checkout_method" value="paypal" class="ng-pristine ng-valid" name="08F">
+      <img ng-src="https://www.google.com/s2/favicons?domain=https://www.paypal.com/" style="width: 16px; height: 16px;" domain="https://www.paypal.com/" class="ng-isolate-scope" src="https://www.google.com/s2/favicons?domain=https://www.paypal.com/">
+      <span>PayPal</span>
+    </label>
+  </div>
+  
