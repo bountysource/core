@@ -219,4 +219,11 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
   $routeProvider.otherwise({
     templateUrl: 'app/layout/notFound.html'
   });
+  
+  $routeProvider.when('/pacts/new', angular.extend({
+    templateUrl: 'app/pacts/create/create-pact.html',
+    controller: 'PactController',
+    title: 'Create Pact',
+    trackEvent: 'Create Pact'
+  }, defaultRouteOptions));
 });
