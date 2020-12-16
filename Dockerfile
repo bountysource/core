@@ -1,4 +1,4 @@
-FROM ruby:2.7.0
+FROM ruby:2.7.1
 
 # Install apt based dependencies required to run Rails as
 # well as RubyGems. As the Ruby image itself is based on a
