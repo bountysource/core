@@ -24,6 +24,7 @@
       placeholder="Enter Amount"
       ng-model="usdCart.amount"
       class="form form-control input-borderless"
+      min="5"
     />
     <button
       id="fiatSelect"
@@ -51,11 +52,11 @@
             <div class="name">
               <span
                 ng-if="owner.display_name !=='Anonymous' && owner !== undefined"
-                ng-include="'app/pact/create/templates/current-person-img.html'"
+                ng-include="'app/pacts/create/templates/current-person-img.html'"
               ></span>
               <span
                 ng-if="owner.display_name === 'Anonymous' || owner === undefined"
-                ng-include="'app/pact/create/templates/anon-img.html'"
+                ng-include="'app/pacts/create/templates/anon-img.html'"
               ></span>
               <span>{{owner.display_name || owner.name || 'Anonymous'}}</span>
             </div>
@@ -64,13 +65,13 @@
           <ul class="dropdown-menu">
             <li ng-if="current_person">
               <a ng-click="setOwner('person',current_person)">
-                <span ng-include="'app/pact/create/templates/current-person-img.html'"></span>
+                <span ng-include="'app/pacts/create/templates/current-person-img.html'"></span>
                 {{current_person.display_name}}
               </a>
             </li>
             <li ng-if="current_person">
               <a ng-click="setOwner('anonymous')">
-                <span ng-include="'app/pact/create/templates/anon-img.html'"></span>
+                <span ng-include="'app/pacts/create/templates/anon-img.html'"></span>
                 Anonymous
               </a>
             </li>

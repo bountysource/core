@@ -1,0 +1,171 @@
+<div class="team-header" style="padding: 25px 0 15px;">
+  <div class="container">
+    <div class="row display-flex vertical-align-middle">
+      <div class="col-xs-3 col-sm-2">
+        <img ng-src="<%= asset_path("bountysource-grey.png") %>" class="img-circle img-responsive center-block" style="background: white; max-width: 110px;" />
+      </div>
+      <div class="col-xs-9">
+        <h1 class="font-weight-medium m-0">Post a pact</h1>
+        <p>
+          A pact is an agreement between a developer and the requester to complete a task.<br/>
+          It doesn't need to be linked to an issue, and the code doesn't need to be open source.<br/>
+          Once a developer is selected to work on a pact, the pact requirements will be sent directly to that developer<br/>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-xs-12">
+      <h3 class="mb-4">Post a new pact</h3>
+
+      <form class="form-horizontal" ng-submit="createPact(formData)">
+        <!-- Alerts and Progerss Bars -->
+        <div class="alert alert-salmon" ng-show="error">{{error}}</div>
+        <div ng-if="_options.editForm" ng-show="alert.text">
+          <alert close="alert.text = undefined" type="alert.type">{{alert.text}}</alert>
+        </div>
+        <div ng-if="!_options.editForm" collapse="!creatingTeam">
+          <loading-bar>Creating {{formData.projectName || "pact"}}...</loading-bar>
+        </div>
+
+        <!-- FORM INPUTS -->
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Project Name</label>
+          <div class="col-sm-10">
+            <input id="projectName" type="text" class="input-medium form-control" ng-model="formData.projectName" placeholder="An internal label for your project">
+            <small class="error">{{ errors.projectName }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Pact type</label>
+          <div class="col-sm-10">
+            <select
+              :name="pactType"
+              ng-model="pactType.value"
+              ng-options="option.value as option.description for option in pactTypeOptions"
+              class="input-medium form-control"
+              ng-change="updatePactType(pactType.value)"
+            ></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Experience Level</label>
+          <div class="col-sm-10">
+            <select
+              :name="expirienceLvl"
+              ng-model="expirienceLvl.value"
+              ng-options="option.value as option.description for option in expirienceLvlOptions"
+              class="input-medium form-control"
+              ng-change="updateExpirienceLvl(expirienceLvl.value)"
+            ></select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Time Commitment</label>
+          <div class="col-sm-10">
+            <select
+              :name="Time Commitment"
+              ng-model="timeCommitment.value"
+              ng-options="option.value as option.description for option in timeCommitmentOptions"
+              class="input-medium form-control"
+              ng-change="updateTimeCommitment(timeCommitment.value)"
+            ></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Issue type</label>
+          <div class="col-sm-10">
+            <select
+              :name="issueType"
+              ng-model="issueType.value"
+              ng-options="option.value as option.description for option in issueTypeOptions"
+              class="input-medium form-control"
+              ng-change="updateissueType(issueType.value)"
+            ></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Expiration</label>
+          <div class="col-sm-10">
+            <select
+              :name="pactTimerOptions"
+              ng-model="pactTimer.value"
+              ng-options="option.value as option.description for option in pactTimerOptions"
+              class="input-medium form-control"
+              ng-change="updatePactTimer(pactTimer.value)"
+            ></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Relevant project link</label>
+          <div class="col-sm-10">
+            <input
+              ng-model="formData.projectLink"
+              placeholder="Relevant link (website)"
+              type="text"
+              class="input-medium  form-control"
+            />
+            <small class="error">{{ errors.projectLink }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Github issue</label>
+          <div class="col-sm-10">
+            <input
+              ng-model="formData.githubIssue"
+              placeholder="Link to github issue (optional)"
+              type="text"
+              class="input-medium  form-control"
+            />
+            <small class="error">{{ errors.githubIssue }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label col-sm-2" for="name">Project description</label>
+          <div class="col-sm-10">
+            <textarea
+              ng-model="formData.projectDescription"
+              placeholder="Project description"
+              type="text"
+              class="input-medium  form-control"
+            ></textarea>
+            <small class="error">{{ errors.projectDescription }}</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-md-8">
+            <div ng-if="current_person" class="text-center payment-container">
+              <div
+                class="form-container"
+                ng-include="'app/pacts/create/templates/payment-form.html'"
+              ></div>
+              <submit type="submit" ng-click="createPact(formData)" class="btn btn-light-blue btn-long font-weight-semibold" ng-disabled="!canCheckout()" disabled="disabled">CONTINUE</submit>
+            </div>
+            <div ng-if="!current_person">
+              <p class="text-center">You need to sign in in order to post a pact.</p>
+              <button
+                class="btn btn-light-blue btn-responsive"
+                ng-click="goToSignInPage()"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
