@@ -485,6 +485,14 @@ Api::Application.routes.draw do
               get :summary
             end
           end
+
+          scope controller: :pacts do
+            get '/pacts', action: :index
+            # post '/', action: :add_member
+            # match '/:member_id', action: :update_member, via: :put
+            # match '/:member_id', action: :remove_member, via: :delete
+          end
+
           resources :backers, only: [:index]
           resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/ do
             resources :support_offering_rewards, only: [:create]
