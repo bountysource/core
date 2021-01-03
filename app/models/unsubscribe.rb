@@ -5,8 +5,8 @@
 #  id                :integer          not null, primary key
 #  person_id         :integer
 #  linked_account_id :integer
-#  email             :string(255)
-#  category          :string(255)
+#  email             :string
+#  category          :string
 #  created_at        :datetime
 #  updated_at        :datetime
 #

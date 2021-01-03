@@ -8,7 +8,7 @@
 #  amount                  :decimal(10, 2)   not null
 #  estimated_work          :integer
 #  bio                     :string(1000)
-#  state                   :string(255)      default("pending")
+#  state                   :string           default("pending")
 #  created_at              :datetime
 #  updated_at              :datetime
 #  completed_by            :datetime

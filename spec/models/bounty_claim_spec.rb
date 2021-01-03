@@ -6,7 +6,7 @@
 #  person_id   :integer          not null
 #  issue_id    :integer          not null
 #  number      :integer
-#  code_url    :string(255)
+#  code_url    :string
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null

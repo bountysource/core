@@ -3,7 +3,7 @@
 # Table name: mixpanel_aliases
 #
 #  id          :integer          not null, primary key
-#  distinct_id :string(255)      not null
+#  distinct_id :string           not null
 #  person_id   :integer          not null
 #  created_at  :datetime
 #  updated_at  :datetime
