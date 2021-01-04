@@ -4,7 +4,7 @@
 #
 #  id                  :bigint(8)        not null, primary key
 #  project_name        :string
-#  type                :string
+#  pact_type           :string
 #  experience_level    :string
 #  time_commitment     :string
 #  issue_type          :string
@@ -13,11 +13,13 @@
 #  link                :string
 #  issue_url           :string
 #  project_description :string
-#  amount              :decimal(10, 2)   not null
+#  bounty_total        :decimal(10, 2)   default(0.0), not null
 #  person_id           :integer
 #  owner_type          :string
 #  owner_id            :integer
 #  featured            :boolean          default(FALSE), not null
+#  can_add_bounty      :boolean          default(TRUE), not null
+#  solution_started    :boolean          default(FALSE), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #

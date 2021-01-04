@@ -146,13 +146,14 @@
 
         <div class="form-group">
           <div class="col-sm-offset-2 col-md-8">
-            <div ng-if="current_person" class="text-center payment-container">
-              <div
-                class="form-container"
-                ng-include="'app/pacts/create/templates/payment-form.html'"
-              ></div>
-              <submit type="submit" ng-click="createPact(formData)" class="btn btn-light-blue btn-long font-weight-semibold" ng-disabled="!canCheckout()" disabled="disabled">CONTINUE</submit>
-            </div>
+            <submit 
+              type="submit" 
+              ng-click="createPact(formData)" 
+              class="btn btn-light-blue btn-long font-weight-semibold" 
+            >
+              CONTINUE
+            </submit>
+
             <div ng-if="!current_person">
               <p class="text-center">You need to sign in in order to post a pact.</p>
               <button

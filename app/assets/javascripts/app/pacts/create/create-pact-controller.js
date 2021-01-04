@@ -2,11 +2,11 @@ function initializeScope(scope) {
   scope.formData = {}
   // pact type default options and value
   scope.pactTypeOptions = [
-    { value: 1, description: 'Default' },
-    { value: 2, description: 'Approval Required' },
+    { value: 'default', description: 'Default' },
+    { value: 'approval_required', description: 'Approval Required' },
   ]
   scope.pactType = {
-    value: 1,
+    value: 'default',
   }
   scope.updatePactType = function (value) {
     scope.pactType.value = value
@@ -24,54 +24,43 @@ function initializeScope(scope) {
     scope.pactTimer.value = value
   }
   scope.expirienceLvlOptions = [
-    { value: 'Beginner', description: 'Beginner' },
-    { value: 'Intermediate', description: 'Intermediate' },
-    { value: 'Advanced', description: 'Advanced' },
+    { value: 'beginner', description: 'Beginner' },
+    { value: 'intermediate', description: 'Intermediate' },
+    { value: 'advanced', description: 'Advanced' },
   ]
   scope.expirienceLvl = {
-    value: 'Intermediate',
+    value: 'intermediate',
   }
   scope.updateExpirienceLvl = function (value) {
     scope.expirienceLvl.value = value
   }
   scope.timeCommitmentOptions = [
-    { value: 'Hours', description: 'Hours' },
-    { value: 'Days', description: 'Days' },
-    { value: 'Weeks', description: 'Weeks' },
-    { value: 'Months', description: 'Months' },
+    { value: 'hours', description: 'Hours' },
+    { value: 'days', description: 'Days' },
+    { value: 'weeks', description: 'Weeks' },
+    { value: 'months', description: 'Months' },
   ]
   scope.timeCommitment = {
-    value: 'Days',
+    value: 'days',
   }
   scope.updateTimeCommitment = function (value) {
     scope.timeCommitment.value = value
   }
   scope.issueTypeOptions = [
-    { value: 'Bug', description: 'Bug' },
-    { value: 'Feature', description: 'Feature' },
-    { value: 'Improvement', description: 'Improvement' },
-    { value: 'Security', description: 'Security' },
-    { value: 'Documentation', description: 'Documentation' },
-    { value: 'Design', description: 'Design' },
-    { value: 'Code review', description: 'Code review' },
-    { value: 'Other', description: 'Other' },
+    { value: 'bug', description: 'Bug' },
+    { value: 'feature', description: 'Feature' },
+    { value: 'improvement', description: 'Improvement' },
+    { value: 'security', description: 'Security' },
+    { value: 'documentation', description: 'Documentation' },
+    { value: 'design', description: 'Design' },
+    { value: 'code review', description: 'Code review' },
+    { value: 'other', description: 'Other' },
   ]
   scope.issueType = {
-    value: 'Other',
+    value: 'other',
   }
   scope.updateissueType = function (value) {
     scope.issueType.value = value
-  }
-  // checkout default options
-  scope.checkout = {}
-  scope.usdCart = {
-    amount: 5,
-    item_type: 'pact',
-    bounty_expiration: null,
-    currency: 'USD',
-  }
-  scope.setAmount = function (amount) {
-    $scope.bounty.amount = amount
   }
   scope.errors = {
     githubIssue: '',
@@ -110,10 +99,6 @@ angular
   .controller('PactController', function ($api, $window, $scope, $location, $anchorScroll, $routeParams) {
     initializeScope($scope)
 
-    $scope.canCheckout = function () {
-      return $scope.usdCart.amount >= 5 && $scope.checkout.checkout_method
-    }
-
     $scope.setOwner = function (type, owner) {
       switch (type) {
         case 'anonymous':
@@ -121,16 +106,10 @@ angular
             display_name: 'Anonymous',
             image_url: '<%= asset_path("bs-anon.png") %>',
           }
-          $scope.usdCart.owner_id = null
-          $scope.usdCart.owner_type = null
-          $scope.usdCart.anonymous = true
           break
 
         case 'person':
           $scope.owner = angular.copy(owner)
-          $scope.usdCart.owner_id = owner.id
-          $scope.usdCart.owner_type = 'Person'
-          $scope.usdCart.anonymous = false
           break
       }
     }
@@ -139,30 +118,21 @@ angular
       $location.url('/signin')
     }
 
-    $scope.setUsdAmount = function (amount) {
-      $scope.usdCart.amount = amount
-    }
-
-    $scope.calculateCartTotal = function () {
-      $scope.usdCart.total = $scope.usdCart.amount
-      return $scope.usdCart.total
-    }
-    $scope.checkoutUsd = function () {
+    $scope.createPact = function () {
       let data = {
-        personId: $scope.current_person.id,
-        projectName: $scope.formData.projectName,
-        pactType: $scope.pactType.value,
-        expirienceLvl: $scope.expirienceLvl.value,
-        timeCommitment: $scope.timeCommitment.value,
-        issueType: $scope.issueType.value,
-        pactTimer: $scope.pactTimer.value,
-        projectLink: $scope.formData.projectLink,
-        githubIssue: $scope.formData.githubIssue,
-        projectDescription: $scope.formData.projectDescription,
-        amount: $scope.usdCart.amount,
+        project_name: $scope.formData.projectName,
+        pact_type: $scope.pactType.value,
+        experience_level: $scope.expirienceLvl.value,
+        time_commitment: $scope.timeCommitment.value,
+        issue_type: $scope.issueType.value,
+        expires_at: $scope.pactTimer.value,
+        link: $scope.formData.projectLink,
+        issue_url: $scope.formData.githubIssue,
+        project_description: $scope.formData.projectDescription,
       }
 
       let errors = validatePact(data)
+
       if (errors) {
         $scope.errors = errors
       } else {
@@ -173,18 +143,11 @@ angular
           projectDescription: '',
         }
 
-        $api.v2.pact(data).then(function (response) {
-          if (response.data.success === 'OK') {
-            console.log(response)
-            $window.location = '/'
+        $api.v2.createPact(data).then(function (response) {
+          if (response.success) {
+            $window.location = '/pacts/' + response.data.id
           }
         })
-        // $api.v2
-        //   .checkout({ item: $scope.usdCart, checkout_method: $scope.checkout.checkout_method })
-        //   .then(function (response) {
-        //     console.log(response)
-        //     $window.location = response.data.checkout_url
-        //   })
       }
     }
     const routeListener = $scope.$on('$routeChangeSuccess', function () {

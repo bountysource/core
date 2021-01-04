@@ -5,7 +5,7 @@
 #  id                :integer          not null, primary key
 #  amount            :decimal(10, 2)   not null
 #  person_id         :integer
-#  issue_id          :integer          not null
+#  issue_id          :integer
 #  status            :string(12)       default("active"), not null
 #  expires_at        :datetime
 #  created_at        :datetime         not null
@@ -20,6 +20,7 @@
 #  acknowledged_at   :datetime
 #  tweet             :boolean          default(FALSE), not null
 #  featured          :boolean          default(FALSE), not null
+#  pact_id           :bigint(8)
 #
 # Indexes
 #
@@ -27,6 +28,7 @@
 #  index_bounties_on_github_issue_id  (issue_id)
 #  index_bounties_on_owner_id         (owner_id)
 #  index_bounties_on_owner_type       (owner_type)
+#  index_bounties_on_pact_id          (pact_id)
 #  index_bounties_on_patron_id        (person_id)
 #  index_bounties_on_status           (status)
 #

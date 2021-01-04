@@ -170,6 +170,21 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    createPact: function(params) {
+      return this.call({
+        url: '/pacts',
+        method: 'POST',
+        params: params
+      })
+    },
+
+    getPact: function(id) {
+      return this.call({
+        url: '/pacts/' + id,
+        method: 'GET'
+      })
+    },
+
     pledges: function(params) {
       return this.call({
         url: '/pledges',

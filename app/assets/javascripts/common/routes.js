@@ -226,4 +226,11 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
     title: 'Create Pact',
     trackEvent: 'Create Pact'
   }, defaultRouteOptions));
+
+  $routeProvider.when('/pacts/:id', angular.extend({
+    templateUrl: 'app/pacts/single-pact/single-pact.html',
+    controller: 'SinglePactController',
+    title: 'View Pact',
+    trackEvent: 'View Pact'
+  }, defaultRouteOptions));
 });
