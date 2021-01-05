@@ -6,6 +6,8 @@ angular
     $api.v2.getPact(id).then(function (response) {
       if (response.status === 200) {
         $scope.pact = response.data
+
+        setupDevSection()
       }
     })
 
@@ -117,9 +119,17 @@ angular
       $scope.bounty.amount = amount;
     };
 
-    // developer section
-    $scope.developer_form.data = {}
-    if ($scope.pact.can_add_bounty) {
-      if ($scope.
-    }
+    function setupDevSection(pact) {
+      $scope.developer_form = {
+        data: {}
+      }
+
+      console.log($scope.pact)
+      if ($scope.pact.can_add_bounty) {
+        $scope.developer_form.data.status = "no_solution";
+
+        // if ($scope.
+        // console.log($scope.developer_form)
+      }
+     }
   })

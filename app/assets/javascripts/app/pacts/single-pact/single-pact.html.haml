@@ -1,0 +1,93 @@
+%div{ "class"=>"text-center" }
+  %h3 {{pact_error}}
+.container
+  %div{ "ng-show"=>"pact.id" }
+    %info-space{"info-space" => "ads.issue_ad"}
+    .row.mt-5
+      .col-md-8
+        / SECTION PACT CARD START
+        .panel.panel-default
+          .panel-body
+            %span.label.label-success.label-padded.label-lg{ "ng-show" => "pact.can_add_bounty"} Open
+            %span.label.label-salmon.label-padded.label-lg{ "ng-hide" => "pact.can_add_bounty"} Closed
+            %span.label.label-info.label-padded.label-lg{ "ng-show" => "pact.paid_out"} Paid Out
+
+            %h3.text-black{"style" => "word-break: break-word;"}
+              {{ pact.project_name }}
+
+            -# %div
+            -#   %a.text-gunmetal{"ng-href" => "/teams/{{team.slug}}"}
+            -#     %span.font-16.text-black {{team.name}}            
+
+            %div.mt-3.font-12
+              %span.text-muted
+                %i.glyphicon.glyphicon-calendar
+                {{ pact.created_at | date:'dd MMMM yyyy' }}
+              -# %span.text-muted.ml-3
+              -#   %i.glyphicon.glyphicon-user
+              -#   Posted by
+              -#   %span.text-black {{ pact.display_name }}
+
+            %div.row
+              .col-md-6.mt-5.text-center.text-md-left
+                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.issue_url}}", :style => "font-size: 12px", :target => "_blank"}
+                  %span.glyphicon.glyphicon-new-window
+                  View issue
+              .col-md-6.mt-5.text-center.text-md-left
+                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.link}}", :style => "font-size: 12px", :target => "_blank"}
+                  %span.glyphicon.glyphicon-new-window
+                  View link
+              .col-md-6.mt-5.text-center.text-md-right
+                %a.btn.btn-light-blue.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()", "ng-show" => "issue.can_add_bounty"}
+                  SOLVE PACT
+
+        / SECTION PACT CARD END
+        / SECTION PACT DETAILS BEGIN
+        .panel.panel-default
+          .panel-body
+            %tabset
+              %tab{"heading" => "Overview" }
+                Type: {{ pact.pact_type }}
+                %br
+                Experience level: {{ pact.experience_level }}
+                %br
+                Time commitment: {{ pact.time_commitment }}
+                %br
+                Issue type: {{ pact.issue_type }}
+                %br
+                Expiration: {{ pact.expiration }}
+                %br
+                Project description: {{ pact.project_description }}
+              %tab{"heading" => "Backers ({{issue.backers_count || 0}})" }
+                %backers-tab
+
+        / SECTION PACT DETAILS END
+      .col-md-4
+        %div.text-center{"ng-if" => "pact.can_add_bounty"}
+          %div.text-center
+            .panel.panel-gunmetal
+              .panel-heading.text-white.text-center.pt-5.pb-5
+                %h4.font-weight-semibold
+                  {{ pact.bounty_total === 0 ? 'POST A BOUNTY' : 'TOTAL BOUNTY VALUE' }}
+                %p{"ng-if" => "pact.bounty_total === 0"}
+                  Be the first to post a bounty for this pact!
+                %h3.m-0{"ng-if" => "pact.bounty_total > 0"}
+                  ${{pact.bounty_total | number : 2 }}USD
+              .panel-body
+                %div.text-center{"ng-if" => "!current_person"}
+                  %button.btn.btn-light-blue.btn-responsive{"ng-click" => "goToSignInPage()"}
+                    Sign In
+                %div.text-center{"ng-if" => "current_person"}
+                  // %div There are several ways to post this bounty
+                  // %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
+                  %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
+        
+        %div
+          %div{ "ng-switch" => "developer_form.data.status" }
+            %div{ "ng-switch-when"=>"no_solution" } 
+              %div 
+                .font-weight-medium  
+                  Are you a developer who can solve this issue?  
+                %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
+
+        %team-about-panel{"ng-show" => "team.id"}
