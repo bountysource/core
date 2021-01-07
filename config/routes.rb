@@ -486,6 +486,7 @@ Api::Application.routes.draw do
             end
           end
           resources :pacts, only: [:index, :show, :create, :update, :destroy]
+          resources :pact_applications, only: [:index, :show, :create, :update, :destroy]
 
           # scope path: '/pacts', controller: :pacts do
           #   get '/',  action: :index
