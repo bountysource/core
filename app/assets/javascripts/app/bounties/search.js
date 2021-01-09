@@ -122,6 +122,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     $location.search(cleaned_form_data);
     $api.bounty_search(cleaned_form_data).then(function(response) {
       $scope.search_results = response.issues;
+      console.log($scope.search_results)
       $scope.issues_count = response.issues_total;
       $scope.perPage = 50;
       $scope.maxSize = 10;
@@ -138,7 +139,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     var result = {};
     for (var key in data) {
       var value = data[key];
-      if (!value) { // null or undefined ng-model values
+      if (!value) { // null or undefined ng-m issue.author.medium_image_urlodel values
         continue;
       }
 

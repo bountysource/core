@@ -66,6 +66,10 @@ angular
       });
     };
 
+    $scope.goToSignInPage = function() {
+      $location.url('/signin');
+    };
+
     $scope.calculateCartTotal = function () {
       if ($scope.usdCart.tweet) {
         $scope.usdCart.total = $scope.usdCart.amount + 20;

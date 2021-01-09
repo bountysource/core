@@ -28,6 +28,8 @@
               -#   Posted by
               -#   %span.text-black {{ pact.display_name }}
 
+              %br
+                {{ pact.project_description }}
             %div.row
               .col-md-6.mt-5.text-center.text-md-left
                 %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.issue_url}}", :style => "font-size: 12px", :target => "_blank"}
@@ -36,7 +38,7 @@
               .col-md-6.mt-5.text-center.text-md-left
                 %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.link}}", :style => "font-size: 12px", :target => "_blank"}
                   %span.glyphicon.glyphicon-new-window
-                  View link
+                  View project link
               .col-md-6.mt-5.text-center.text-md-right
                 %a.btn.btn-light-blue.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()", "ng-show" => "issue.can_add_bounty"}
                   SOLVE PACT
@@ -56,8 +58,6 @@
                 Issue type: {{ pact.issue_type }}
                 %br
                 Expiration: {{ pact.expiration }}
-                %br
-                Project description: {{ pact.project_description }}
               %tab{"heading" => "Backers ({{issue.backers_count || 0}})" }
                 %backers-tab
 
@@ -82,12 +82,17 @@
                   // %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
                   %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
         
-        %div
-          %div{ "ng-switch" => "developer_form.data.status" }
-            %div{ "ng-switch-when"=>"no_solution" } 
-              %div 
-                .font-weight-medium  
+      .col-md-4
+        %div.text-center{ "ng-switch" => "developer_form.data.status" }
+          %div.text-center{ "ng-switch-when"=>"no_solution" } 
+            %div.panel.panel-gunmetal
+              .panel-body
+                .text-center.font-weight-medium
                   Are you a developer who can solve this issue?  
-                %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
+                %div.text-center{"ng-if" => "!current_person"}
+                  %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "goToSignInPage()"}
+                    Sign In
+                %div.text-center{"ng-if" => "current_person"}
+                  %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
 
-        %team-about-panel{"ng-show" => "team.id"}
+        %team-aboupanel{"ng-show" => "team.id"}

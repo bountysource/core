@@ -1,12 +1,18 @@
-<a ng-href="/issues/{{ issue.slug }}" class="nostyle">
+<a ng-href="{{link}}" class="nostyle">
   <div class="issue-card">
+    <div class="issue-type" style="background-color: {{ issue.type === 'pact' && '#4d34ec' }};">
+      <span class="issue-type-text fw-sb">
+        {{ issue.type }}
+      </span>
+    </div>
+
     <div class="issue-body row">
       <div class="col-sm-2 col-xs-12 tracker-info">
         <div class="tracker-image-container">
-          <img class="tracker-image" ng-src="{{ issue.team.image_url }}" alt="" />
+          <img class="tracker-image" ng-src="{{ issue.team.image_url || issue.author.image_url }}" alt="" />
         </div>
-        <div class="tracker-name url-dark" tooltip="{{ issue.tracker.name }}" tooltip-trigger="mouseenter">
-          {{ issue.tracker.name }}
+        <div class="tracker-name url-dark" tooltip="{{ issue.tracker.name || issue.author.display_name }}" tooltip-trigger="mouseenter">
+          {{ issue.tracker.name || issue.author.display_name }}
         </div>
       </div>
 
@@ -63,6 +69,8 @@
         </div>
       </div>
     </div>
+
+    
 
     <div class="issue-bounty">
       <span ng-show="issue.crypto_bounty_total > 0" class="issue-bounty-text">

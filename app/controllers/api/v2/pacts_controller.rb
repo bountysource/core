@@ -1,5 +1,5 @@
 class Api::V2::PactsController < Api::BaseController
-  before_action :require_auth
+  before_action :require_auth, only: [:create]
 
   def index
     @collection = Pact.all

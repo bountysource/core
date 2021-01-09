@@ -74,36 +74,50 @@ class Search < ApplicationRecord
  
       queryString = queryString.chop
  
-      bounties = Issue.find_by_sql("SELECT * FROM public.issues
-      WHERE id IN (#{queryString}) AND can_add_bounty=true
-      ORDER BY #{order} #{direction}");
+      issues_with_bounties = Issue.find_by_sql("SELECT * FROM public.issues
+        WHERE id IN (#{queryString}) AND can_add_bounty=true
+        ORDER BY #{order} #{direction}");
+ 
+      pacts_with_bounties = Issue.find_by_sql("SELECT * FROM public.pacts
+        WHERE id IN (#{queryString}) AND can_add_bounty=true
+        ORDER BY #{order} #{direction}");
  
     else
-      bounties = Issue.find_by_sql("SELECT * FROM public.issues
+      issues_with_bounties = Issue.find_by_sql("SELECT * FROM public.issues
+        WHERE can_add_bounty=true AND bounty_total > 0
+        ORDER BY #{order} #{direction}");
+
+      pacts_with_bounties = Pact.find_by_sql("SELECT * FROM public.pacts
         WHERE can_add_bounty=true AND bounty_total > 0
         ORDER BY #{order} #{direction}");
     end
-      
+
     if query != "*"
       bounties = bounties.select { |bounty| bounty.title.include? query }
     end
-    
-    total_bounties = bounties.length()
+
+    results = issues_with_bounties
+      .concat(bounties || [])
+      .concat(pacts_with_bounties)
+
+    total = results.length()
     page = page.to_i
     if page > 1
       drop_first_n = (page - 1) * per_page
       puts drop_first_n
-      bounties = bounties.drop(drop_first_n)
-      bounties = bounties.take(per_page)
+      results = results.drop(drop_first_n)
+      results = results.take(per_page)
     else
-      bounties = bounties.take(per_page)
+      results = results.take(per_page)
     end
+
+    puts results[0].inspect
     
     ActiveRecord::Associations::Preloader.new.preload(bounties, [:issue_address, author: [:person], tracker: [:languages, :team]])
  
     {
-      issues: bounties,
-      issues_total: total_bounties
+      issues: results,
+      issues_total: total
     }
   end
 

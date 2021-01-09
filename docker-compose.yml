@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: bountysource
       POSTGRES_PASSWORD: password
     volumes:
-      - database:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
   sphinx:

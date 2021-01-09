@@ -361,10 +361,6 @@ GEM
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
-    jshint (1.5.0)
-      execjs (>= 1.4.0)
-      multi_json (~> 1.0)
-      therubyracer (~> 0.12.1)
     json (2.1.0)
     jwt (0.1.11)
       multi_json (>= 1.5)
@@ -629,7 +625,6 @@ DEPENDENCIES
   htmlentities
   httparty
   jbuilder
-  jshint (= 1.5.0)
   json
   jwt (= 0.1.11)
   launchy
