@@ -124,12 +124,14 @@
             </tr>
             <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
               <td>
-                <img ng-src="{{issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" tooltip="{{issue.tracker.name}}"></img>  
+                <img 
+                  ng-src="{{issue.type === 'pact' ? issue.author.image_url : issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" 
+                  tooltip="{{issue.tracker.name}}"></img>  
               </td>
               <td>
                 <div class="flex-row spaced-between-flex">
                   <div class="column-center">
-                    <a ng-href="/issues/{{issue.slug}}">
+                    <a ng-href="/{{issue.type}}/{{issue.slug}}">
                       {{issue.title}}
                     </a>
                   </div>

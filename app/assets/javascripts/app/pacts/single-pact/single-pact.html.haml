@@ -84,15 +84,22 @@
         
       .col-md-4
         %div.text-center{ "ng-switch" => "developer_form.data.status" }
-          %div.text-center{ "ng-switch-when"=>"no_solution" } 
-            %div.panel.panel-gunmetal
-              .panel-body
+          %div.panel.panel-gunmetal
+            .panel-body
+              %div.text-center{ "ng-switch-when"=>"no_solution" } 
                 .text-center.font-weight-medium
                   Are you a developer who can solve this issue?  
                 %div.text-center{"ng-if" => "!current_person"}
                   %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "goToSignInPage()"}
                     Sign In
                 %div.text-center{"ng-if" => "current_person"}
-                  %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show()", "style"=>"margin-left:10px" } Get Started
+                  %button.mt-3.btn.btn-long.btn-light-blue{"ng-click"=>"developer_form.show_applying()", "style"=>"margin-left:10px" } Get Started
+              %div.text-center{ "ng-switch-when"=>"applying" }
+                .text-center.font-weight-medium
+                  Enter a message for the pact owner with relevant motivation (e.g. link to portfolio) and submit your application
+                %textarea{:cols => 20, :rows => 5, "ng-model" => "developer_form.data.note" }
+                %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.apply()"}
+                  Submit application
+
 
         %team-aboupanel{"ng-show" => "team.id"}

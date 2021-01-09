@@ -488,17 +488,6 @@ Api::Application.routes.draw do
           resources :pacts, only: [:index, :show, :create, :update, :destroy]
           resources :pact_applications, only: [:index, :show, :create, :update, :destroy]
 
-          # scope path: '/pacts', controller: :pacts do
-          #   get '/',  action: :index
-          #   post '/', action: :create
-          #   get '/:pact_id', action: :show
-          #   delete '/:pact_id', action: :delete
-          #   put '/:pact_id', action: :update
-          #   # post '/', action: :add_member
-          #   # match '/:member_id', action: :update_member, via: :put
-          #   # match '/:member_id', action: :remove_member, via: :delete
-          # end
-
           resources :backers, only: [:index]
           resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/ do
             resources :support_offering_rewards, only: [:create]

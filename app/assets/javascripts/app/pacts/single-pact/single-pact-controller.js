@@ -3,13 +3,25 @@ angular
   .controller('SinglePactController', function ($api, $scope, $location, $anchorScroll, $routeParams, $window) {
     let id = $location.$$url.split('/')[2]
 
-    $api.v2.getPact(id).then(function (response) {
-      if (response.status === 200) {
-        $scope.pact = response.data
+    Promise.all([
+      $api.v2.getPact(id),
+      $api.v2.getPactApplications({ pact_id: id })
+    ])
+      .then(function ([pactResponse, applicationsResponse]) {
+        if(pactResponse.status !== 200 || applicationsResponse.status !== 200) {
+          console.log("responses were not successful");
+          console.log(pactResponse, applicationsResponse)
+          return
+        }
+
+        $scope.pact = pactResponse.data
+        $scope.pactApplications = applicationsResponse.data
 
         setupDevSection()
-      }
-    })
+      })
+      .catch(function (e) {
+        console.error(e)
+      })
 
     // create bounty box (allow prefil via &amount=123 in query params)
     $scope.usdCart = {
@@ -125,15 +137,24 @@ angular
 
     function setupDevSection(pact) {
       $scope.developer_form = {
-        data: {}
+        data: {},
       }
 
-      console.log($scope.pact)
       if ($scope.pact.can_add_bounty) {
+        // TODO: add conditionals
         $scope.developer_form.data.status = "no_solution";
+        console.log($scope.pactApplications)
+      }
 
-        // if ($scope.
-        // console.log($scope.developer_form)
+      $scope.developer_form.show_applying = () => {
+        $scope.developer_form.data.status = "applying"
+      }
+
+      $scope.developer_form.apply = () => {
+        $api.v2.createPactApplication({
+          note: $scope.developer_form.data.note,
+          pact_id: $scope.pact.id
+        })
       }
      }
   })

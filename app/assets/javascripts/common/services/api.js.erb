@@ -185,6 +185,21 @@ angular.module('services').config(function($httpProvider) {
       })
     },
 
+    createPactApplication: function(params) {
+      return this.call({
+        url: '/pact_applications',
+        method: 'POST',
+        params: params
+      })
+    },
+
+    getPactApplications: function(params) {
+      return this.call({
+        url: '/pact_applications',
+        params: params || {}
+      })
+    },
+
     pledges: function(params) {
       return this.call({
         url: '/pledges',
