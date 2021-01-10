@@ -82,7 +82,6 @@
                   // %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
                   %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
         
-      .col-md-4
         %div.text-center{ "ng-switch" => "developer_form.data.status" }
           %div.panel.panel-gunmetal
             .panel-body
@@ -100,6 +99,8 @@
                 %textarea{:cols => 20, :rows => 5, "ng-model" => "developer_form.data.note" }
                 %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.apply()"}
                   Submit application
-
+              %div.text-center{ "ng-switch-when"=>"applied" }
+                .text-center.font-weight-medium
+                  You have already applied to work on this pact! The pact owner will contact you with details on how to move forward.
 
         %team-aboupanel{"ng-show" => "team.id"}

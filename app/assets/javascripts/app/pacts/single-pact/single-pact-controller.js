@@ -7,15 +7,15 @@ angular
       $api.v2.getPact(id),
       $api.v2.getPactApplications({ pact_id: id })
     ])
-      .then(function ([pactResponse, applicationsResponse]) {
-        if(pactResponse.status !== 200 || applicationsResponse.status !== 200) {
+      .then(function ([pact_response, applications_response]) {
+        if(pact_response.status !== 200 || applications_response.status !== 200) {
           console.log("responses were not successful");
-          console.log(pactResponse, applicationsResponse)
+          console.log(pact_response, applications_response)
           return
         }
 
-        $scope.pact = pactResponse.data
-        $scope.pactApplications = applicationsResponse.data
+        $scope.pact = pact_response.data
+        $scope.pact_applications = applications_response.data.pact_applications
 
         setupDevSection()
       })
@@ -141,9 +141,14 @@ angular
       }
 
       if ($scope.pact.can_add_bounty) {
-        // TODO: add conditionals
         $scope.developer_form.data.status = "no_solution";
-        console.log($scope.pactApplications)
+
+        if ($scope.current_person) {
+          if($scope.pact_applications.some(a => a.person.id === $scope.current_person.id)) {
+            // current user has already applied
+            $scope.developer_form.data.status = 'applied';
+          }
+        }
       }
 
       $scope.developer_form.show_applying = () => {
