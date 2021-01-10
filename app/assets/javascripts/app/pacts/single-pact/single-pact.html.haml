@@ -1,7 +1,7 @@
 %div{ "class"=>"text-center" }
   %h3 {{pact_error}}
 .container
-  %div{ "ng-show"=>"pact.id" }
+  %div{ "ng-show"=>"pact" }
     %info-space{"info-space" => "ads.issue_ad"}
     .row.mt-5
       .col-md-8
@@ -32,11 +32,10 @@
                 {{ pact.project_description }}
             %div.row
               .col-md-6.mt-5.text-center.text-md-left
-                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.issue_url}}", :style => "font-size: 12px", :target => "_blank"}
+                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-if" => "pact.issue_url", "ng-href" => "{{pact.issue_url}}", :style => "font-size: 12px", :target => "_blank"}
                   %span.glyphicon.glyphicon-new-window
                   View issue
-              .col-md-6.mt-5.text-center.text-md-left
-                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-href" => "{{pact.link}}", :style => "font-size: 12px", :target => "_blank"}
+                %a.btn.btn-gunmetal.btn-small-radius.font-weight-semibold{"ng-if" => "pact.link", "ng-href" => "{{pact.link}}", :style => "font-size: 12px", :target => "_blank"}
                   %span.glyphicon.glyphicon-new-window
                   View project link
               .col-md-6.mt-5.text-center.text-md-right
@@ -58,8 +57,29 @@
                 Issue type: {{ pact.issue_type }}
                 %br
                 Expiration: {{ pact.expiration }}
-              %tab{"heading" => "Backers ({{issue.backers_count || 0}})" }
-                %backers-tab
+              %tab{"ng-if" => "pact.person_id == current_person.id", "heading" => "Applications ({{pact_applications.length || 0}})" }
+                %table#applicants-table.table
+                  %thead
+                    %tr
+                      %th
+                        %a.text-dark Dev
+                      %th
+                      %th
+                        %a.text-dark Email
+                      %th
+                        %a.text-dark Date
+                      %th
+                        %a.text-dark Note
+                  %tbody
+                    %tr{"ng-repeat" => "application in pact_applications"}
+                      %td
+                        %profile-pic{:owner => "application.person"}
+                      %td
+                        %profile-name{:owner => "application.person"}
+                      %td
+                        {{ application.person.email }}
+                      %td
+                        {{ application.created_at }}
 
         / SECTION PACT DETAILS END
       .col-md-4

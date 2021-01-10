@@ -1,7 +1,7 @@
 angular
   .module('app')
   .controller('SinglePactController', function ($api, $scope, $location, $anchorScroll, $routeParams, $window) {
-    let id = $location.$$url.split('/')[2]
+    let id = $location.$$url.split('/').reverse()[0]
 
     Promise.all([
       $api.v2.getPact(id),
@@ -19,9 +19,7 @@ angular
 
         setupDevSection()
       })
-      .catch(function (e) {
-        console.error(e)
-      })
+      .catch(console.error)
 
     // create bounty box (allow prefil via &amount=123 in query params)
     $scope.usdCart = {
