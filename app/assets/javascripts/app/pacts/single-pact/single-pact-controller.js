@@ -133,6 +133,12 @@ angular
       $scope.bounty.amount = amount;
     };
 
+    $scope.markPactCompleted = function () {
+      $api.v2.markPactCompleted(id)
+        .then(() => $api.v2.getPact(id))
+        .then(response => $scope.pact = response.data)
+    }
+
     function setupDevSection(pact) {
       $scope.developer_form = {
         data: {},
@@ -158,6 +164,9 @@ angular
           note: $scope.developer_form.data.note,
           pact_id: $scope.pact.id
         })
+      }
+
+      $scope.developer_form.claim = () => {
       }
      }
   })

@@ -185,6 +185,14 @@ angular.module('services').config(function($httpProvider) {
       })
     },
 
+    markPactCompleted: function(id) {
+      return this.call({
+        url: '/pacts/' + id + '/mark_completed',
+        method: 'POST',
+        params: {},
+      })
+    },
+
     createPactApplication: function(params) {
       return this.call({
         url: '/pact_applications',

@@ -31,4 +31,11 @@ class Api::V2::PactsController < Api::BaseController
   def show
     @item = Pact.find(params[:id])
   end
+
+  def mark_completed
+    @item = Pact.find(params[:id])
+    @item.update_attributes!(completed_at: Time.now, can_add_bounty: false)
+
+    render 'api/v2/pacts/show'
+  end
 end

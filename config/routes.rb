@@ -485,7 +485,11 @@ Api::Application.routes.draw do
               get :summary
             end
           end
-          resources :pacts, only: [:index, :show, :create, :update, :destroy]
+          resources :pacts, only: [:index, :show, :create, :update, :destroy] do
+            member do
+              match '/posts/:id/mark_completed', action: :mark_completed, via: :post
+            end
+          end
           resources :pact_applications, only: [:index, :show, :create, :update, :destroy]
 
           resources :backers, only: [:index]

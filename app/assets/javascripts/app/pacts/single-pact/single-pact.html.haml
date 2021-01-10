@@ -39,8 +39,8 @@
                   %span.glyphicon.glyphicon-new-window
                   View project link
               .col-md-6.mt-5.text-center.text-md-right
-                %a.btn.btn-light-blue.btn-lg.px-5.py-4{"ng-click" => "openHunterBox()", "ng-show" => "issue.can_add_bounty"}
-                  SOLVE PACT
+                %a.btn.btn-danger.btn-lg.px-5.py-4{"ng-show" => "pact.person_id === current_person.id && !pact.completed_at", "ng-click" => "markPactCompleted()"}
+                  Mark pact complete
 
         / SECTION PACT CARD END
         / SECTION PACT DETAILS BEGIN
@@ -124,5 +124,10 @@
               %div.text-center{ "ng-switch-when"=>"applied" }
                 .text-center.font-weight-medium
                   You have already applied to work on this pact! The pact owner will contact you with details on how to move forward.
+
+                  Did you complete the task?
+                  %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.claim()"}
+                    Claim pact bounty
+
 
         %team-aboupanel{"ng-show" => "team.id"}

@@ -16,7 +16,8 @@ json.(item,
   :featured,
   :created_at,
   :updated_at,
-  :can_add_bounty
+  :can_add_bounty,
+  :completed_at
 )
 
 json.bounty_total item.bounty_total.to_f
