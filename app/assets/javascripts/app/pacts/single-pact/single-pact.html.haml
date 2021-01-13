@@ -8,9 +8,9 @@
         / SECTION PACT CARD START
         .panel.panel-default
           .panel-body
-            %span.label.label-success.label-padded.label-lg{ "ng-show" => "pact.can_add_bounty"} Open
-            %span.label.label-salmon.label-padded.label-lg{ "ng-hide" => "pact.can_add_bounty"} Closed
-            %span.label.label-info.label-padded.label-lg{ "ng-show" => "pact.paid_out"} Paid Out
+            %span.label.label-success.label-padded.label-lg{ "ng-show" => "!pact.completed_at"} Open
+            %span.label.label-salmon.label-padded.label-lg{ "ng-show" => "pact.completed_at"} Closed
+            %span.label.label-info.label-padded.label-lg{ "ng-show" => "pact.paid_at"} Paid Out
 
             %h3.text-black{"style" => "word-break: break-word;"}
               {{ pact.project_name }}
@@ -84,7 +84,10 @@
                         {{ application.note }}
 
         / SECTION PACT DETAILS END
+
       .col-md-4
+        / SECTION PACT BOUNTY START
+
         %div.text-center{"ng-if" => "pact.can_add_bounty"}
           %div.text-center
             .panel.panel-gunmetal
@@ -103,7 +106,11 @@
                   // %div There are several ways to post this bounty
                   // %div{"ng-include" => "'app/issues/templates/contribute_accordian.html'"}
                   %div{"ng-include" => "'app/issues/templates/usd_form.html'"}
-        
+
+        / section pact bounty end
+
+        / section dev tools start
+
         %div.text-center{ "ng-switch" => "developer_form.data.status" }
           %div.panel.panel-gunmetal
             .panel-body
@@ -124,10 +131,11 @@
               %div.text-center{ "ng-switch-when"=>"applied" }
                 .text-center.font-weight-medium
                   You have already applied to work on this pact! The pact owner will contact you with details on how to move forward.
-
+              %div.text-center{ "ng-switch-when"=>"completed", "ng-if" => "!pact.paid_at"}
+                .text-center.font-weight-medium
                   Did you complete the task?
+
                   %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.claim()"}
                     Claim pact bounty
-
 
         %team-aboupanel{"ng-show" => "team.id"}

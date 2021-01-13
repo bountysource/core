@@ -15,10 +15,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  amount      :decimal(, )      default(0.0), not null
+#  pact_id     :bigint(8)
 #
 # Indexes
 #
 #  index_bounty_claims_on_issue_id                (issue_id)
+#  index_bounty_claims_on_pact_id                 (pact_id)
 #  index_bounty_claims_on_person_id               (person_id)
 #  index_bounty_claims_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
@@ -26,11 +28,13 @@
 class BountyClaim < ApplicationRecord
   belongs_to :person
   belongs_to :issue
+  belongs_to :pact
   has_many :bounty_claim_responses
   has_many :bounty_claim_events
 
   validates :person, presence: true
-  validates :issue, presence: true
+  validates :issue, presence: true, unless: -> { !pact.blank? }
+  validates :pact, presence: true, if: -> { issue.blank? }
 
   # uses the custom URL validator defined in app/validators/url_validator.rb
   #validates :code_url, url: true, if: lambda { code_url.present? }

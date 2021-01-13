@@ -144,16 +144,20 @@ angular
         data: {},
       }
 
-      if ($scope.pact.can_add_bounty) {
-        $scope.developer_form.data.status = "no_solution";
+      let status = "no_solution";
 
-        if ($scope.current_person) {
-          if($scope.pact_applications.some(a => a.person.id === $scope.current_person.id)) {
-            // current user has already applied
-            $scope.developer_form.data.status = 'applied';
-          }
+      if ($scope.current_person) {
+        if($scope.pact_applications.some(a => a.person.id === $scope.current_person.id)) {
+          // current user has already applied
+          status = 'applied';
+        }
+
+        if($scope.pact.completed_at) {
+          status = "completed";
         }
       }
+
+      $scope.developer_form.data.status = status
 
       $scope.developer_form.show_applying = () => {
         $scope.developer_form.data.status = "applying"
@@ -168,5 +172,5 @@ angular
 
       $scope.developer_form.claim = () => {
       }
-     }
+    }
   })

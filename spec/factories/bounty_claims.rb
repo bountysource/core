@@ -15,10 +15,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  amount      :decimal(, )      default(0.0), not null
+#  pact_id     :bigint(8)
 #
 # Indexes
 #
 #  index_bounty_claims_on_issue_id                (issue_id)
+#  index_bounty_claims_on_pact_id                 (pact_id)
 #  index_bounty_claims_on_person_id               (person_id)
 #  index_bounty_claims_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #

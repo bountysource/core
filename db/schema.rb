@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210110204412) do
+ActiveRecord::Schema.define(version: 20210113213551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -157,7 +157,9 @@ ActiveRecord::Schema.define(version: 20210110204412) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "amount", default: "0.0", null: false
+    t.bigint "pact_id"
     t.index ["issue_id"], name: "index_bounty_claims_on_issue_id"
+    t.index ["pact_id"], name: "index_bounty_claims_on_pact_id"
     t.index ["person_id", "issue_id"], name: "index_bounty_claims_on_person_id_and_issue_id", unique: true
     t.index ["person_id"], name: "index_bounty_claims_on_person_id"
   end
@@ -1494,6 +1496,7 @@ ActiveRecord::Schema.define(version: 20210110204412) do
   end
 
   add_foreign_key "bounties", "pacts"
+  add_foreign_key "bounty_claims", "pacts"
   add_foreign_key "crypto_bounties", "issues"
   add_foreign_key "crypto_pay_out_claim_events", "crypto_pay_outs"
   add_foreign_key "crypto_pay_out_txns", "crypto_pay_outs"

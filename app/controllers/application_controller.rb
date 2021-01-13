@@ -27,8 +27,11 @@ class ApplicationController < ActionController::Base
 
   class MissingRequiredParams < StandardError
     attr_accessor :params
+    attr_accessor :all_required
+
     def initialize(*params)
       @params = params
+      @all_required = true
     end
   end
 
@@ -147,6 +150,16 @@ protected
   def require_params(*keys)
     missing_params = keys.reject { |k| params.has_key?(k) && !params[k].blank? }
     raise MissingRequiredParams.new missing_params unless missing_params.empty?
+  end
+
+  def require_any_of_params(*keys)
+    missing_params = keys.reject { |k| params.has_key?(k) && !params[k].blank? }
+    missing_params_error = MissingRequiredParams.new missing_params if (!keys.empty? && keys.length == missing_params.length)
+
+    if (missing_params_error) 
+      missing_params_error.all_required = false
+      raise missing_params_error
+    end
   end
 
   def require_auth

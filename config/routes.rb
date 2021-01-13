@@ -487,7 +487,7 @@ Api::Application.routes.draw do
           end
           resources :pacts, only: [:index, :show, :create, :update, :destroy] do
             member do
-              match '/posts/:id/mark_completed', action: :mark_completed, via: :post
+              match '/mark_completed', action: :mark_completed, via: :post
             end
           end
           resources :pact_applications, only: [:index, :show, :create, :update, :destroy]
