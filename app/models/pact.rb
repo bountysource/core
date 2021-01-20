@@ -26,12 +26,10 @@
 #
 
 class Pact < ApplicationRecord
-  enum category: [:fiat, :crypto]
+  enum category: [:fiat]
   belongs_to :person
 
   has_many :bounties
-  has_many :crypto_bounties
-  has_many :crypto_pay_outs
   has_many :bounty_claims
 
   has_owner
@@ -55,4 +53,13 @@ class Pact < ApplicationRecord
   # scope :not_refunded, lambda { where("status != :status", status: Status::REFUNDED) }
 
   # scope :expiring_soon,       lambda { |date=2.weeks.from_now, count=nil| where('expires_at < ?', date).order('expires_at desc').limit(count) }
+
+  def backers
+    fiat_backers = bounties.pluck(:person_id).uniq
+    Person.where(id: fiat_backers.uniq)
+  end
+
+  def can_respond_to_claims?(person)
+    Ability.new(person).can?(:respond_to_claims, self)
+  end
 end

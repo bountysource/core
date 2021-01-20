@@ -4,7 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  person_id   :integer          not null
-#  issue_id    :integer          not null
+#  issue_id    :integer
 #  number      :integer
 #  code_url    :string
 #  description :text

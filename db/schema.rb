@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20210113213551) do
 
   create_table "bounty_claims", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.integer "issue_id", null: false
+    t.integer "issue_id"
     t.integer "number"
     t.string "code_url"
     t.text "description"

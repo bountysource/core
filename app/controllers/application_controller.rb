@@ -92,7 +92,7 @@ protected
       request_info["remote_ip"] = request.env["action_dispatch.remote_ip"].to_s
 
       options[:issue_id] = @issue.try(:id) || params[:item_number]
-      options[:tracker_id] = @tracker.try(:id) || @item.try(:id) || @issue.tracker.id #use item for follow_relations controller
+      options[:tracker_id] = @tracker.try(:id) || @item.try(:id) || @issue&.tracker&.id #use item for follow_relations controller
       options[:person_id] = @person.try(:id)
       ActivityLog.delay.log(name, request_info, options)
     }
