@@ -1,5 +1,5 @@
 class Api::V2::PactsController < Api::BaseController
-  before_action :require_auth, only: [:create]
+  before_action :require_auth, only: [:create, :show]
 
   def index
     @collection = Pact.all
@@ -29,6 +29,12 @@ class Api::V2::PactsController < Api::BaseController
   end
   
   def show
+    @current_user = current_user
+
+    if params[:can_respond_to_claims].to_bool && current_user
+      @include_pact_can_respond_to_claims = true
+    end
+
     @item = Pact.find(params[:id])
   end
 

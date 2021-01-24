@@ -25,6 +25,7 @@ class BountyClaimResponse < ApplicationRecord
   belongs_to  :person
   belongs_to  :bounty_claim
   has_one     :issue, through: :bounty_claim
+  has_one     :pact, through: :bounty_claim
 
   validates :person, presence: true
   validates :bounty_claim, presence: true
@@ -46,7 +47,13 @@ class BountyClaimResponse < ApplicationRecord
     # email backers and developer if it is now disputed
     if response.reject?
       # backers, unless backer is the developer...
-      bounty_claim.issue.backers.each do |backer|
+      if bounty_claim.issue
+        backers = bounty_claim.issue.backers
+      elsif bounty_claim.pact
+        backers = bounty_claim.pact.backers
+      end
+
+      backers.each do |backer|
         if backer != bounty_claim.person
           backer.send_email(:bounty_claim_rejected_backer_notice, bounty_claim: bounty_claim, response: response)
         end
@@ -80,7 +87,12 @@ class BountyClaimResponse < ApplicationRecord
   end
 
   def self.set_anonymity(bounty_claim, person)
-    persons_bounties = bounty_claim.issue.bounties.where(person_id: person.id)
+    if bounty_claim.issue
+      persons_bounties = bounty_claim.issue.bounties.where(person_id: person.id)
+    elsif bounty_claim.pact
+      persons_bounties = bounty_claim.pact.bounties.where(person_id: person.id)
+    end
+
     if persons_bounties.pluck(:anonymous).include?(true)
       true
     else

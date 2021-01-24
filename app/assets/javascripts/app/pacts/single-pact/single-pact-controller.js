@@ -4,8 +4,8 @@ angular
     let id = $location.$$url.split('/').reverse()[0]
 
     function fetchPact() {
-      return $api.v2.getPact(id)
-        .then(response => {
+      return $api.v2.getPact(id, { can_respond_to_claims: true })
+        .then(function (response) {
           if (response.status !== 200) {
             throw new Error("Failed to fetch pact")
           }
@@ -16,7 +16,7 @@ angular
 
     function fetchPactApplications() {
       return $api.v2.getPactApplications({ pact_id: id })
-        .then(response => {
+        .then(function (response) {
           if (response.status !== 200) {
             throw new Error("Failed to fetch pact applications")
           }
@@ -25,14 +25,14 @@ angular
         })
     }
 
-    function fetchClaim() {
+    function fetchClaims() {
       return BountyClaim.query({
         pact_id: id,
-        include_pact: true,
+        include_owner: true,
         include_responses: true
       }).$promise.then(claims => {
-        $scope.claim = claims.find(c => c.pact_id == id)
-        console.log(id, $scope.claim, claims)
+        $scope.all_bounty_claims = claims
+        $scope.claim = claims.find(c => c.pact_id == id && c.owner.id === $scope.current_person.id)
       });
     }
 
@@ -40,12 +40,9 @@ angular
       Promise.all([
         fetchPact(),
         fetchPactApplications(),
-        fetchClaim(),
+        fetchClaims(),
       ])
-        .then(() => {
-          console.log($scope.claim)
-          setupDevSection()
-        })
+        .then(setupDevSection)
         .catch(console.error)
     }
 
@@ -222,7 +219,7 @@ angular
             console.error(r.error)
             $scope.developer_form.error = r.error
           } else {
-            return fetchClaim().then(setupDevSection)
+            return fetchClaims().then(setupDevSection)
           }
         }
 
@@ -232,5 +229,53 @@ angular
           $api.bounty_claim_update($scope.claim.id, data).then(handle_response)
         }
       }
+
+      if ($scope.all_bounty_claims) {
+        angular.forEach($scope.all_bounty_claims, claim => {
+          angular.forEach(claim.responses, res => {
+            if ($scope.current_person.id === res.owner.id) {
+              claim.my_response = res
+            }
+          })
+        })
+      }
+
+      var backer_form = $scope.backer_form = {
+        accept_claim: function(bounty_claim) {
+          $api.bounty_claim_accept(bounty_claim.id, bounty_claim.my_form_data.description).then(backer_form.bounty_claim_response_callback);
+        },
+
+        reject_claim: function(bounty_claim) {
+          $api.bounty_claim_reject(bounty_claim.id, bounty_claim.my_form_data.description).then(backer_form.bounty_claim_response_callback);
+        },
+
+        resolve_claim: function(bounty_claim) {
+          $api.bounty_claim_resolve(bounty_claim.id, bounty_claim.my_form_data.description).then(backer_form.bounty_claim_response_callback);
+        },
+
+        reset_claim: function(bounty_claim) {
+          $api.bounty_claim_reset(bounty_claim.id, bounty_claim.my_form_data.description).then(backer_form.bounty_claim_response_callback);
+        },
+
+        start_response: function(bounty_claim, action) {
+          bounty_claim.my_form_data = { action: action };
+          if (bounty_claim.my_response) {
+            bounty_claim.my_form_data.description = bounty_claim.my_response.description;
+          }
+        },
+
+        cancel_response: function(bounty_claim) {
+          bounty_claim.my_form_data = null;
+        },
+
+        bounty_claim_response_callback: function() {
+          Promise.all([
+            fetchPact(),
+            fetchClaims()
+          ]).then(setupDevSection)
+        }
+      };
+
+      $scope.$apply()
     }
   })

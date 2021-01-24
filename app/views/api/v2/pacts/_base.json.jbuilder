@@ -20,4 +20,8 @@ json.(item,
   :completed_at
 )
 
+if @include_pact_can_respond_to_claims
+  json.can_respond_to_claims item.can_respond_to_claims?(@current_user)
+end
+
 json.bounty_total item.bounty_total.to_f

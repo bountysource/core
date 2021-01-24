@@ -27,6 +27,10 @@ class Api::V2::BountyClaimsController < Api::BaseController
       @collection = @collection.includes(:bounty_claim_responses)
     end
 
+    if params[:pact_id]
+      @collection = @collection.where(pact_id: params[:pact_id])
+    end
+
     @collection = filter!(@collection)
     @collection = order!(@collection)
     @collection = paginate!(@collection)

@@ -39,7 +39,8 @@ class BountyClaim < ApplicationRecord
   # uses the custom URL validator defined in app/validators/url_validator.rb
   #validates :code_url, url: true, if: lambda { code_url.present? }
 
-  validates_uniqueness_of :issue_id, :pact_id, scope: :person_id
+  validates_uniqueness_of :issue_id, :allow_blank => true, scope: :person_id
+  validates_uniqueness_of :pact_id, :allow_blank => true, scope: :person_id
 
   scope :paid_out, -> { where(paid_out: true) }
   scope :collected, -> { where(collected: true) }
@@ -52,7 +53,13 @@ class BountyClaim < ApplicationRecord
       self.number = pact.bounty_claims.count + 1
     end
   }
-  after_create { self.person.is_bounty_hunter!(issue: self.issue) }
+  after_create { 
+    if issue 
+      self.person.is_bounty_hunter!(issue: self.issue)
+    elsif pact
+      self.person.is_bounty_hunter!(pact: self.pact)
+    end
+  }
 
   # send email to backers and the developer after creation
   after_create do
@@ -64,19 +71,29 @@ class BountyClaim < ApplicationRecord
   # if the creation of this claim contested the bounty, send emails
   after_commit do
     if contested?
-      (issue&.developers + pact&.developers).each { |developer| developer.send_email(:bounty_claim_contested_developer_notice, bounty_claim: self) }
-      (issue&.backers + pact&.developers).each { |backer| backer.send_email(:bounty_claim_contested_backer_notice, bounty_claim: self) }
+      if issue
+        developers = issue.developers
+        backers  = issue.backers
+      elsif pact
+        developers = pact.developers
+        backers = pact.backers
+      end
+      developers.each { |developer| developer.send_email(:bounty_claim_contested_developer_notice, bounty_claim: self) }
+      backers.each { |backer| backer.send_email(:bounty_claim_contested_backer_notice, bounty_claim: self) }
     end
   end
 
   validate do
+    puts "starting validation"
+    puts errors.empty?, errors.inspect
+
     #Rails.logger.error "HI THERE: #{self.id} -- #{issue.inspect}"
     # require the issue to be closed, unless it's generic
-    if !issue&.generic? && issue&.can_add_bounty?
+    if issue && !issue&.generic? && issue&.can_add_bounty?
       errors.add(:issue, 'not closed')
     end
 
-    if !pact&.completed_at?
+    if pact && !pact&.completed_at?
       errors.add(:pact, 'not completed')
     end
 
@@ -98,6 +115,9 @@ class BountyClaim < ApplicationRecord
     if issue&.crypto? && !person.has_verified_primary_wallet?
       errors.add(:person, "must have a verified primary wallet to submit a claim for a crypto bounty")
     end
+
+    puts "some validation done"
+    puts errors.empty?, errors.inspect
 
     errors.empty?
   end
@@ -291,7 +311,24 @@ class BountyClaim < ApplicationRecord
 
         issue&.update_bounty_total
       elsif pact
-        pact.bounty_claims.each { |bounty_claim| bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self }
+        puts "before loop"
+
+        pact.bounty_claims.each do |bounty_claim| 
+          puts "inside loop"
+          puts bounty_claim.id
+          puts bounty_claim.inspect
+
+          begin
+            bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self 
+            puts "updated"
+          rescue Exception => ex
+            puts ex.inspect
+            raise ex
+          end
+
+        end
+
+        puts "after loop"
 
         pact.update_attribute(:paid_at, Time.now)
 

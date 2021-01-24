@@ -211,6 +211,8 @@ class Person < ApplicationRecord
       teams << options[:team]
     elsif options[:issue]
       teams += Team.where(id: options[:issue].bounties.where(owner_type: 'Team').pluck(:owner_id))
+    elsif options[:pact]
+      teams += Team.where(id: options[:pact].bounties.where(owner_type: 'Team').pluck(:owner_id))
     end
 
     teams.each do |team|

@@ -31,6 +31,7 @@ class Pact < ApplicationRecord
 
   has_many :bounties
   has_many :bounty_claims
+  has_many :pact_applications
 
   has_owner
 
@@ -53,6 +54,11 @@ class Pact < ApplicationRecord
   # scope :not_refunded, lambda { where("status != :status", status: Status::REFUNDED) }
 
   # scope :expiring_soon,       lambda { |date=2.weeks.from_now, count=nil| where('expires_at < ?', date).order('expires_at desc').limit(count) }
+
+  def developers
+    developer_ids = pact_applications.pluck(:person_id) + bounty_claims.pluck(:person_id)
+    Person.where(id: developer_ids)
+  end
 
   def backers
     fiat_backers = bounties.pluck(:person_id).uniq

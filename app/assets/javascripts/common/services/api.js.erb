@@ -178,10 +178,11 @@ angular.module('services').config(function($httpProvider) {
       })
     },
 
-    getPact: function(id) {
+    getPact: function(id, params = {}) {
       return this.call({
         url: '/pacts/' + id,
-        method: 'GET'
+        method: 'GET',
+        params
       })
     },
 
