@@ -114,6 +114,8 @@
         %div.text-center{ "ng-switch" => "developer_form.data.status" }
           %div.panel.panel-gunmetal
             .panel-body
+              .alert.alert-danger{"ng-if"=>"developer_form.error"} {{developer_form.error}}
+
               %div.text-center{ "ng-switch-when"=>"no_solution" } 
                 .text-center.font-weight-medium
                   Are you a developer who can solve this issue?  
@@ -131,11 +133,33 @@
               %div.text-center{ "ng-switch-when"=>"applied" }
                 .text-center.font-weight-medium
                   You have already applied to work on this pact! The pact owner will contact you with details on how to move forward.
-              %div.text-center{ "ng-switch-when"=>"completed", "ng-if" => "!pact.paid_at"}
+              %div.text-center{ "ng-switch-when"=>"completed" }
                 .text-center.font-weight-medium
                   Did you complete the task?
 
-                  %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.claim()"}
+                  %button.mt-3.btn.btn-light-blue.btn-responsive{"ng-click" => "developer_form.show_claiming()"}
                     Claim pact bounty
+              %div.text-center{ "ng-switch-when"=>"claiming" }
+                .text-center.font-weight-medium
+                  %form.form-horizontal.form-without-botttom-margin{ "ng-submit"=>"developer_form.claim()" }
+                    .form-group
+
+                      %label.col-xs-12.control-label
+                        Code URL
+                        .col-xs-12.mt-3
+                          %input.form-control{:type => "text", :placeholder => "The URL to your solution. For example, a pull request on GitHub", "ng-model"=>"developer_form.data.url" }
+                      %label.col-xs-12.control-label
+                        Description
+                        .col-xs-12.mt-3
+                          %textarea.form-control{:placceholder => "Provide some details for the backers!", :rows => "4", "ng-model"=>"developer_form.data.description" }
+                      %button.btn.btn-light-blue{ "type" => "submit", "style"=>"margin-top:10px" } Submit
+
+              %div.text-center{ "ng-switch-when"=>"claimed" }
+                %h4
+                  You have submitted a claim.
+                  %button.btn.btn-light-blue{"ng-click"=>"developer_form.show_claiming()", "style"=>"margin-left:10px"} Edit Claim
+                %p
+                  The bounty will be paid out if all backers accept your claim or if no backers reject your claim by {{claim.dispute_period_ends_at | date:'MMM d, y h:mm a':'UTC' }} (GMT).
+
 
         %team-aboupanel{"ng-show" => "team.id"}

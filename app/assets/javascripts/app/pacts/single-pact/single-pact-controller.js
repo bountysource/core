@@ -1,25 +1,55 @@
 angular
   .module('app')
-  .controller('SinglePactController', function ($api, $scope, $location, $anchorScroll, $routeParams, $window) {
+  .controller('SinglePactController', function ($api, $scope, $location, $anchorScroll, $routeParams, $window, BountyClaim) {
     let id = $location.$$url.split('/').reverse()[0]
 
-    Promise.all([
-      $api.v2.getPact(id),
-      $api.v2.getPactApplications({ pact_id: id })
-    ])
-      .then(function ([pact_response, applications_response]) {
-        if(pact_response.status !== 200 || applications_response.status !== 200) {
-          console.log("responses were not successful");
-          console.log(pact_response, applications_response)
-          return
-        }
+    function fetchPact() {
+      return $api.v2.getPact(id)
+        .then(response => {
+          if (response.status !== 200) {
+            throw new Error("Failed to fetch pact")
+          }
 
-        $scope.pact = pact_response.data
-        $scope.pact_applications = applications_response.data.pact_applications
+          $scope.pact = response.data
+        })
+    }
 
-        setupDevSection()
-      })
-      .catch(console.error)
+    function fetchPactApplications() {
+      return $api.v2.getPactApplications({ pact_id: id })
+        .then(response => {
+          if (response.status !== 200) {
+            throw new Error("Failed to fetch pact applications")
+          }
+
+          $scope.pact_applications = response.data.pact_applications
+        })
+    }
+
+    function fetchClaim() {
+      return BountyClaim.query({
+        pact_id: id,
+        include_pact: true,
+        include_responses: true
+      }).$promise.then(claims => {
+        $scope.claim = claims.find(c => c.pact_id == id)
+        console.log(id, $scope.claim, claims)
+      });
+    }
+
+    function setupPage() {
+      Promise.all([
+        fetchPact(),
+        fetchPactApplications(),
+        fetchClaim(),
+      ])
+        .then(() => {
+          console.log($scope.claim)
+          setupDevSection()
+        })
+        .catch(console.error)
+    }
+
+    setupPage()
 
     // create bounty box (allow prefil via &amount=123 in query params)
     $scope.usdCart = {
@@ -155,6 +185,13 @@ angular
         if($scope.pact.completed_at) {
           status = "completed";
         }
+
+        if($scope.claim) {
+          status = "claimed"
+
+          $scope.developer_form.data.url = $scope.claim.url
+          $scope.developer_form.data.description = $scope.claim.description
+        }
       }
 
       $scope.developer_form.data.status = status
@@ -170,7 +207,30 @@ angular
         })
       }
 
+      $scope.developer_form.show_claiming = () => {
+        $scope.developer_form.data.status = "claiming"
+      }
+
       $scope.developer_form.claim = () => {
+        const data = {
+          code_url: $scope.developer_form.data.url,
+          description: $scope.developer_form.data.description
+        }
+
+        function handle_response(r) {
+          if (r && r.error) {
+            console.error(r.error)
+            $scope.developer_form.error = r.error
+          } else {
+            return fetchClaim().then(setupDevSection)
+          }
+        }
+
+        if (!$scope.claim) {
+          $api.pact_bounty_claim_create($scope.pact.id, data).then(handle_response)
+        } else {
+          $api.bounty_claim_update($scope.claim.id, data).then(handle_response)
+        }
       }
     }
   })

@@ -16,6 +16,11 @@ class Api::V2::BountyClaimsController < Api::BaseController
       @collection = @collection.includes(:issue)
     end
 
+    if params[:include_pact].to_bool
+      @include_bounty_claim_pact = true
+      @collection = @collection.includes(:pact)
+    end
+
     if params[:include_responses].to_bool
       @include_bounty_claim_responses = true
       @include_bounty_claim_response_owner = true
