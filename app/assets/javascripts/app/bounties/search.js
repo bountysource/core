@@ -139,7 +139,7 @@ angular.module('app').controller('BountiesSearchController', function($scope, $r
     var result = {};
     for (var key in data) {
       var value = data[key];
-      if (!value) { // null or undefined ng-m issue.author.medium_image_urlodel values
+      if (!value) { // null or undefined ng-model values
         continue;
       }
 
