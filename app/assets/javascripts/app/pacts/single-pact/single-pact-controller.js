@@ -164,7 +164,7 @@ angular
 
     $scope.markPactCompleted = function () {
       $api.v2.markPactCompleted(id)
-        .then(function () $api.v2.getPact(id))
+        .then(function () { $api.v2.getPact(id) })
         .then(function (response) { $scope.pact = response.data })
     }
 
