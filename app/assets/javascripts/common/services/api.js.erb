@@ -178,7 +178,9 @@ angular.module('services').config(function($httpProvider) {
       })
     },
 
-    getPact: function(id, params = {}) {
+    getPact: function(id, params) {
+      params = params || {}
+
       return this.call({
         url: '/pacts/' + id,
         method: 'GET',
@@ -868,7 +870,8 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/bounty_claims", "POST", data);
   };
 
-  this.pact_bounty_claim_create = function(pact_id, data = {}) {
+  this.pact_bounty_claim_create = function(pact_id, data) {
+    data = data || {}
     data.pact_id = pact_id
     return this.call("/bounty_claims", "POST", data);
   };

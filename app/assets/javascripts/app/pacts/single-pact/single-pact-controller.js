@@ -1,7 +1,7 @@
 angular
   .module('app')
   .controller('SinglePactController', function ($api, $scope, $location, $anchorScroll, $routeParams, $window, BountyClaim) {
-    let id = $location.$$url.split('/').reverse()[0]
+    var id = $location.$$url.split('/').reverse()[0]
 
     function fetchPact() {
       return $api.v2.getPact(id, { can_respond_to_claims: true })
@@ -30,9 +30,11 @@ angular
         pact_id: id,
         include_owner: true,
         include_responses: true
-      }).$promise.then(claims => {
+      }).$promise.then(function (claims) {
         $scope.all_bounty_claims = claims
-        $scope.claim = claims.find(c => c.pact_id == id && c.owner.id === $scope.current_person.id)
+        $scope.claim = claims.find(function (c) {
+          c.pact_id == id && c.owner.id === $scope.current_person.id
+        })
       });
     }
 
@@ -162,8 +164,8 @@ angular
 
     $scope.markPactCompleted = function () {
       $api.v2.markPactCompleted(id)
-        .then(() => $api.v2.getPact(id))
-        .then(response => $scope.pact = response.data)
+        .then(function () $api.v2.getPact(id))
+        .then(function (response) { $scope.pact = response.data })
     }
 
     function setupDevSection(pact) {
@@ -171,10 +173,10 @@ angular
         data: {},
       }
 
-      let status = "no_solution";
+      var status = "no_solution";
 
       if ($scope.current_person) {
-        if($scope.pact_applications.some(a => a.person.id === $scope.current_person.id)) {
+        if($scope.pact_applications.some(function (a) { a.person.id === $scope.current_person.id })) {
           // current user has already applied
           status = 'applied';
         }
@@ -193,23 +195,23 @@ angular
 
       $scope.developer_form.data.status = status
 
-      $scope.developer_form.show_applying = () => {
+      $scope.developer_form.show_applying = function () {
         $scope.developer_form.data.status = "applying"
       }
 
-      $scope.developer_form.apply = () => {
+      $scope.developer_form.apply = function () {
         $api.v2.createPactApplication({
           note: $scope.developer_form.data.note,
           pact_id: $scope.pact.id
         })
       }
 
-      $scope.developer_form.show_claiming = () => {
+      $scope.developer_form.show_claiming = function () {
         $scope.developer_form.data.status = "claiming"
       }
 
-      $scope.developer_form.claim = () => {
-        const data = {
+      $scope.developer_form.claim = function () {
+        var data = {
           code_url: $scope.developer_form.data.url,
           description: $scope.developer_form.data.description
         }
@@ -231,8 +233,8 @@ angular
       }
 
       if ($scope.all_bounty_claims) {
-        angular.forEach($scope.all_bounty_claims, claim => {
-          angular.forEach(claim.responses, res => {
+        angular.forEach($scope.all_bounty_claims, function (claim) {
+          angular.forEach(claim.responses, function (res) {
             if ($scope.current_person.id === res.owner.id) {
               claim.my_response = res
             }
