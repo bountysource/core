@@ -1,5 +1,10 @@
 angular.module('activity')
   .config(function($routeProvider, personResolver, defaultRouteOptions) {
+    $routeProvider.when('/activity/pacts', angular.extend({
+      templateUrl: 'app/activity/pacts.html',
+      controller: 'PactsController',
+      resolve: { person: personResolver }
+    }, defaultRouteOptions));
 
     $routeProvider.when('/activity/bounties', angular.extend({
       templateUrl: 'app/activity/bounties.html',

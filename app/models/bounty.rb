@@ -38,6 +38,7 @@ require 'account/team'
 class Bounty < ApplicationRecord
   belongs_to :person
   belongs_to :issue
+  belongs_to :pact
 
   # TODO: this object shouldn't have an account... rework Transaction.build to use "account: bounty.issue"
   has_one :account, :through => :issue
@@ -48,7 +49,8 @@ class Bounty < ApplicationRecord
   # Gives access to polymorphic owner, which respects object anonymity on read
   has_owner
 
-  validates :issue, presence: true
+  validates :issue, presence: true, unless: -> { !pact.blank? }
+  validates :pact, presence: true, if: -> { issue.blank? }
   validates :amount, numericality: { greater_than_or_equal_to: 5 }
 
   # define status constants

@@ -254,8 +254,12 @@ class Api::V1::PeopleController < ApplicationController
     @pledges = @person.pledges.includes(:owner, :fundraiser, :reward).order('created_at desc')
   end
 
+  def pacts
+    @pacts = @person.pacts.order('created_at desc')
+  end
+
   def bounties
-    @bounties = @person.bounties.includes(:owner, :issue => [:tracker]).order('created_at desc')
+    @bounties = @person.bounties.includes(:owner, :pact, :issue => [:tracker]).order('created_at desc')
   end
 
   def crypto_bounties
