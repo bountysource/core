@@ -56,10 +56,12 @@ angular
       item_type: 'bounty',
       pact_id: id,
       bounty_expiration: null,
-      currency: 'USD'
+      currency: 'USD',
     };
 
-    $scope.checkout = {};
+    $scope.checkout = {
+      checkout_method: 'paypal'
+    };
 
     $scope.setOwner = function (type, owner) {
       switch (type) {
@@ -279,5 +281,15 @@ angular
       };
 
       $scope.$apply()
-    }
+    };
+
+    $scope.$watch('current_person', function (person) {
+      if (angular.isObject(person)) {
+        $scope.setOwner('person', person);
+
+        $api.person_teams(person.id).then(function (teams) {
+          $scope.teams = angular.copy(teams);
+        });
+      }
+    });
   })

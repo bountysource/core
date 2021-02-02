@@ -35,7 +35,8 @@ private
   end
 
   def bounty_params
-    params.require(:item).permit(:amount, :owner_id, :owner_type, :anonymous, :issue_id, :bounty_expiration, :upon_expiration, :tweet, :item_type, :total, :currency) if params[:item]
+    params.require(:item)
+      .permit(:amount, :owner_id, :owner_type, :anonymous, :issue_id, :bounty_expiration, :upon_expiration, :tweet, :item_type, :total, :currency, :pact_id) if params[:item]
   end
 
   def team_payin_params
