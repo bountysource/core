@@ -129,14 +129,25 @@
                   tooltip="{{issue.tracker.name}}"></img>  
               </td>
               <td>
-                <div class="flex-row spaced-between-flex">
+                <div class="flex-row spaced-between-flex" ng-if="issue.type === 'issue">
                   <div class="column-center">
-                    <a ng-href="/{{issue.type}}/{{issue.slug}}">
+                    <a ng-href="/issues/{{issue.id}}">
                       {{issue.title}}
                     </a>
                   </div>
                   <div ng-show="issue.bounty_total > 0" class="column-center">
                     <span ng-href="/issues/{{issue.slug}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
+                  </div>
+                </div>
+                <div class="flex-row spaced-between-flex" ng-if="issue.type === 'pact'"">
+                  <div class="column-center">
+                    <a ng-href="/pacts/{{issue.id}}">
+                      {{issue.title}}
+                    </a>
+                  </div>
+
+                  <div ng-show="issue.bounty_total > 0" class="column-center">
+                    <span ng-href="/pacts/{{issue.id}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
                   </div>
                 </div>
               </td>

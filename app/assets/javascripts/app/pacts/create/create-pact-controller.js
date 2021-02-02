@@ -115,10 +115,7 @@ angular
     }
 
     $scope.goToSignInPage = function () {
-      var tab = window.open(location.origin + '/signin', "_blank")
-      tab.addEventListener('unload', () => {
-        $scope.apply()
-      })
+      window.open(location.origin + '/signin', "_blank")
     }
 
     $scope.createPact = function () {
