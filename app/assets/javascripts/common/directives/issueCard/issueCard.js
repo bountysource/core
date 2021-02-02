@@ -15,7 +15,7 @@ angular.module('directives').directive('issueCard', function() {
           break
         }
         default: {
-          $scope.link = '/issues/' + $scope.slug
+          $scope.link = '/issues/' + $scope.issue.slug
         }
       }
     }]
