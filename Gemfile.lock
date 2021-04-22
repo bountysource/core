@@ -406,7 +406,7 @@ GEM
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     nori (2.6.0)
-    oauth (0.5.4)
+    oauth (0.5.5)
     octokit (4.8.0)
       sawyer (~> 0.8.0, >= 0.5.3)
     oj (3.5.0)
