@@ -364,7 +364,8 @@ GEM
     json (2.1.0)
     jwt (0.1.11)
       multi_json (>= 1.5)
-    kramdown (1.16.2)
+    kramdown (2.3.1)
+      rexml
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.6.0)
@@ -478,6 +479,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rexml (3.2.4)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
