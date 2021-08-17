@@ -1,7 +1,7 @@
 class Api::V1::BountyClaimsController < ApplicationController
 
   before_action :require_auth, except: [:show]
-  before_action :require_issue, only: [:create]
+  before_action :require_issue_or_pact, only: [:create]
   before_action :require_bounty_claim, except: [:index, :create]
   before_action :require_ownership, only: [:update, :destroy]
 
@@ -17,16 +17,20 @@ class Api::V1::BountyClaimsController < ApplicationController
   end
 
   def create
-    require_params :issue_id
+    require_any_of_params :issue_id, :pact_id
 
-    if @issue.fiat?
-      amount = @issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
-    elsif @issue.crypto?
-      amount = @issue.crypto_bounty_total
+    if (@issue)
+      if @issue.fiat?
+        amount = @issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+      elsif @issue.crypto?
+        amount = @issue.crypto_bounty_total
+      end
+    elsif (@pact)
+      amount = @pact.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
     end
 
     @bounty_claim = @person.bounty_claims.new(
-      bounty_claim_params.merge(issue: @issue, amount: amount)
+      bounty_claim_params.merge(issue: @issue, pact: @pact, amount: amount)
     )
 
     if @bounty_claim.save
@@ -72,8 +76,12 @@ protected
     end
   end
 
-  def require_issue
-    unless (@issue = Issue.find_by_id params[:issue_id])
+  def require_issue_or_pact
+    if (params[:issue_id])
+      @issue = Issue.find_by_id params[:issue_id]
+    elsif (params[:pact_id])
+      @pact = Pact.find_by_id params[:pact_id]
+    else
       render json: { error: "Issue not found" }, status: :not_found
     end
   end

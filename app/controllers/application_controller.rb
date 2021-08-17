@@ -27,8 +27,11 @@ class ApplicationController < ActionController::Base
 
   class MissingRequiredParams < StandardError
     attr_accessor :params
+    attr_accessor :all_required
+
     def initialize(*params)
       @params = params
+      @all_required = true
     end
   end
 
@@ -89,7 +92,7 @@ protected
       request_info["remote_ip"] = request.env["action_dispatch.remote_ip"].to_s
 
       options[:issue_id] = @issue.try(:id) || params[:item_number]
-      options[:tracker_id] = @tracker.try(:id) || @item.try(:id) || @issue.tracker.id #use item for follow_relations controller
+      options[:tracker_id] = @tracker.try(:id) || @item.try(:id) || @issue&.tracker&.id #use item for follow_relations controller
       options[:person_id] = @person.try(:id)
       ActivityLog.delay.log(name, request_info, options)
     }
@@ -147,6 +150,16 @@ protected
   def require_params(*keys)
     missing_params = keys.reject { |k| params.has_key?(k) && !params[k].blank? }
     raise MissingRequiredParams.new missing_params unless missing_params.empty?
+  end
+
+  def require_any_of_params(*keys)
+    missing_params = keys.reject { |k| params.has_key?(k) && !params[k].blank? }
+    missing_params_error = MissingRequiredParams.new missing_params if (!keys.empty? && keys.length == missing_params.length)
+
+    if (missing_params_error) 
+      missing_params_error.all_required = false
+      raise missing_params_error
+    end
   end
 
   def require_auth

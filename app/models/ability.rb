@@ -113,6 +113,13 @@ class Ability
         
       end
 
+      can :respond_to_claims, Pact do |pact|
+        puts pact.bounties
+        is_creator = pact.bounties.pluck(:person_id).include?(person.id)
+        is_on_team = TeamMemberRelation.where(team_id: pact.bounties.where(owner_type: 'Team').pluck(:owner_id), developer: true).pluck(:person_id).include?(person.id)
+        !pact.can_add_bounty && (pact.bounty_total > 0) && (is_creator || is_on_team)
+      end
+
       # Person can edit a tracker page
       can :edit_tracker, Tracker do |tracker|
         if (relation = tracker.relation_for_person(person))

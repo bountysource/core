@@ -1,0 +1,9 @@
+attribute :id
+attribute :project_name
+attribute :project_description
+attribute :created_at
+attribute :updated_at
+attribute :completed_at
+attribute :paid_at
+attribute :bounty_total
+attribute :featured

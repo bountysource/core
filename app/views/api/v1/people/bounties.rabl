@@ -10,3 +10,7 @@ child (:issue) do
     extends "api/v1/trackers/partials/base"
   end
 end
+
+child (:pact) do
+  extends "api/v1/pacts/partials/base"
+end

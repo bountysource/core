@@ -3,14 +3,14 @@
 # Table name: cash_outs
 #
 #  id                         :integer          not null, primary key
-#  type                       :string(255)      not null
+#  type                       :string           not null
 #  person_id                  :integer          not null
 #  address_id                 :integer          not null
 #  mailing_address_id         :integer
-#  bitcoin_address            :string(255)
-#  paypal_address             :string(255)
-#  remote_ip                  :string(255)
-#  user_agent                 :string(255)
+#  bitcoin_address            :string
+#  paypal_address             :string
+#  remote_ip                  :string
+#  user_agent                 :string
 #  amount                     :decimal(, )
 #  sent_at                    :datetime
 #  us_citizen                 :boolean
@@ -20,8 +20,8 @@
 #  serialized_mailing_address :text
 #  fee                        :decimal(, )
 #  fee_adjustment             :decimal(, )
-#  ripple_address             :string(255)
-#  mastercoin_address         :string(255)
+#  ripple_address             :string
+#  mastercoin_address         :string
 #  is_refund                  :boolean          default(FALSE), not null
 #  account_id                 :integer          not null
 #  quickbooks_transaction_id  :integer

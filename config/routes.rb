@@ -333,7 +333,7 @@ Api::Application.routes.draw do
           resource :email_change_verification, only: [:update]
 
           # not legacy
-          get :pledges, :bounties, :crypto_bounties, :crypto_pay_outs
+          get :pledges, :bounties, :crypto_bounties, :crypto_pay_outs, :pacts
 
           resource :address, controller: 'addresses'
 
@@ -485,6 +485,13 @@ Api::Application.routes.draw do
               get :summary
             end
           end
+          resources :pacts, only: [:index, :show, :create, :update, :destroy] do
+            member do
+              match '/mark_completed', action: :mark_completed, via: :post
+            end
+          end
+          resources :pact_applications, only: [:index, :show, :create, :update, :destroy]
+
           resources :backers, only: [:index]
           resources :teams, only: [:index, :show, :update], :id => /([^\/])+?/, :format => /json/ do
             resources :support_offering_rewards, only: [:create]

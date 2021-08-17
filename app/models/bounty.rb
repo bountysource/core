@@ -5,21 +5,22 @@
 #  id                :integer          not null, primary key
 #  amount            :decimal(10, 2)   not null
 #  person_id         :integer
-#  issue_id          :integer          not null
+#  issue_id          :integer
 #  status            :string(12)       default("active"), not null
 #  expires_at        :datetime
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  paid_at           :datetime
 #  anonymous         :boolean          default(FALSE), not null
-#  owner_type        :string(255)
+#  owner_type        :string
 #  owner_id          :integer
-#  bounty_expiration :string(255)
-#  upon_expiration   :string(255)
-#  promotion         :string(255)
+#  bounty_expiration :string
+#  upon_expiration   :string
+#  promotion         :string
 #  acknowledged_at   :datetime
 #  tweet             :boolean          default(FALSE), not null
 #  featured          :boolean          default(FALSE), not null
+#  pact_id           :bigint(8)
 #
 # Indexes
 #
@@ -27,6 +28,7 @@
 #  index_bounties_on_github_issue_id  (issue_id)
 #  index_bounties_on_owner_id         (owner_id)
 #  index_bounties_on_owner_type       (owner_type)
+#  index_bounties_on_pact_id          (pact_id)
 #  index_bounties_on_patron_id        (person_id)
 #  index_bounties_on_status           (status)
 #
@@ -36,6 +38,7 @@ require 'account/team'
 class Bounty < ApplicationRecord
   belongs_to :person
   belongs_to :issue
+  belongs_to :pact
 
   # TODO: this object shouldn't have an account... rework Transaction.build to use "account: bounty.issue"
   has_one :account, :through => :issue
@@ -46,7 +49,8 @@ class Bounty < ApplicationRecord
   # Gives access to polymorphic owner, which respects object anonymity on read
   has_owner
 
-  validates :issue, presence: true
+  validates :issue, presence: true, unless: -> { !pact.blank? }
+  validates :pact, presence: true, if: -> { issue.blank? }
   validates :amount, numericality: { greater_than_or_equal_to: 5 }
 
   # define status constants

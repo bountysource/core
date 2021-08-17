@@ -11,15 +11,16 @@
 #  owner_id         :bigint(8)
 #  featured         :boolean          default(FALSE), not null
 #  transaction_hash :string           not null
+#  from             :string           not null
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-#  from             :string(50)       not null
 #  is_refund        :boolean          default(FALSE), not null
 #
 # Indexes
 #
 #  index_crypto_bounties_on_issue_id                 (issue_id)
 #  index_crypto_bounties_on_owner_type_and_owner_id  (owner_type,owner_id)
+#  index_crypto_bounties_on_transaction_hash         (transaction_hash) UNIQUE
 #
 
 class CryptoBounty < ApplicationRecord

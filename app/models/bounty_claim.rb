@@ -4,9 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  person_id   :integer          not null
-#  issue_id    :integer          not null
+#  issue_id    :integer
 #  number      :integer
-#  code_url    :string(255)
+#  code_url    :string
 #  description :text
 #  collected   :boolean
 #  disputed    :boolean          default(FALSE), not null
@@ -15,10 +15,12 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  amount      :decimal(, )      default(0.0), not null
+#  pact_id     :bigint(8)
 #
 # Indexes
 #
 #  index_bounty_claims_on_issue_id                (issue_id)
+#  index_bounty_claims_on_pact_id                 (pact_id)
 #  index_bounty_claims_on_person_id               (person_id)
 #  index_bounty_claims_on_person_id_and_issue_id  (person_id,issue_id) UNIQUE
 #
@@ -26,43 +28,73 @@
 class BountyClaim < ApplicationRecord
   belongs_to :person
   belongs_to :issue
+  belongs_to :pact
   has_many :bounty_claim_responses
   has_many :bounty_claim_events
 
   validates :person, presence: true
-  validates :issue, presence: true
+  validates :issue, presence: true, unless: -> { !pact.blank? }
+  validates :pact, presence: true, if: -> { issue.blank? }
 
   # uses the custom URL validator defined in app/validators/url_validator.rb
   #validates :code_url, url: true, if: lambda { code_url.present? }
 
-  validates_uniqueness_of :issue_id, scope: :person_id
+  validates_uniqueness_of :issue_id, :allow_blank => true, scope: :person_id
+  validates_uniqueness_of :pact_id, :allow_blank => true, scope: :person_id
 
   scope :paid_out, -> { where(paid_out: true) }
   scope :collected, -> { where(collected: true) }
 
   # add number before creation. i.e. Bounty Claim #1
-  before_create { self.number = issue.bounty_claims.count + 1 }
-  after_create { self.person.is_bounty_hunter!(issue: self.issue) }
+  before_create { 
+    if issue
+      self.number = issue.bounty_claims.count + 1 
+    elsif pact
+      self.number = pact.bounty_claims.count + 1
+    end
+  }
+  after_create { 
+    if issue 
+      self.person.is_bounty_hunter!(issue: self.issue)
+    elsif pact
+      self.person.is_bounty_hunter!(pact: self.pact)
+    end
+  }
 
   # send email to backers and the developer after creation
   after_create do
     person.send_email(:bounty_claim_submitted_developer_notice, bounty_claim: self)
-    issue.backers.each { |backer| backer.send_email(:bounty_claim_submitted_backer_notice, bounty_claim: self) }
+    issue&.backers&.each { |backer| backer.send_email(:bounty_claim_submitted_backer_notice, bounty_claim: self) }
+    pact&.backers&.each { |backer| backer.send_email(:bounty_claim_submitted_backer_notice, bounty_claim: self) }
   end
 
   # if the creation of this claim contested the bounty, send emails
   after_commit do
     if contested?
-      issue.developers.each { |developer| developer.send_email(:bounty_claim_contested_developer_notice, bounty_claim: self) }
-      issue.backers.each { |backer| backer.send_email(:bounty_claim_contested_backer_notice, bounty_claim: self) }
+      if issue
+        developers = issue.developers
+        backers  = issue.backers
+      elsif pact
+        developers = pact.developers
+        backers = pact.backers
+      end
+      developers.each { |developer| developer.send_email(:bounty_claim_contested_developer_notice, bounty_claim: self) }
+      backers.each { |backer| backer.send_email(:bounty_claim_contested_backer_notice, bounty_claim: self) }
     end
   end
 
   validate do
+    puts "starting validation"
+    puts errors.empty?, errors.inspect
+
     #Rails.logger.error "HI THERE: #{self.id} -- #{issue.inspect}"
     # require the issue to be closed, unless it's generic
-    if !issue.generic? && issue.can_add_bounty?
+    if issue && !issue&.generic? && issue&.can_add_bounty?
       errors.add(:issue, 'not closed')
+    end
+
+    if pact && !pact&.completed_at?
+      errors.add(:pact, 'not completed')
     end
 
     # invalidate if another claim won
@@ -70,14 +102,22 @@ class BountyClaim < ApplicationRecord
       errors.add(:issue, 'bounty already claimed')
     end
 
+    if new_record? && pact && !self.class.where(pact_id: pact.id, collected: true).empty?
+      errors.add(:pact, 'bounty already claimed')
+    end
+
     # require code_url AND/OR description to be present
     if code_url.blank? && description.blank?
       errors.add(:base, "Must provide code_url and/or description")
     end
 
-    if issue.crypto? && !person.has_verified_primary_wallet?
+    # add check for pact when we add crypto support there
+    if issue&.crypto? && !person.has_verified_primary_wallet?
       errors.add(:person, "must have a verified primary wallet to submit a claim for a crypto bounty")
     end
+
+    puts "some validation done"
+    puts errors.empty?, errors.inspect
 
     errors.empty?
   end
@@ -166,7 +206,11 @@ class BountyClaim < ApplicationRecord
   end
 
   def backers_count
-    issue.backers.count
+    if issue
+      issue.backers.count 
+    elsif pact 
+      pact.backers.count
+    end
   end
 
   def responsive_backers
@@ -174,7 +218,7 @@ class BountyClaim < ApplicationRecord
   end
 
   def unresponsive_backers
-    issue.backers - responsive_backers
+    issue&.backers - responsive_backers
   end
 
   # a claim is disputed if one or more of the backers rejected it.
@@ -188,7 +232,11 @@ class BountyClaim < ApplicationRecord
 
   # is there more than one claim on the issue?
   def contested?
-    self.class.where(issue_id: issue.id).count > 1
+    if issue
+      self.class.where(issue_id: issue.id).count > 1 
+    elsif pact
+      self.class.where(pact_id: pact.id).count > 1
+    end
   end
 
   def dispute_period_ends_at
@@ -206,10 +254,14 @@ class BountyClaim < ApplicationRecord
 
   # have all of the backers voted, and are all votes for accepting the claim?
   def unanimously_accepted?
-    if issue.fiat?
-      issue.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
-    elsif issue.crypto?
-      issue.crypto_bounties.pluck(:owner_id).uniq.reject(&:nil?).count == bounty_claim_responses.where(value: true).count
+    if issue
+      if issue.fiat?
+        issue.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
+      elsif issue.crypto?
+        issue.crypto_bounties.pluck(:owner_id).uniq.reject(&:nil?).count == bounty_claim_responses.where(value: true).count
+      end
+    elsif pact
+      pact.bounties.pluck(:person_id).uniq.count == bounty_claim_responses.where(value: true).count
     end
   end
 
@@ -234,35 +286,67 @@ class BountyClaim < ApplicationRecord
       update_attribute :collected, true
 
       # set ALL OTHER bounty claims from nil to false, and reject
-      issue.bounty_claims.each { |bounty_claim| bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self }
+      if issue
+        issue.bounty_claims.each { |bounty_claim| bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self }
 
-      # set issue to paid_out
-      issue.update_attribute(:paid_out, true)
+        # set issue to paid_out
+        issue.update_attribute(:paid_out, true)
 
-      # create event
-      BountyClaimEvent::Collected.create!(bounty_claim: self)
-      if issue.fiat?
+        if issue.fiat?
+          #set bounty_claim.amount to the sum of all the bounties that have been set to paid -- this will not handle paying out claims multiple times..
+          payout_amount = issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+          update_attribute :amount, payout_amount
+
+          #update active bounties' status to paid (not refunded)
+          issue.bounties.active.update_all(status: Bounty::Status::PAID)
+
+          # payout! it raises on its own if something goes wrong
+          payout! if payout_amount > 0
+        else
+          CryptoPayOut.create(issue: issue, person: person, type: 'ETH::Payout')
+        end
+
+        # update email template, email backers of bounty claim
+        issue.backers.find_each { |backer| backer.send_email(:bounty_claim_accepted_backer_notice, bounty_claim: self) }
+
+        issue&.update_bounty_total
+      elsif pact
+        puts "before loop"
+
+        pact.bounty_claims.each do |bounty_claim| 
+          puts "inside loop"
+          puts bounty_claim.id
+          puts bounty_claim.inspect
+
+          begin
+            bounty_claim.update_attributes!(collected: false, rejected: true) unless bounty_claim == self 
+            puts "updated"
+          rescue Exception => ex
+            puts ex.inspect
+            raise ex
+          end
+
+        end
+
+        puts "after loop"
+
+        pact.update_attribute(:paid_at, Time.now)
+
         #set bounty_claim.amount to the sum of all the bounties that have been set to paid -- this will not handle paying out claims multiple times..
-        payout_amount = issue.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
+        payout_amount = pact.bounties.where(status: Bounty::Status::ACTIVE).sum(:amount)
         update_attribute :amount, payout_amount
 
         #update active bounties' status to paid (not refunded)
-        issue.bounties.active.update_all(status: Bounty::Status::PAID)
+        pact.bounties.active.update_all(status: Bounty::Status::PAID)
 
         # payout! it raises on its own if something goes wrong
         payout! if payout_amount > 0
-      else
-        CryptoPayOut.create(issue: issue, person: person, type: 'ETH::Payout')
+
+        # update email template, email backers of bounty claim
+        pact.backers.find_each { |backer| backer.send_email(:bounty_claim_accepted_backer_notice, bounty_claim: self) }
+
+        issue&.update_bounty_total
       end
-
-
-      # update email template, email backers of bounty claim
-      issue.backers.find_each { |backer| backer.send_email(:bounty_claim_accepted_backer_notice, bounty_claim: self) }
-
-      # email developer that his/her claim has been collected, with messages from backers
-      person.send_email(:bounty_claim_accepted_developer_notice, bounty_claim: self, responses: accepted_responses_with_messages)
-
-      
 
       MixpanelEvent.track(
         person_id: person_id,
@@ -270,9 +354,13 @@ class BountyClaim < ApplicationRecord
         issue_id: issue_id,
         type: unanimously_accepted? ? 'vote' : 'time'
       )
-    end
 
-    issue.update_bounty_total
+      # create event
+      BountyClaimEvent::Collected.create!(bounty_claim: self)
+
+      # email developer that his/her claim has been collected, with messages from backers
+      person.send_email(:bounty_claim_accepted_developer_notice, bounty_claim: self, responses: accepted_responses_with_messages)
+    end
 
     self
   end
@@ -281,7 +369,8 @@ class BountyClaim < ApplicationRecord
   # that is, did the person place a bounty on the issue?
   # OR is this person a developer of a team that created a bounty
   def person_can_respond?(person)
-    issue.can_respond_to_claims?(person)
+    issue&.can_respond_to_claims?(person)
+    pact&.can_respond_to_claims?(person)
   end
 
   # get the response for a person.
@@ -316,7 +405,7 @@ class BountyClaim < ApplicationRecord
 
       transaction.splits.create(
         amount: -1 * amount,
-        item: issue
+        item: (issue || pact)
       )
 
       transaction.splits.create(

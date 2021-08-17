@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180827073853) do
+ActiveRecord::Schema.define(version: 20210113213551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20180827073853) do
   create_table "bounties", id: :serial, force: :cascade do |t|
     t.decimal "amount", precision: 10, scale: 2, null: false
     t.integer "person_id"
-    t.integer "issue_id", null: false
+    t.integer "issue_id"
     t.string "status", limit: 12, default: "active", null: false
     t.datetime "expires_at"
     t.datetime "created_at", null: false
@@ -109,10 +109,12 @@ ActiveRecord::Schema.define(version: 20180827073853) do
     t.datetime "acknowledged_at"
     t.boolean "tweet", default: false, null: false
     t.boolean "featured", default: false, null: false
+    t.bigint "pact_id"
     t.index ["anonymous"], name: "index_bounties_on_anonymous"
     t.index ["issue_id"], name: "index_bounties_on_github_issue_id"
     t.index ["owner_id"], name: "index_bounties_on_owner_id"
     t.index ["owner_type"], name: "index_bounties_on_owner_type"
+    t.index ["pact_id"], name: "index_bounties_on_pact_id"
     t.index ["person_id"], name: "index_bounties_on_patron_id"
     t.index ["status"], name: "index_bounties_on_status"
   end
@@ -144,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180827073853) do
 
   create_table "bounty_claims", id: :serial, force: :cascade do |t|
     t.integer "person_id", null: false
-    t.integer "issue_id", null: false
+    t.integer "issue_id"
     t.integer "number"
     t.string "code_url"
     t.text "description"
@@ -155,7 +157,9 @@ ActiveRecord::Schema.define(version: 20180827073853) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.decimal "amount", default: "0.0", null: false
+    t.bigint "pact_id"
     t.index ["issue_id"], name: "index_bounty_claims_on_issue_id"
+    t.index ["pact_id"], name: "index_bounty_claims_on_pact_id"
     t.index ["person_id", "issue_id"], name: "index_bounty_claims_on_person_id_and_issue_id", unique: true
     t.index ["person_id"], name: "index_bounty_claims_on_person_id"
   end
@@ -672,6 +676,41 @@ ActiveRecord::Schema.define(version: 20180827073853) do
     t.datetime "processed_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pact_applications", force: :cascade do |t|
+    t.bigint "person_id"
+    t.bigint "pact_id"
+    t.string "note"
+    t.datetime "completion_date"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pact_id"], name: "index_pact_applications_on_pact_id"
+    t.index ["person_id"], name: "index_pact_applications_on_person_id"
+  end
+
+  create_table "pacts", force: :cascade do |t|
+    t.string "project_name"
+    t.string "pact_type"
+    t.string "experience_level"
+    t.string "time_commitment"
+    t.string "issue_type"
+    t.datetime "expires_at"
+    t.datetime "paid_at"
+    t.string "link"
+    t.string "issue_url"
+    t.string "project_description"
+    t.decimal "bounty_total", precision: 10, scale: 2, default: "0.0", null: false
+    t.integer "person_id"
+    t.string "owner_type"
+    t.integer "owner_id"
+    t.boolean "featured", default: false, null: false
+    t.boolean "can_add_bounty", default: true, null: false
+    t.boolean "solution_started", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "completed_at"
   end
 
   create_table "payment_method_temporaries", id: :serial, force: :cascade do |t|
@@ -1456,9 +1495,13 @@ ActiveRecord::Schema.define(version: 20180827073853) do
     t.index ["person_id"], name: "index_wallets_on_person_id"
   end
 
+  add_foreign_key "bounties", "pacts"
+  add_foreign_key "bounty_claims", "pacts"
   add_foreign_key "crypto_bounties", "issues"
   add_foreign_key "crypto_pay_out_claim_events", "crypto_pay_outs"
   add_foreign_key "crypto_pay_out_txns", "crypto_pay_outs"
   add_foreign_key "crypto_pay_outs", "issues"
   add_foreign_key "issue_addresses", "issues"
+  add_foreign_key "pact_applications", "pacts"
+  add_foreign_key "pact_applications", "people"
 end

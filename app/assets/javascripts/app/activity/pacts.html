@@ -1,0 +1,49 @@
+<ul class="breadcrumb">
+  <li><a href="/">Home</a></li>
+  <li><a href="/activity">Activity</a></li>
+  <li class="active"><a href="/activity/pacts">Pacts</a></li>
+</ul>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <ng-include src="'app/activity/templates/navTabs.html'"></ng-include>
+    <div>
+      Need something fixed? <a href="/search">Search for issues</a> or <a href="/pacts/new">create a pact</a> and post a bounty!
+    </div>
+
+    <div class="table-responsive">
+      <table class="table" ng-show="pacts.length > 0">
+        <thead>
+          <tr>
+            <th style="width: 4%"></th>
+            <th>Project name</th>
+            <th>Status</th>
+            <th>Amount funded</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat="pact in pacts | orderBy:'-created_at'">
+            <td />
+            <td class="center-height">
+              <a ng-href="/pacts/{{pact.id}}">{{ pact.project_name }}</a>
+            </td>
+
+            <td class="center-height">
+              <span class="label label-primary" ng-show="pact.bounty_total > 0">Funded</span>
+              <span class="label label-danger" ng-show="pact.bounty_total == 0">Not Funded</span>
+              <span class="label label-success" ng-show="pact.completed_at != null">Completed</span>
+              <span class="label label-warning" ng-show="pact.paid_at != null">Paid out</span>
+            </td>
+
+            <td class="center-height">{{ pact.bounty_total | dollars }}</td>
+
+            <td class="center-height">{{ pact.created_at | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

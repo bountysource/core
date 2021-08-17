@@ -170,6 +170,47 @@ angular.module('services').config(function($httpProvider) {
       });
     },
 
+    createPact: function(params) {
+      return this.call({
+        url: '/pacts',
+        method: 'POST',
+        params: params
+      })
+    },
+
+    getPact: function(id, params) {
+      params = params || {}
+
+      return this.call({
+        url: '/pacts/' + id,
+        method: 'GET',
+        params
+      })
+    },
+
+    markPactCompleted: function(id) {
+      return this.call({
+        url: '/pacts/' + id + '/mark_completed',
+        method: 'POST',
+        params: {},
+      })
+    },
+
+    createPactApplication: function(params) {
+      return this.call({
+        url: '/pact_applications',
+        method: 'POST',
+        params: params
+      })
+    },
+
+    getPactApplications: function(params) {
+      return this.call({
+        url: '/pact_applications',
+        params: params || {}
+      })
+    },
+
     pledges: function(params) {
       return this.call({
         url: '/pledges',
@@ -826,6 +867,12 @@ angular.module('services').config(function($httpProvider) {
 
   this.bounty_claim_create = function(issue_id, data) {
     data.issue_id = issue_id;
+    return this.call("/bounty_claims", "POST", data);
+  };
+
+  this.pact_bounty_claim_create = function(pact_id, data) {
+    data = data || {}
+    data.pact_id = pact_id
     return this.call("/bounty_claims", "POST", data);
   };
 

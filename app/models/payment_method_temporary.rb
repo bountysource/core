@@ -4,7 +4,7 @@
 #
 #  id           :integer          not null, primary key
 #  person_id    :integer          not null
-#  paypal_token :string(255)      not null
+#  paypal_token :string           not null
 #  data         :json             not null
 #  created_at   :datetime
 #  updated_at   :datetime

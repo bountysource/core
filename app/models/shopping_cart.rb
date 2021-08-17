@@ -8,7 +8,7 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  order_id          :integer
-#  uid               :string(255)
+#  uid               :string
 #  payment_method_id :integer
 #  status            :text             default("draft"), not null
 #
@@ -209,7 +209,11 @@ class ShoppingCart < ApplicationRecord
     case item
     when Bounty
       item.assign_attributes attrs.select { |k,v| WHITELISTED_BOUNTY_ATTRIBUTES.include? k.to_sym }.with_indifferent_access
+      if attrs[:issue_id]
       item.issue = ::Issue.find_by id: attrs[:issue_id]
+      elsif attrs[:pact_id]
+        item.pact = ::Pact.find_by id: attrs[:pact_id]
+      end
 
     when Pledge
       item.assign_attributes attrs.select { |k,v| WHITELISTED_PLEDGE_ATTRIBUTES.include? k.to_sym }

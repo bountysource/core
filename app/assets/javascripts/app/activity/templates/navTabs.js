@@ -2,6 +2,7 @@ angular.module('activity').controller('ActivityNavTabsController', function($sco
 
   $scope.navElements = [
     new NavTab('Timeline',      '/activity'),
+    new NavTab('Pacts',      '/activity/pacts'),
     new NavTab('Fiat Bounties',      '/activity/bounties'),
     new NavTab('Crypto Bounties',      '/activity/crypto_bounties'),
     new NavTab('Bounty Claims', '/activity/claims'),

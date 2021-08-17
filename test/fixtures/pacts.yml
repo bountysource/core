@@ -1,0 +1,54 @@
+# == Schema Information
+#
+# Table name: pacts
+#
+#  id                  :bigint(8)        not null, primary key
+#  project_name        :string
+#  pact_type           :string
+#  experience_level    :string
+#  time_commitment     :string
+#  issue_type          :string
+#  expires_at          :datetime
+#  paid_at             :datetime
+#  link                :string
+#  issue_url           :string
+#  project_description :string
+#  bounty_total        :decimal(10, 2)   default(0.0), not null
+#  person_id           :integer
+#  owner_type          :string
+#  owner_id            :integer
+#  featured            :boolean          default(FALSE), not null
+#  can_add_bounty      :boolean          default(TRUE), not null
+#  solution_started    :boolean          default(FALSE), not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  completed_at        :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_name: MyString
+  type: 
+  experience_level: MyString
+  time_commitment: MyString
+  issue_type: MyString
+  expiration: 1
+  link: MyString
+  issue_url: MyString
+  project_description: MyString
+  amount: 1
+  person_id: 1
+
+two:
+  project_name: MyString
+  type: 
+  experience_level: MyString
+  time_commitment: MyString
+  issue_type: MyString
+  expiration: 1
+  link: MyString
+  issue_url: MyString
+  project_description: MyString
+  amount: 1
+  person_id: 1

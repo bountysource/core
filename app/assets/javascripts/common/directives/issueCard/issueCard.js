@@ -7,6 +7,17 @@ angular.module('directives').directive('issueCard', function() {
     scope: {
       issue: "="
     },
-    link: function(scope) { scope.issueTruncateLength = 240; }
+    link: function(scope) { scope.issueTruncateLength = 240; },
+    controller: ['$scope', function ($scope) {
+      switch ($scope.issue.type) {
+        case 'pact': {
+          $scope.link = '/pacts/' + $scope.issue.id
+          break
+        }
+        default: {
+          $scope.link = '/issues/' + $scope.issue.slug
+        }
+      }
+    }]
   };
 });

@@ -219,4 +219,18 @@ angular.module('app').config(function ($routeProvider, defaultRouteOptions, pers
   $routeProvider.otherwise({
     templateUrl: 'app/layout/notFound.html'
   });
+  
+  $routeProvider.when('/pacts/new', angular.extend({
+    templateUrl: 'app/pacts/create/create-pact.html',
+    controller: 'PactController',
+    title: 'Create Pact',
+    trackEvent: 'Create Pact'
+  }, defaultRouteOptions));
+
+  $routeProvider.when('/pacts/:id', angular.extend({
+    templateUrl: 'app/pacts/single-pact/single-pact.html',
+    controller: 'SinglePactController',
+    title: 'View Pact',
+    trackEvent: 'View Pact'
+  }, defaultRouteOptions));
 });

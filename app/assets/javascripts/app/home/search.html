@@ -124,17 +124,30 @@
             </tr>
             <tr ng-repeat="issue in results.issues | filter:filter_search_results ">
               <td>
-                <img ng-src="{{issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" tooltip="{{issue.tracker.name}}"></img>  
+                <img 
+                  ng-src="{{issue.type === 'pact' ? issue.author.image_url : issue.tracker.image_url}}" class="issue-table-tracker-img img-circle" 
+                  tooltip="{{issue.tracker.name}}"></img>  
               </td>
               <td>
-                <div class="flex-row spaced-between-flex">
+                <div class="flex-row spaced-between-flex" ng-if="issue.type === 'issue">
                   <div class="column-center">
-                    <a ng-href="/issues/{{issue.slug}}">
+                    <a ng-href="/issues/{{issue.id}}">
                       {{issue.title}}
                     </a>
                   </div>
                   <div ng-show="issue.bounty_total > 0" class="column-center">
                     <span ng-href="/issues/{{issue.slug}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
+                  </div>
+                </div>
+                <div class="flex-row spaced-between-flex" ng-if="issue.type === 'pact'"">
+                  <div class="column-center">
+                    <a ng-href="/pacts/{{issue.id}}">
+                      {{issue.title}}
+                    </a>
+                  </div>
+
+                  <div ng-show="issue.bounty_total > 0" class="column-center">
+                    <span ng-href="/pacts/{{issue.id}}" class="label label-aquamarine label-small-radius">{{issue.bounty_total | dollars}}</span>
                   </div>
                 </div>
               </td>

@@ -1,0 +1,10 @@
+json.(item,
+  :id,
+  :person,
+  :pact,
+  :note,
+  :completion_date,
+  :status,
+  :created_at,
+  :updated_at
+ )

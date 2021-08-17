@@ -17,7 +17,7 @@
           <tr>
             <th style="width: 4%"></th>
             <th>Tracker</th>
-            <th>Issue</th>
+            <th>Issue/Pact</th>
             <th>Amount</th>
             <th>Date</th>
             <th style="width: 50px;">Owner</th>
@@ -31,15 +31,22 @@
         <tbody>
           <tr ng-repeat="bounty in bounties | orderBy:'-created_at'">
             <td class="center-height">
-              <a ng-href="/trackers/{{bounty.issue.tracker.slug}}">
+              <a ng-if="bounty.issue" ng-href="/trackers/{{bounty.issue.tracker.slug}}">
                 <img ng-src="{{ bounty.issue.tracker.image_url }}" class="img-responsive img-circle" tooltip="{{bounty.issue.tracker.name}}" tooltip-placement="left">
               </a>
+              <p ng-if="bounty.pact">N/A</p>
             </td>
             <td class="center-height"><a ng-href="/trackers/{{bounty.issue.tracker.slug}}">{{ bounty.issue.tracker.name }}</a></td>
-            <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
+            <td ng-if="bounty.issue" class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.issue.title }}
               <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
               <span ng-hide="bounty.status == 'refunded'">
                 <issue-status-label issue="bounty.issue"></issue-status-label>
+              </span>
+            </a></td>
+            <td ng-if="bounty.pact" class="center-height"><a ng-href="/pacts/{{bounty.pact.id}}">{{ bounty.pact.project_name }}
+              <span ng-show="bounty.status == 'refunded'" class="label label-warning">Refunded</span>
+              <span ng-hide="bounty.status == 'refunded'">
+                <issue-status-label issue="bounty.pact"></issue-status-label>
               </span>
             </a></td>
             <td class="center-height"><a ng-href="/issues/{{bounty.issue.slug}}">{{ bounty.amount | dollars }}</a></td>

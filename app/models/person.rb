@@ -3,30 +3,30 @@
 # Table name: people
 #
 #  id                   :integer          not null, primary key
-#  first_name           :string(255)
-#  last_name            :string(255)
-#  display_name         :string(255)
-#  email                :string(255)      not null
+#  first_name           :string
+#  last_name            :string
+#  display_name         :string
+#  email                :string           not null
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  buyer_id             :string(255)
-#  password_digest      :string(255)
+#  buyer_id             :string
+#  password_digest      :string
 #  account_completed    :boolean          default(FALSE)
-#  paypal_email         :string(255)
+#  paypal_email         :string
 #  last_seen_at         :datetime
 #  last_bulk_mailed_at  :datetime
 #  admin                :boolean          default(FALSE)
 #  bio                  :text
-#  location             :string(255)
-#  url                  :string(255)
-#  company              :string(255)
-#  public_email         :string(255)
+#  location             :string
+#  url                  :string
+#  company              :string
+#  public_email         :string
 #  accepted_terms_at    :datetime
-#  cloudinary_id        :string(255)
+#  cloudinary_id        :string
 #  deleted              :boolean          default(FALSE), not null
 #  profile_completed    :boolean          default(FALSE), not null
 #  shopping_cart_id     :integer
-#  stripe_customer_id   :string(255)
+#  stripe_customer_id   :string
 #  suspended_at         :datetime
 #  bounty_hunter        :boolean
 #  quickbooks_vendor_id :integer
@@ -92,6 +92,7 @@ class Person < ApplicationRecord
 
   has_many :pledges
   has_many :bounties
+  has_many :pacts
   has_many :crypto_bounties, as: :owner
   has_many :crypto_pay_outs
   has_many :team_payins
@@ -211,6 +212,8 @@ class Person < ApplicationRecord
       teams << options[:team]
     elsif options[:issue]
       teams += Team.where(id: options[:issue].bounties.where(owner_type: 'Team').pluck(:owner_id))
+    elsif options[:pact]
+      teams += Team.where(id: options[:pact].bounties.where(owner_type: 'Team').pluck(:owner_id))
     end
 
     teams.each do |team|

@@ -5,7 +5,7 @@
 #  id                          :integer          not null, primary key
 #  support_offering_id         :integer          not null
 #  amount                      :decimal(10, 2)   not null
-#  title                       :string(255)
+#  title                       :string
 #  description                 :text
 #  active_support_levels_count :integer          default(0), not null
 #  deleted_at                  :datetime
