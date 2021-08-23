@@ -1,5 +1,5 @@
 class Api::V1::PeopleController < ApplicationController
-  before_action :require_auth,    except: [:recent, :profile, :activity, :login, :create, :reset_password, :request_password_reset, :interesting, :count, :teams, :email_registered]
+  before_action :require_auth,    except: [:recent, :profile, :activity, :login, :create, :reset_password, :request_password_reset, :interesting, :count, :teams, :email_registered, :report]
   before_action :require_profile, only:   [:profile, :activity, :teams]
 
   # show all of the authenticated user's info
@@ -341,6 +341,14 @@ class Api::V1::PeopleController < ApplicationController
     language_ids = (params[:language_ids] || '').split(',')
     @person.set_languages(*language_ids)
 
+    head :ok
+  end
+
+  # report account
+  def report
+    report = Hash.new
+    params[:report].each { |k, v| report[k.to_sym] = v }
+    @person.send_email(:report_account, report: report)
     head :ok
   end
 

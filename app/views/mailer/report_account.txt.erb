@@ -1,0 +1,8 @@
+Activity report of the account: <%= Api::Application.config.www_url %>/users/<%=@report[:person_id]%>
+
+From: <%=@person.frontend_url%>
+
+Reason: <%=@report[:reason]%>
+
+Comment: <%=@report[:note]%>
+

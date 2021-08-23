@@ -73,6 +73,36 @@
         <div ng-show="current_person.id == person.id" class="text-center">
           <a href="/settings" class="btn btn-default btn-long border-gunmetal">Edit Your Profile</a>
         </div>
+
+        <div ng-show="current_person.id != person.id" class="text-center" ng-switch="report_user_form.state">
+          <div class="alert alert-danger" ng-if="report_user_form.error">
+            {{report_user_form.error}}
+          </div>
+          <div ng-switch-when="hidden">
+            <button ng-click="report_user_form.show()" class="mt-3 btn btn-long btn-danger">Report This Account</button>
+          </div>
+          <form ng-switch-when="shown" class="form-horizontal ng-pristine ng-valid" ng-submit="report_user_form.submit()">
+            <label class="col-xs-12 control-label">Reason</label>
+            <!--select class="col-xs-12 mt-3" ng-model="report_user_form.data.report_reason" ng-options="item for item in report_user_form.reasons">
+            </select-->
+            <div class="btn-group mt-3">
+              <span ng-repeat="reason in report_user_form.reasons" ng-click="selectReportReason(reason)" class="btn btn-sm btn-light-blue btn-outline" ng-class="{active: reason == report_user_form.data.report_reason}">
+                {{ reason }}
+              </span>
+            </div>
+            <label class="col-xs-12 control-label">Comment</label>
+            <div class="col-xs-12 mt-3">
+              <textarea class="form-control ng-pristine ng-valid" ng-model="report_user_form.data.note" placeholder="Provide some additional information." rows="4"></textarea>
+            </div>
+            <div>
+              <button type="submit" class="mt-3 btn btn-light-blue">Submit</button>
+              <button ng-click="report_user_form.cancel()" class="mt-3 btn btn-danger">Cancel</button>
+            </div>
+          </form>
+          <div ng-switch-when="submitted">
+            <button class="mt-3 btn btn-long btn-default disabled">Reported</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

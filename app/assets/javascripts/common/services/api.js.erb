@@ -916,6 +916,10 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/people/"+person_id+"/teams");
   };
 
+  this.person_report = function(person_id, data) {
+    return this.call("/people/"+person_id+"/report", "POST", {report: data} );
+  };
+
   this.followed_trackers = function() {
     return this.call('/trackers/followed');
   };
