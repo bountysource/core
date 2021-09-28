@@ -172,6 +172,18 @@ describe "live_sync" do
         expect(action).to change(Comment, :count).by_at_least(1)
       end
     end
+
+    describe "Redmine::Issue" do
+      let(:issue_url) { "https://projects.theforeman.org/issues/863" }
+
+      it "should create new issue" do
+        expect(action).to change(Issue, :count).by(1)
+      end
+
+      it "should fetch issue comment" do
+        expect(action).to change(Comment, :count).by_at_least(1)
+      end
+    end
   end
 
   describe "Tracker#remote_sync" do

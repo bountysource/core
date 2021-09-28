@@ -82,6 +82,11 @@ FactoryBot.define do
       sequence(:url) { |n| "https://www.randomsite-#{n}.local/bugs/buglist.cgi?product=abc" }
     end
 
+    factory :redmine_tracker, class: Redmine::Tracker do
+      sequence(:name) { |n| "Redmine repo #{n}" }
+      sequence(:url) { |n| "https://www.randomsite.local/issues" }
+    end
+
     factory :sourceforge_tracker, class: SourceForge::Tracker do
       sequence(:name) { |n| "SourceForge#{n}" }
       sequence(:url) { |n| "http://sourceforge.net/projects/sourceforge#{n}/" }
