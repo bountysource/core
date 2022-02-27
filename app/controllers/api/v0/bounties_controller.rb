@@ -38,7 +38,7 @@ class Api::V0::BountiesController < Api::V0::BaseController
   end
 
   def refund
-    @bounty.refund!
+    @bounty.refund!(!!params[:fraud])
 
     if @bounty.errors.empty?
       render "api/v0/bounties/show"

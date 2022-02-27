@@ -227,13 +227,15 @@ class Bounty < ApplicationRecord
 
   # Refund bounty to the person who created it. The amount refundable is simply
   # the amount - (amount * bs fee)
-  def refund!
+  def refund!(is_fraud=false)
     if refundable?
       self.class.transaction do
         transaction = Transaction.build do |tr|
-          tr.description = "Refund Bounty(#{id}) - Bounty Amount: $#{amount} Refunded: $#{amount}"
+          tr.description = "Refund Bounty(#{id}) #{'FOR FRAUD ' if is_fraud}- Bounty Amount: $#{amount} Refunded: $#{amount}"
           tr.splits.create(amount: -amount, item: issue)
-          if owner_type == "Team"
+          if is_fraud
+            tr.splits.create(amount: +amount, account: Account::Liability.instance)
+          elsif owner_type == "Team"
             tr.splits.create(amount: +amount, item: owner)
           else
             tr.splits.create(amount: +amount, item: person)
@@ -246,7 +248,7 @@ class Bounty < ApplicationRecord
         update_attributes status: Status::REFUNDED or raise ActiveRecord::Rollback
 
         # email the backer
-        person.send_email :bounty_refunded, bounty: self, transaction: transaction
+        person.send_email :bounty_refunded, bounty: self, transaction: transaction unless is_fraud
       end
 
       # update displayed bounty total on issue

@@ -23,7 +23,9 @@
 
 
         <h4>Actions</h4>
-        <button class="btn btn-success" ng-click="refund(bounty.id)" ng-show="bounty.status=='active'">Refund</button>
+        <button class="btn btn-success" ng-click="refund(bounty.id, false)" ng-show="bounty.status=='active'">Cancel (refund owner)</button>
+        &nbsp; &nbsp;
+        <button class="btn btn-success" ng-click="refund(bounty.id, true)" ng-show="bounty.status=='active'">Cancel (no refund)</button>
         &nbsp; &nbsp;
         <button class="btn btn-success" ng-click="set_featured(bounty.id, true)" ng-show="!bounty.featured">Feature</button>
         <button class="btn btn-success" ng-click="set_featured(bounty.id, false)" ng-show="bounty.featured">Unfeature</button>

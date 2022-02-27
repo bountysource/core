@@ -48,9 +48,9 @@ angular.module('app')
     return split.transaction.audited;
   };
 
-  $scope.refund = function(bounty_id) {
+  $scope.refund = function(bounty_id, is_fraud) {
     if (confirm("Are you sure?")) {
-      $api.refund_bounty(bounty_id).then(function(response) {
+      $api.refund_bounty(bounty_id, is_fraud).then(function(response) {
         if (response.meta.success) {
           $window.location.reload();
         } else {
