@@ -424,7 +424,7 @@ GEM
     puma (3.12.4)
     rabl (0.13.1)
       activesupport (>= 2.3.14)
-    rack (2.2.2)
+    rack (2.2.3.1)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-test (1.0.0)
