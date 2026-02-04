@@ -125,7 +125,6 @@ class Github::Repository < Tracker
   def update_from_github(options={})
     # read synced_at before updating
     if_modified_since = options[:force] ? nil : self.synced_at.try(:httpdate)
-    update_attribute(:synced_at, Time.now)
 
     # add access token
     params  = {
@@ -139,7 +138,10 @@ class Github::Repository < Tracker
       headers:        { 'If-Modified-Since' => if_modified_since }
     )
     # trigger an update on the underlying object if modified
-    self.class.update_attributes_from_github_data(api_response.data, obj: self) if api_response.modified?
+    if api_response.modified?
+      update_attribute(:synced_at, Time.now)
+      self.class.update_attributes_from_github_data(api_response.data, obj: self) 
+    end
   end
 
   # Update the repo languages from GitHub
@@ -188,29 +190,38 @@ class Github::Repository < Tracker
     # TODO: optimization: github api returns open_issues_count which we could compare to issues.where(state=open)
 
     if options[:state]
+      # IMPROVEMENT: Add a 10-minute buffer to account for clock drift/indexing delays
+      since_timestamp = options[:since]
+      since_timestamp -= 10.minutes if since_timestamp
+
       # make a call to github API
       api_response = Github::API.call(
         url: File.join(self.github_api_path, "/issues"),
         params: {
           access_token: options[:person].try(:github_account).try(:oauth_token),
-          since: options[:since].try(:iso8601),
+          since: since_timestamp.try(:iso8601),
           state: options[:state],
+          per_page: 100,
           page: options[:page] || 1
-        }.reject { |k,v| v.nil? },
-
-        # NOTE: this doesn't have any affect... and we don't want to store etags, so no API optimization here.
-        #headers: {
-        #  'If-Modified-Since' => options[:since].try(:httpdate)
-        #}.reject { |k,v| v.nil? }
+        }.reject { |k,v| v.nil? }
       )
 
-      # Edge case: tracker is deleted, just raise for now
-      if !api_response.success? && api_response.status == 404
-        raise "Github::Repository(#{id}) not found at GitHub(#{url}). Maybe it was deleted?"
+      # IMPROVEMENT: Robust error logging and status check
+      unless api_response.success?
+        Rails.logger.error "Github::Repository(#{id}) Issue Sync Failed: #{api_response.status} - #{api_response.data.inspect}"
+        if api_response.status == 404
+          raise "Github::Repository(#{id}) not found at GitHub(#{url}). Maybe it was deleted?"
+        end
+        return false # Stop processing this branch
       end
 
-      # process these 100 issues
-      Github::Issue.update_attributes_from_github_array(api_response.data)
+      # IMPROVEMENT: Type validation before processing
+      if api_response.data.is_a?(Array)
+        Github::Issue.update_attributes_from_github_array(api_response.data)
+      else
+        Rails.logger.error "Github::Repository(#{id}) Expected Array from API, got: #{api_response.data.class}"
+        return false
+      end
 
       # if a page param wasn't passed in, load the rest of the pages
       if !options[:page] && api_response.link[:last]
