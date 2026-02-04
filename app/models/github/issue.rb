@@ -194,7 +194,6 @@ class Github::Issue < ::Issue
   def update_from_github(options={})
     # read synced_at before updating
     if_modified_since = options[:force] ? nil : self.synced_at.try(:httpdate)
-    update_attribute(:synced_at, Time.now)
 
     # add access token
     params  = {
@@ -209,7 +208,12 @@ class Github::Issue < ::Issue
     )
 
     # trigger an update on the underlying object
-    self.class.update_attributes_from_github_data(api_response.data, obj: self) 
+    if api_response.success?
+      update_attribute(:synced_at, Time.now)
+      self.class.update_attributes_from_github_data(api_response.data, obj: self) 
+    else
+      Rails.logger.error "Github::Issue(#{id}) Update Failed: #{api_response.status} - #{api_response.data.inspect}"
+    end
   end
 
   # Sync comments with GitHub. Deletes comments that no longer exist.
@@ -281,8 +285,11 @@ class Github::Issue < ::Issue
   end
 
   def self.update_attributes_from_github_array(github_data, options={})
+    # IMPROVEMENT: Guard against non-array data
+    return [] unless github_data.is_a?(Array)
+
     # bulk load all issues
-    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] })
+    issue_hash = where("remote_id in (?)", github_data.map { |r| r['id'] if r.is_a?(Hash) }.compact)
       .inject({}) do |hash,obj| 
         hash[obj.remote_id.to_i] = obj
         hash 
@@ -290,14 +297,15 @@ class Github::Issue < ::Issue
 
 
     # bulk update
-    repos = Github::Repository.update_attributes_from_github_array(github_data.map { |issue| issue['repo'] }.uniq.compact)
+    repos = Github::Repository.update_attributes_from_github_array(github_data.map { |issue| issue['repo'] if issue.is_a?(Hash) }.uniq.compact)
     repos_hash = repos.inject({}) { |hash,obj| hash[obj.remote_id.to_i] = obj; hash }
 
     # bulk update linked accounts to save lots of lookups
-    linked_accounts = LinkedAccount::Github.update_attributes_from_github_array(github_data.map { |issue| issue['user'] }.uniq.compact)
-    linked_accounts_hash = linked_accounts.inject({}) { |hash,obj| hash[obj.remote_id.to_i] = obj; hash }
+    linked_accounts = LinkedAccount::Github.update_attributes_from_github_array(github_data.map { |issue| issue['user'] if issue.is_a?(Hash) }.uniq.compact)
+    linked_accounts_hash = linked_accounts.inject({}) { |hash,obj| hash[obj.uid.to_i] = obj; hash }
 
     github_data.map do |issue_data|
+      next unless issue_data.is_a?(Hash)
       update_attributes_from_github_data(
         issue_data,
         options.merge(
@@ -306,7 +314,7 @@ class Github::Issue < ::Issue
           tracker: (issue_data.has_key?('repo') ? repos_hash[issue_data['repo']['id'].to_i] : options[:tracker])
         )
       )
-    end
+    end.compact
   end
 
   def self.update_attributes_from_github_data(github_data, options={})
