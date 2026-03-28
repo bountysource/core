@@ -268,3 +268,12 @@ test_1          | 1239 examples, 0 failures, 13 pending
 test_1          |
 bountysourcecore_test_1 exited with code 0
 ```
+
+## Alternatives
+Since Bountysource is currently offline, here are some community-recommended alternatives for OSS funding and bounties:
+* [Algora.io](https://algora.io)
+* [Polar.sh](https://polar.sh)
+* [Resolvr](https://resolvr.io)
+* [Rysolv](https://rysolv.com)
+* [IssueHunt](https://issuehunt.io)
+* [GitPay](https://gitpay.me)
