@@ -81,6 +81,7 @@ class Github::Event
     when 'IssueCommentEvent'
       issue = issue(event['payload']['issue'], tracker: repo)
       comment(event['payload']['comment'], issue: issue)
+      Github::BountyIntent.queue_from_comment(event['payload']['comment'], issue: issue, actor: actor)
 
     when 'PullRequestEvent'
       # NOTE: we can NOT pass in the pull_request here because it doesn't have the right remote_id for issue
