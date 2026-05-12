@@ -96,4 +96,26 @@ describe Mailer do
       expect(email.subject).to eq("#{fundraiser.person.display_name} backed your fundraiser #{fundraiser.title}")
     end
   end
+
+  describe "#profile_reported" do
+    let(:reported_person) { create(:person, display_name: "Reported Person") }
+    let(:email) do
+      Mailer.profile_reported(
+        reporter: person,
+        reported_person: reported_person,
+        reason: "fraud",
+        comment: "Looks suspicious"
+      )
+    end
+
+    it "renders a support email from the reporter" do
+      expect(email.to).to eq(["support@bountysource.com"])
+      expect(email.from).to eq([person.email])
+      expect(email.reply_to).to eq([person.email])
+      expect(email.subject).to eq("Profile reported: #{reported_person.display_name}")
+      expect(email.encoded).to include("fraud")
+      expect(email.encoded).to include("Looks suspicious")
+      expect(email.encoded).to include(reported_person.to_param)
+    end
+  end
 end

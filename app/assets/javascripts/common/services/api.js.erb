@@ -603,6 +603,10 @@ angular.module('services').config(function($httpProvider) {
     return this.call("/users/"+id);
   };
 
+  this.person_report = function(id, data) {
+    return this.call("/people/"+id+"/report", "POST", data);
+  };
+
   this.person_update = function(data) {
     return this.call("/user", "PUT", data);
   };

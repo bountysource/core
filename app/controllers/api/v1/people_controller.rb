@@ -1,6 +1,8 @@
 class Api::V1::PeopleController < ApplicationController
   before_action :require_auth,    except: [:recent, :profile, :activity, :login, :create, :reset_password, :request_password_reset, :interesting, :count, :teams, :email_registered]
-  before_action :require_profile, only:   [:profile, :activity, :teams]
+  before_action :require_profile, only:   [:profile, :activity, :teams, :report]
+
+  REPORT_REASONS = %w(spam abuse fraud other).freeze
 
   # show all of the authenticated user's info
   def show
@@ -16,6 +18,30 @@ class Api::V1::PeopleController < ApplicationController
 
   # show any user's profile. same thing as show if viewing your own profile
   def profile
+  end
+
+  def report
+    require_params(:reason)
+
+    reason = params[:reason].to_s
+    unless REPORT_REASONS.include?(reason)
+      render json: { error: "Reason must be one of: #{REPORT_REASONS.join(', ')}" }, status: :unprocessable_entity
+      return
+    end
+
+    if @profile_person == @person
+      render json: { error: "You cannot report your own profile" }, status: :unprocessable_entity
+      return
+    end
+
+    Mailer.profile_reported(
+      reporter: @person,
+      reported_person: @profile_person,
+      reason: reason,
+      comment: params[:comment].to_s
+    ).deliver
+
+    render json: { message: "Profile report submitted" }, status: :ok
   end
 
   # get info about the user's account
@@ -362,7 +388,8 @@ protected
   end
 
   def require_profile
-    @profile_person = Person.where(id: params[:profile_id]).first
+    profile_id = params[:profile_id].to_s.split('-', 2).first
+    @profile_person = Person.where(id: profile_id).first
 
     unless @profile_person
       render json: { error: 'Profile not found' }, status: :not_found

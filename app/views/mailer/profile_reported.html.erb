@@ -1,0 +1,34 @@
+<h1>Profile reported</h1>
+
+<p>
+  <strong>Reported profile:</strong>
+  <%= @reported_person.display_name %>
+</p>
+
+<p>
+  <strong>Profile URL:</strong>
+  <%= link_to @reported_profile_url, @reported_profile_url %>
+</p>
+
+<p>
+  <strong>Reporter:</strong>
+  <%= @reporter.display_name %>
+</p>
+
+<p>
+  <strong>Reporter email:</strong>
+  <%= mail_to @reporter.email %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @reason %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+</p>
+
+<p>
+  <%= simple_format(@comment.presence || "No comment provided.") %>
+</p>

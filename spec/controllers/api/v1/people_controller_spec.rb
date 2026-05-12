@@ -102,4 +102,52 @@ describe Api::V1::PeopleController do
       expect(person.languages).to include language2
     end
   end
+
+  describe "report" do
+    let(:reporter) { create(:person, email: "reporter@example.com", display_name: "Reporter") }
+    let(:reported_person) { create(:person, email: "reported@example.com", display_name: "Reported") }
+    let(:params) { { access_token: reporter.create_access_token, profile_id: reported_person.to_param } }
+
+    it "emails support with the selected reason and comment" do
+      expect {
+        post :report, params: params.merge(reason: "spam", comment: "Suspicious links")
+      }.to change(ActionMailer::Base.deliveries, :count).by(1)
+
+      assert_response :ok
+
+      email = ActionMailer::Base.deliveries.last
+      expect(email.to).to eq(["support@bountysource.com"])
+      expect(email.from).to eq([reporter.email])
+      expect(email.reply_to).to eq([reporter.email])
+      expect(email.subject).to eq("Profile reported: #{reported_person.display_name}")
+      expect(email.encoded).to include("spam")
+      expect(email.encoded).to include("Suspicious links")
+      expect(email.encoded).to include(reported_person.to_param)
+    end
+
+    it "requires authentication" do
+      post :report, params: params.except(:access_token).merge(reason: "spam")
+      assert_response :unauthorized
+    end
+
+    it "rejects invalid reasons" do
+      expect {
+        post :report, params: params.merge(reason: "not-a-reason")
+      }.not_to change(ActionMailer::Base.deliveries, :count)
+
+      assert_response :unprocessable_entity
+    end
+
+    it "does not allow self reports" do
+      expect {
+        post :report, params: {
+          access_token: reporter.create_access_token,
+          profile_id: reporter.to_param,
+          reason: "spam"
+        }
+      }.not_to change(ActionMailer::Base.deliveries, :count)
+
+      assert_response :unprocessable_entity
+    end
+  end
 end

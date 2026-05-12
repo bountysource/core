@@ -18,4 +18,38 @@ angular.module('app').controller('PeopleShow', function ($scope, $routeParams, $
     $scope.teams = teams;
     return teams;
   });
+
+  $scope.report = {
+    open: false,
+    submitting: false,
+    submitted: false,
+    error: null,
+    form: {
+      reason: 'spam',
+      comment: ''
+    }
+  };
+
+  $scope.toggleReportForm = function() {
+    $scope.report.open = !$scope.report.open;
+    $scope.report.error = null;
+    $scope.report.submitted = false;
+  };
+
+  $scope.submitReport = function() {
+    $scope.report.submitting = true;
+    $scope.report.error = null;
+
+    $api.person_report($routeParams.id, $scope.report.form).then(function(response) {
+      $scope.report.submitting = false;
+
+      if (response.meta && response.meta.success) {
+        $scope.report.submitted = true;
+        $scope.report.open = false;
+        $scope.report.form.comment = '';
+      } else {
+        $scope.report.error = response.data && response.data.error || 'Unable to submit report.';
+      }
+    });
+  };
 });

@@ -73,6 +73,39 @@
         <div ng-show="current_person.id == person.id" class="text-center">
           <a href="/settings" class="btn btn-default btn-long border-gunmetal">Edit Your Profile</a>
         </div>
+
+        <div ng-show="current_person && current_person.id != person.id" class="mt-3">
+          <button type="button" class="btn btn-default btn-long border-gunmetal center-block" ng-click="toggleReportForm()">
+            Report this profile
+          </button>
+
+          <form ng-show="report.open" class="mt-3" ng-submit="submitReport()">
+            <div class="form-group">
+              <label for="profile-report-reason">Reason</label>
+              <select id="profile-report-reason" class="form-control" ng-model="report.form.reason">
+                <option value="spam">Spam</option>
+                <option value="abuse">Abuse</option>
+                <option value="fraud">Fraud</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="profile-report-comment">Comment</label>
+              <textarea id="profile-report-comment" class="form-control" rows="3" maxlength="1000" ng-model="report.form.comment" placeholder="Optional details"></textarea>
+            </div>
+
+            <div class="alert alert-danger" ng-show="report.error">{{report.error}}</div>
+
+            <button type="submit" class="btn btn-primary btn-long" ng-disabled="report.submitting">
+              {{report.submitting ? 'Submitting...' : 'Submit report'}}
+            </button>
+          </form>
+
+          <div class="alert alert-success mt-3" ng-show="report.submitted">
+            Report submitted.
+          </div>
+        </div>
       </div>
     </div>
   </div>
