@@ -271,6 +271,7 @@ Api::Application.routes.draw do
         scope controller: :people do
           get 'users/:profile_id', action: :profile
           get 'users/:profile_id/activity', action: :activity
+          post 'people/:profile_id/report', action: :report
           get 'people/count', action: :count
           get 'people/:profile_id/teams', action: :teams
           get 'people/:profile_id/activity', action: :activity

@@ -1,0 +1,12 @@
+Profile reported
+
+Reported profile: <%= @reported_person.display_name %>
+Profile URL: <%= @reported_profile_url %>
+
+Reporter: <%= @reporter.display_name %>
+Reporter email: <%= @reporter.email %>
+
+Reason: <%= @reason %>
+
+Comment:
+<%= @comment.presence || "No comment provided." %>

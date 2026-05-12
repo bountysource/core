@@ -634,6 +634,24 @@ class Mailer < ActionMailer::Base
     end
   end
 
+  def profile_reported(options)
+    @reporter = options.fetch(:reporter)
+    @reported_person = options.fetch(:reported_person)
+    @reason = options.fetch(:reason)
+    @comment = options[:comment].to_s
+    @reported_profile_url = "#{Api::Application.config.www_url}people/#{@reported_person.to_param}"
+
+    mail(
+      to: "support@bountysource.com",
+      from: @reporter.email,
+      reply_to: @reporter.email,
+      subject: "Profile reported: #{@reported_person.display_name}"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
   # def newsletter(options)
   #   @person = options[:person]
   #
