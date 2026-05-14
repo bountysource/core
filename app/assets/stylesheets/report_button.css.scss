@@ -1,0 +1,21 @@
+/* Report button styles */
+.report-btn {
+  background: none;
+  border: 1px solid #ddd;
+  color: #999;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.report-btn:hover {
+  color: #d9534f;
+  border-color: #d9534f;
+  background-color: #fdf7f7;
+}
+
+.report-btn i {
+  margin-right: 3px;
+}

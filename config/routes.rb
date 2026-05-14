@@ -516,6 +516,7 @@ Api::Application.routes.draw do
               get :global_summary
             end
           end
+          resources :reports, only: [:index, :show, :create, :update]
           resources :stats, only: [:index]
           resources :issue_suggestions, only: [:index, :create, :update]
           post 'thumbs/index', to: 'thumbs#index'
