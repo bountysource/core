@@ -1,0 +1,26 @@
+<p>Hi <%= @person.display_name || @person.email %>,</p>
+
+<p>We found <strong><%= @bounties.size %> new bounties</strong> matching your subscription:</p>
+
+<% if @keywords.present? %>
+  <p>Keywords: <em><%= @keywords %></em></p>
+<% end %>
+<% if @language.present? %>
+  <p>Language: <em><%= @language %></em></p>
+<% end %>
+
+<ul>
+<% @bounties.each do |bounty| %>
+  <li>
+    <strong><%= link_to bounty.issue.title, "#{Api::Application.config.www_url}issues/#{bounty.issue_id}" %></strong>
+    (<%= number_to_currency(bounty.amount) %>)
+    — <%= bounty.issue.tracker.try(:name) || 'Unknown project' %>
+  </li>
+<% end %>
+</ul>
+
+<p>
+  <%= link_to "Manage your subscription settings", @subscription_url %>
+</p>
+
+<p>Happy bounty hunting!</p>

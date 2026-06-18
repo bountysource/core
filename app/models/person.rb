@@ -61,6 +61,7 @@ class Person < ApplicationRecord
   has_many :bounty_claims
   has_many :bounty_claim_responses
   has_many :bounty_claim_events
+  has_many :bounty_subscriptions
   has_many :access_tokens
   has_many :saved_search_tabs
 

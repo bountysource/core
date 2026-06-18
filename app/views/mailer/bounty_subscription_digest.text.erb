@@ -1,0 +1,19 @@
+Hi <%= @person.display_name || @person.email %>,
+
+We found <%= @bounties.size %> new bounties matching your subscription:
+
+<% if @keywords.present? %>
+Keywords: <%= @keywords %>
+<% end %>
+<% if @language.present? %>
+Language: <%= @language %>
+<% end %>
+
+<% @bounties.each do |bounty| %>
+- <%= bounty.issue.title %> (<%= number_to_currency(bounty.amount) %>)
+  <%= "#{Api::Application.config.www_url}issues/#{bounty.issue_id}" %>
+<% end %>
+
+Manage your subscription settings: <%= @subscription_url %>
+
+Happy bounty hunting!

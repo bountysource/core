@@ -541,6 +541,8 @@ Api::Application.routes.draw do
           resources :wallets, only: [:index, :create, :update, :destroy] do
             resource :set_as_primary, only: :create, module: :wallets
           end
+
+          resources :bounty_subscriptions, only: [:index, :show, :create, :update, :destroy]
         end
       end
     end
