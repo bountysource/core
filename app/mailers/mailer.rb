@@ -748,4 +748,23 @@ class Mailer < ActionMailer::Base
     mail(to: @person.email, subject: 'Your cash out has been processed')
   end
 
+  def bounty_subscription_digest(options)
+    @person = options[:person]
+    @subscription = options[:subscription]
+    @bounties = options[:bounties] || []
+    @subscription_url = "#{Api::Application.config.www_url}settings/notifications"
+
+    @unsubscribe_token = Unsubscribe.object_to_token(@person)
+    @unsubscribe_category = "bounty_alerts"
+
+    mail(
+      to: @subscription.email,
+      from: %(Bountysource Alerts <alerts@bountysource.com>),
+      subject: "New bounties matching your subscription — #{@bounties.size} found"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
 end
