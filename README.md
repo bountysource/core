@@ -268,3 +268,11 @@ test_1          | 1239 examples, 0 failures, 13 pending
 test_1          |
 bountysourcecore_test_1 exited with code 0
 ```
+
+## Supported Trackers
+
+### GNU Projects
+- **GNU Hurd** - [savannah.gnu.org/projects/hurd](https://savannah.gnu.org/projects/hurd/)
+  - Issues tracked via Savannah: http://www.gnu.org/software/hurd/open_issues.html
+  - Bountysource integration via FossFactory
+  - Tracker type: Savannah::Tracker
