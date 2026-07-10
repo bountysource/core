@@ -201,6 +201,13 @@ class Bounty < ApplicationRecord
     targets -= [person]
 
     targets.uniq.each { |person| person.send_email(:bounty_placed, bounty: self) }
+
+    # Email users whose saved-search subscriptions match this bounty (#1141)
+    delay(priority: 30).notify_bounty_email_subscriptions
+  end
+
+  def notify_bounty_email_subscriptions
+    BountyEmailSubscription.notify_matching_for_bounty!(self)
   end
 
   def refundable?

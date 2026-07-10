@@ -1,0 +1,33 @@
+<p>Hi <%= @person.display_name %>,</p>
+
+<p>
+  A bounty matched your email subscription
+  <strong>&ldquo;<%= @subscription.name %>&rdquo;</strong>:
+</p>
+
+<ul>
+  <li><strong>Amount:</strong> <%= number_to_dollars(@bounty.amount) %></li>
+  <li><strong>Issue:</strong> <%= @bounty.issue.title %></li>
+  <li><strong>Project:</strong> <%= @bounty.issue.tracker.try(:name) %></li>
+  <li>
+    <strong>Criteria:</strong>
+    query=<%= @subscription.query.presence || '(any)' %><% if @subscription.min_amount.to_f > 0 %>;
+    min=<%= number_to_dollars(@subscription.min_amount) %><% end %>
+  </li>
+</ul>
+
+<p>
+  <a href="<%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>">
+    View the issue and bounty
+  </a>
+</p>
+
+<p style="color:#666;font-size:12px;">
+  Manage subscriptions:
+  <a href="<%= "#{Api::Application.config.www_url}settings/email-subscriptions" %>">
+    settings/email-subscriptions
+  </a>
+  <% if @unsubscribe_link %>
+    &middot; <a href="<%= @unsubscribe_link %>">Unsubscribe from this alert</a>
+  <% end %>
+</p>

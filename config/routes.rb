@@ -286,6 +286,10 @@ Api::Application.routes.draw do
 
         match '/tabs', controller: 'saved_search_tabs', action: 'index', via: :get
 
+        # Bounty email search subscriptions (#1141)
+        resources :bounty_email_subscriptions, only: [:index, :show, :create, :update, :destroy],
+                  path: 'user/bounty_email_subscriptions'
+
         resources :languages, only: [:index]
 
         resources :project_relations, only: [:index, :show], controller: 'tracker_relations'

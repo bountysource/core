@@ -118,6 +118,35 @@ class Mailer < ActionMailer::Base
     mail(to: @person.email, from: %(Bountysource Alerts <alerts@bountysource.com>), subject: "Bounty posted for #{@bounty.issue.title} on #{@bounty.issue.tracker.name}")
   end
 
+  # Saved-search email when a new bounty matches subscription criteria (#1141)
+  def bounty_search_match(options)
+    @person = options[:person]
+    @bounty = options[:bounty]
+    @subscription = options[:subscription]
+
+    @unsubscribe_token = Unsubscribe.object_to_token(@person)
+    @unsubscribe_category = "bounty_alerts_search_#{@subscription.id}"
+
+    @issue_analytics_params = {
+      utm_campaign: "alerts",
+      utm_source: "bounty_search",
+      utm_medium: "email",
+      utm_content: "subscription/#{@subscription.id}"
+    }
+
+    subj_bits = []
+    subj_bits << number_to_dollars(@bounty.amount) if @bounty.amount
+    subj_bits << (@bounty.issue.try(:title) || "new bounty")
+    mail(
+      to: @person.email,
+      from: %(Bountysource Alerts <alerts@bountysource.com>),
+      subject: "Bounty match for \"#{@subscription.name}\": #{subj_bits.join(' — ')}"
+    ) do |format|
+      format.text
+      format.html
+    end
+  end
+
   def repository_donation_made(options)
     @person = options[:person]
     @repo = options[:repo]

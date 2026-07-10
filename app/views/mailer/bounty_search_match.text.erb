@@ -1,0 +1,18 @@
+Hi <%= @person.display_name %>,
+
+A bounty matched your email subscription "<%= @subscription.name %>":
+
+  Amount:  <%= number_to_dollars(@bounty.amount) %>
+  Issue:   <%= @bounty.issue.title %>
+  Project: <%= @bounty.issue.tracker.try(:name) %>
+  Criteria: query=<%= @subscription.query.presence || '(any)' %><% if @subscription.min_amount.to_f > 0 %>; min=<%= number_to_dollars(@subscription.min_amount) %><% end %>
+
+View and claim it:
+<%= "#{Api::Application.config.www_url}issues/#{@bounty.issue.to_param}" %>
+
+Manage subscriptions:
+<%= "#{Api::Application.config.www_url}settings/email-subscriptions" %>
+
+<% if @unsubscribe_link %>
+Unsubscribe from this alert: <%= @unsubscribe_link %>
+<% end %>

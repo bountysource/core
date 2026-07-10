@@ -63,6 +63,7 @@ class Person < ApplicationRecord
   has_many :bounty_claim_events
   has_many :access_tokens
   has_many :saved_search_tabs
+  has_many :bounty_email_subscriptions, dependent: :destroy
 
   # there is no longer a Github::Commit model -- CAB
   # has_many :commits, class_name: 'Github::Commit'
